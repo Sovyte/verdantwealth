@@ -45,12 +45,11 @@ def is_rate_limited(ip):
 CONTACT_TO_EMAIL     = "ilamugilan343@gmail.com"
 
 
-GROQ_API_KEY         = "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"
+GROQ_API_KEY         = os.getenv("GROQ_API")
 GROQ_MODEL           = "llama-3.3-70b-versatile"
 
 # Live market / sector data keys (Alpha Vantage is used for sector performance; TwelveData is used for quotes)
-ALPHA_VANTAGE_KEY    = os.getenv("ALPHA_VANTAGE_KEY", "")
-TWELVEDATA_API_KEY   = "c14e487a134846cc998fefde9605f8e3"
+TWELVEDATA_API_KEY   =  os.getenv("TWELEVE_DATA")
 MARKET_API_URL       = "https://api.twelvedata.com/quote"
 DB_FILE              = "verdant_wealth.db"
 
