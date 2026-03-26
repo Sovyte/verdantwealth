@@ -44,18 +44,7 @@ def is_rate_limited(ip):
 # ── CONFIG ────────────────────────────────────────────────────
 CONTACT_TO_EMAIL     = "ilamugilan343@gmail.com"
 
-# SMTP Configuration (Nodemailer equivalent for Python)
-SMTP_HOST            = os.getenv("SMTP_HOST", "smtp.gmail.com")
-SMTP_PORT            = int(os.getenv("SMTP_PORT", 587))
-SMTP_USER            = os.getenv("SMTP_USER", "ilamugilan343@gmail.com")
-SMTP_PASS            = os.getenv("SMTP_PASS", "eubo ujup xpdo gqbd") # Paste your 16-char code here
-FROM_EMAIL           = SMTP_USER
 
-SUPABASE_URL         = "https://aivctqxlrzpucahuaxsy.supabase.co"
-SUPABASE_ANON_KEY    = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpdmN0cXhscnpwdWNhaHVheHN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDE5NTYsImV4cCI6MjA4OTIxNzk1Nn0.GOZZ6Z-WqcGRm9fEmrFwVZm6NKzAcrArfkh7xqOa9Hg"
-
-# Free AI — Groq (llama-3.3-70b, completely free tier)
-# Get key at: https://console.groq.com  (takes 2 minutes, free)
 GROQ_API_KEY         = "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"
 GROQ_MODEL           = "llama-3.3-70b-versatile"
 
