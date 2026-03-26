@@ -5,7 +5,6 @@
     if(ls){ls.style.transition='opacity .5s ease';ls.style.opacity='0';
     setTimeout(function(){ls.style.visibility='hidden';ls.style.pointerEvents='none';},500);}
   }
-  // If DOM already ready, hide in 800ms
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',function(){setTimeout(doHide,800);});
   } else {
@@ -27,11 +26,10 @@ const SITE = {
   year:     '2026',
 
   /* ── Theme ── */
-  /* ✏️ Change to 'light' for light mode, 'dark' for dark mode */
   defaultTheme: 'dark',
 
-  /* ── Photo ── ✏️ Use filename relative to site root */
-  advisorPhoto: 'saravana.png', // ✏️ Place saravana.png in same folder as HTML files
+  /* ── Photo ── */
+  advisorPhoto: 'saravana.png',
 
   /* ── Pages ── */
   pages: {
@@ -49,7 +47,7 @@ const SITE = {
     notfound:  '404.html',
   },
 
-  /* ── Contact ── ✏️ Replace all values below */
+  /* ── Contact ── */
   contact: {
     email:    'ilamugilan343@gmail.com',
     phone:    '+91 98765 43210',
@@ -58,7 +56,7 @@ const SITE = {
     calendly: 'https://calendly.com/ilamugilan343/new-meeting',
   },
 
-  /* ── Social ── ✏️ Replace # with real URLs */
+  /* ── Social ── */
   social: {
     twitter:   '#',
     linkedin:  '#',
@@ -66,7 +64,7 @@ const SITE = {
     instagram: '#',
   },
 
-  /* ── API endpoints ── ✏️ Update analyzeEndpoint after deploying backend */
+  /* ── API endpoints ── */
   api: {
     baseUrl:         'http://127.0.0.1:8080',
     analyzeEndpoint: 'http://127.0.0.1:8080/analyze',
@@ -74,25 +72,25 @@ const SITE = {
     welcomeEndpoint: 'http://127.0.0.1:8080/send-welcome',
   },
 
-  /* ── Supabase ── ✏️ Replace with your project credentials */
+  /* ── Supabase ── */
   supabase: {
     url:     'https://aivctqxlrzpucahuaxsy.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpdmN0cXhscnpwdWNhaHVheHN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDE5NTYsImV4cCI6MjA4OTIxNzk1Nn0.GOZZ6Z-WqcGRm9fEmrFwVZm6NKzAcrArfkh7xqOa9Hg',
   },
 
-  /* ── Analytics ── ✏️ Replace with your Google Analytics ID */
+  /* ── Analytics ── */
   analytics: {
     googleId: 'YOUR_GA_MEASUREMENT_ID',
   },
 
-  /* ── Database (SQLite) ── */
+  /* ── Database ── */
   database: {
     type: 'sqlite',
     file: 'verdant_wealth.db',
     enabled: true
   },
 
-  /* ── Pricing ── ✏️ Update amounts, features anytime */
+  /* ── Pricing ── */
   pricing: {
     basic: {
       name:    'Basic',
@@ -137,7 +135,7 @@ const SITE = {
     },
   },
 
-  /* ── Testimonials ── ✏️ Replace with real client quotes */
+  /* ── Testimonials ── */
   testimonials: [
     {
       name:     'Rajesh Menon',
@@ -218,7 +216,7 @@ const SITE = {
     },
   ],
 
-  /* ── Blog posts ── ✏️ Add/edit posts freely. Set featured:true for ONE post */
+  /* ── Blog posts ── */
   blog: [
     {
       slug:     'rbi-rate-cycle-2026',
@@ -228,7 +226,7 @@ const SITE = {
       readTime: '6 min read',
       tags:     ['RBI', 'Retirement', 'Portfolio'],
       featured: true,
-      body:     'The Reserve Bank of India has held the repo rate steady at 6.5% for three consecutive quarters now, and the question on every long-term investor\'s mind is: what does this mean for my portfolio? The answer depends heavily on your time horizon, your current debt-equity split, and how much of your fixed income is in duration-sensitive instruments...',
+      body:     '',
     },
     {
       slug:     'nri-india-planning-guide',
@@ -282,7 +280,7 @@ const SITE = {
     },
   ],
 
-  /* ── Ticker ── ✏️ Edit stock data shown in the scrolling ticker */
+  /* ── Ticker ── */
   ticker: [
     {label:'NIFTY 50',  val:'22,450', change:'+1.12%', up:true},
     {label:'BANK NIFTY',val:'48,210', change:'+0.85%', up:true},
@@ -297,7 +295,7 @@ const SITE = {
     {label:'BITCOIN',   val:'$68,200',change:'+3.10%', up:true},
   ],
 
-  /* ── Hero stats ── ✏️ Edit the 4 numbers shown in the hero section */
+  /* ── Hero stats ── */
   heroStats: [
     {num:'20+',  lbl:'Years Experience'},
     {num:'200+', lbl:'Families Served'},
@@ -305,7 +303,7 @@ const SITE = {
     {num:'6',    lbl:'AI Models'},
   ],
 
-  /* ── AI Analyzer ── ✏️ Edit quick-select chips shown in the analyzer */
+  /* ── AI Analyzer chips ── */
   analyzerChips: [
     'Analyze NIFTY50 outlook for retirement portfolio over next 12 months',
     'Best sectors for retirement wealth building considering RBI policy',
@@ -324,7 +322,7 @@ const SITE = {
 };
 
 /* ═══════════════════════════════════════════════════════════
-   THEME SYSTEM — light / dark toggle
+   THEME SYSTEM
 ═══════════════════════════════════════════════════════════ */
 (function(){
   var saved = localStorage.getItem('vwc_theme') || SITE.defaultTheme;
@@ -341,13 +339,11 @@ function toggleTheme(){
 }
 
 /* ═══════════════════════════════════════════════════════════
-   TRACKING SYSTEM
+   TRACKING
 ═══════════════════════════════════════════════════════════ */
 function trackEvent(eventName, data) {
   if (SITE.database && SITE.database.enabled) {
-    // Placeholder for actual Backend call
-    console.log(`[DB Log] Event: ${eventName}`, data);
-    // Example: fetch('/api/log', { method: 'POST', body: JSON.stringify({ event: eventName, data: data, timestamp: new Date() }) });
+    console.log('[DB Log] Event: ' + eventName, data);
   }
 }
 
@@ -360,14 +356,12 @@ function logoSVG(w,h){
 }
 
 /* ═══════════════════════════════════════════════════════════
-   NAV RENDERER
+   NAV RENDERER  (no cursor div, no cursor ring)
 ═══════════════════════════════════════════════════════════ */
 function renderNav(activePage){
   activePage = activePage||'';
   var p = SITE.pages;
   document.write(
-    '<div class="cursor" id="cursor"></div>' +
-    '<div class="cursor-ring" id="cring"></div>' +
     '<nav id="mainNav">' +
       '<a href="'+p.home+'" class="nav-logo-link">' +
         logoSVG(30,34) +
@@ -386,12 +380,12 @@ function renderNav(activePage){
       '<div class="nav-right">' +
         '<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">☀</button>' +
         '<a href="'+p.contact+'" class="nav-cta">Get Personalized Advice</a>' +
-        '<button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Menu">' +
+        '<button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Open menu">' +
           '<span></span><span></span><span></span>' +
         '</button>' +
       '</div>' +
     '</nav>' +
-    '<div class="mobile-nav" id="mobileNav">' +
+    '<div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Navigation menu">' +
       '<ul>' +
         '<li><a href="'+p.home+'"     onclick="toggleMobileNav()">Home</a></li>' +
         '<li><a href="'+p.about+'"    onclick="toggleMobileNav()">About</a></li>' +
@@ -485,17 +479,9 @@ function renderFooter(){
 /* ═══════════════════════════════════════════════════════════
    SHARED UTILITIES
 ═══════════════════════════════════════════════════════════ */
-function initCursor(){
-  var cur=document.getElementById('cursor'),cring=document.getElementById('cring');
-  if(!cur||!cring)return;
-  var mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-  (function ar(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cring.style.left=rx+'px';cring.style.top=ry+'px';requestAnimationFrame(ar);})();
-  document.querySelectorAll('a,button,.chip,.card-base,.plan-card,.nav-cta,.btn-primary,.btn-outline').forEach(function(el){
-    el.addEventListener('mouseenter',function(){cur.classList.add('hov');});
-    el.addEventListener('mouseleave',function(){cur.classList.remove('hov');});
-  });
-}
+
+/* initCursor — no-op; custom cursor removed */
+function initCursor(){ /* intentionally empty */ }
 
 function initReveal(){
   var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.07});
@@ -513,9 +499,20 @@ function toggleMobileNav(){
   var nav=document.getElementById('mobileNav');
   var btn=document.getElementById('navHamburger');
   if(!nav)return;
-  nav.classList.toggle('open');
-  if(btn)btn.classList.toggle('open');
+  var isOpen = nav.classList.toggle('open');
+  if(btn)btn.classList.toggle('open', isOpen);
+  // Prevent body scroll when menu open
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+  if(btn)btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
 }
+
+// Close mobile nav on Escape key
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    var nav = document.getElementById('mobileNav');
+    if(nav && nav.classList.contains('open')) toggleMobileNav();
+  }
+});
 
 function getSupabase(){
   if(window._sb)return window._sb;
@@ -555,6 +552,7 @@ function initBackToTop(){
   b.className='back-to-top';
   b.innerHTML='↑';
   b.title='Back to Top';
+  b.setAttribute('aria-label','Back to top');
   b.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};
   document.body.appendChild(b);
   window.addEventListener('scroll',function(){
@@ -575,7 +573,7 @@ function initAnalytics(){
 
 function initAll(){
   initTheme();
-  initCursor();
+  initCursor();   /* no-op */
   initReveal();
   initNavScroll();
   initCookieBanner();
@@ -587,11 +585,10 @@ function initAll(){
 function hideLoading(){
   var ls=document.getElementById('loadingScreen');
   if(!ls)return;
-  // Hide quickly — CSS auto-hide is the fallback
   setTimeout(function(){ls.classList.add('hide');},800);
 }
 
-/* ── Render testimonials helper ── */
+/* ── Helpers ── */
 function renderTestimonials(containerId, count){
   count = count||6;
   var el=document.getElementById(containerId);
@@ -608,7 +605,6 @@ function renderTestimonials(containerId, count){
   });
 }
 
-/* ── Render FAQ helper ── */
 function renderFAQ(containerId){
   var el=document.getElementById(containerId);
   if(!el)return;
@@ -622,7 +618,6 @@ function renderFAQ(containerId){
   });
 }
 
-/* ── Render pricing cards helper ── */
 function renderPricingCards(containerId){
   var el=document.getElementById(containerId);
   if(!el)return;
@@ -643,23 +638,20 @@ function renderPricingCards(containerId){
   });
 }
 
-/* ── Render ticker helper ── */
 function renderTicker(containerId){
   var el=document.getElementById(containerId);
   if(!el)return;
-  var html='';
   var ticks = (SITE.ticker && SITE.ticker.length) ? SITE.ticker : [];
   if(!ticks.length){
     ticks = [{label:'NIFTY',val:'22,200',change:'+0.95%',up:true},{label:'BANKNIFTY',val:'48,100',change:'+0.38%',up:true}];
   }
-  // Triple the loop so seamless scroll works at any speed
-  var loop = [].concat(ticks, ticks, ticks); // Triple the loop so seamless scroll works at any speed
+  var html='';
+  var loop = ticks.concat(ticks, ticks);
   loop.forEach(function(t){
     html+='<span class="tick-item"><span class="ts">'+t.label+'</span>' +
-      '<span class="'+(t.up?'tu':'td')+'">'+(t.up?'▲':'▼')+' '+t.val+(t.change?' '+t.change:'')+'</span></span>'; // Added space before change
+      '<span class="'+(t.up?'tu':'td')+'">'+(t.up?'▲':'▼')+' '+t.val+(t.change?' '+t.change:'')+'</span></span>';
   });
   el.innerHTML=html;
-  // Apply speed from settings
   var speed = parseInt(localStorage.getItem('vwc_ticker_speed')||'15');
   el.style.animationDuration = speed + 's';
 }
@@ -693,25 +685,19 @@ function refreshMarketTicker(){
       var ti = document.getElementById('tickerInner');
       if(ti){ renderTicker('tickerInner'); }
     }
-  }).catch(function(){
-    // keep existing SITE.ticker
-  });
+  }).catch(function(){});
 }
 
 function fetchWorldEvents(){
   return fetch('/world-data').then(function(r){return r.json();}).then(function(d){
-    if(d && d.success && d.events){
-      return d.events;
-    }
+    if(d && d.success && d.events) return d.events;
     return [];
   }).catch(function(){return [];});
 }
 
 function fetchSectorData(){
   return fetch('/sector-data').then(function(r){return r.json();}).then(function(d){
-    if(d && d.success && d.sectors){
-      return d.sectors;
-    }
+    if(d && d.success && d.sectors) return d.sectors;
     return [];
   }).catch(function(){return [];});
 }
