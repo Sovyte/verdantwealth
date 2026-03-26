@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verdant Wealth Co. — P. Saravana Kumar. Premium personal financial advisory with AI-powered market intelligence. Retirement planning for every Indian investor.">
+<title>Privacy Policy — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen" style="pointer-events:none">
+  <div class="loading-gem">
+    <svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg>
+  </div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">Verdant Wealth Co.</div>
+</div>
+<script>
+// Safety: hide loading screen even if _shared.js fails to load
+setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
+</script>
+<script src="_shared.js"></script>
+<script>renderNav('')</script>
+<div class="page-wrap">
+<div class="page-hero"><div class="page-hero-bg"></div><div class="page-eyebrow">Legal</div><h1 class="page-title">Privacy <em>Policy</em></h1><p class="page-sub">Last updated March 2026. This policy describes how Verdant Wealth Co. collects, uses, and protects your personal information.</p></div>
+<div class="page-content" style="max-width:760px">
+<div class="prose reveal">
+<div style="background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.2);border-radius:3px;padding:1rem 1.2rem;color:var(--em-glow);font-size:.85rem;margin-bottom:2rem">✏️ <strong>Placeholder:</strong> Replace with your actual privacy policy drafted by a legal professional before going live.</div>
+<h3>1. Information We Collect</h3><p>We collect information you provide directly — including your name, email address, phone number, and financial information relevant to providing advisory services.</p>
+<h3>2. How We Use Your Information</h3><p>We use the information we collect to provide, maintain, and improve our services, communicate with you personally, and comply with applicable legal obligations under Indian law.</p>
+<h3>3. Information Sharing</h3><p>We do not sell, trade, or transfer your personal information to outside parties. We may share information with trusted third parties who assist us in operating our website and providing services, subject to confidentiality agreements.</p>
+<h3>4. Data Security</h3><p>We implement appropriate security measures including encryption in transit and at rest via Supabase to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
+<h3>5. Your Rights</h3><p>Under India's Digital Personal Data Protection Act 2023, you have the right to access, correct, and delete your personal data held by us. Contact us at <a id="priv-email" href="#">-</a> to exercise these rights.</p>
+<h3>6. Cookies</h3><p>We use cookies to improve your experience and analyse site performance. You may decline non-essential cookies via the cookie banner. Declining cookies does not affect your ability to use the site.</p>
+<h3>7. Contact</h3><p>Questions about this privacy policy may be directed to <a id="priv-email2" href="#">-</a></p>
+</div>
+</div>
+</div>
+<script>
+var e1=document.getElementById('priv-email'),e2=document.getElementById('priv-email2');
+[e1,e2].forEach(function(e){if(e){e.textContent=SITE.contact.email;e.href='mailto:'+SITE.contact.email;}});
+</script>
+<script>
+renderFooter();
+initAll();
+hideLoading();
+initAnalytics();
+setTimeout(function(){
+  var ls = document.getElementById('loadingScreen');
+  if(ls) ls.classList.add('hide');
+}, 1600);
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-question');
+  if(q) q.addEventListener('click', function(){ item.classList.toggle('open'); });
+});
+</script>
+</body>
+</html>

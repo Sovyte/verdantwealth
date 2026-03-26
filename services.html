@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verdant Wealth Co. — P. Saravana Kumar. Premium personal financial advisory with AI-powered market intelligence. Retirement planning for every Indian investor.">
+<title>Services — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:2.2rem;transition:all .4s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(to bottom,var(--em-glow),transparent 60%);opacity:0;transition:opacity .4s}
+.service-card:hover{border-color:rgba(46,204,113,.35);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.service-card:hover::before{opacity:1}
+.svc-num{font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:rgba(46,204,113,.3);margin-bottom:1.2rem}
+.svc-icon{font-size:1.6rem;margin-bottom:1.1rem;display:block}
+.svc-name{font-family:var(--serif);font-size:1.3rem;color:var(--white);margin-bottom:.7rem}
+.svc-desc{font-size:.85rem;color:var(--muted);line-height:1.8}
+.compare-box{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.compare-col{padding:2rem;border-radius:4px}
+.compare-col-bad{border:1px solid rgba(240,244,240,.08);background:rgba(240,244,240,.02)}
+.compare-col-good{border:1px solid var(--em-glow);background:rgba(46,204,113,.03)}
+.compare-col-title{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.2rem}
+.compare-col-bad .compare-col-title{color:var(--muted)}
+.compare-col-good .compare-col-title{color:var(--em-glow)}
+.compare-item{font-size:.86rem;margin-bottom:.7rem;display:flex;gap:.6rem;line-height:1.5}
+.compare-col-bad .compare-item{color:var(--muted)}
+.compare-col-bad .compare-item::before{content:'✗';color:var(--muted);flex-shrink:0}
+.compare-col-good .compare-item{color:var(--white)}
+.compare-col-good .compare-item::before{content:'✓';color:var(--em-glow);flex-shrink:0}
+@media(max-width:1024px){.grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.compare-box,.grid-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen" style="pointer-events:none">
+  <div class="loading-gem">
+    <svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg>
+  </div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">Verdant Wealth Co.</div>
+</div>
+<script>
+// Safety: hide loading screen even if _shared.js fails to load
+setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
+</script>
+<script src="_shared.js"></script>
+<script>renderNav('services')</script>
+<div class="page-wrap">
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-eyebrow">What We Offer</div>
+  <h1 class="page-title">Focused expertise.<br><em>Real outcomes.</em></h1>
+  <p class="page-sub">Every service is delivered personally — directly by Saravana, not a delegate. Augmented by AI-powered market intelligence built in-house.</p>
+</div>
+
+<div class="page-content">
+
+  <div class="grid-3 reveal" style="margin-bottom:5rem">
+    <div class="service-card"><div class="svc-num">01</div><span class="svc-icon">🌱</span><div class="svc-name">Retirement Roadmap</div><p class="svc-desc">A comprehensive plan built around your desired retirement age, lifestyle goals, and current financial position — backed by AI scenario modelling using 20 years of NSE/BSE data.</p></div>
+    <div class="service-card"><div class="svc-num">02</div><span class="svc-icon">📊</span><div class="svc-name">AI Portfolio Review</div><p class="svc-desc">Deep analysis of your investments using our Solari Prime engine — covering NIFTY, sector momentum, macro factors, FII/DII flows — with clear, human-readable recommendations in plain language.</p></div>
+    <div class="service-card"><div class="svc-num">03</div><span class="svc-icon">🛡️</span><div class="svc-name">Wealth Protection</div><p class="svc-desc">Strategies to safeguard your assets against inflation, market volatility, and unforeseen events — using AI-powered VaR and drawdown intelligence. Your hard-earned wealth, defended intelligently.</p></div>
+    <div class="service-card"><div class="svc-num">04</div><span class="svc-icon">💰</span><div class="svc-name">Tax-Efficient Investing</div><p class="svc-desc">Structuring your portfolio to legally minimise tax exposure and maximise net returns over decades. Full awareness of RBI policy cycles, budget implications, and Section 80C/80D opportunities.</p></div>
+    <div class="service-card"><div class="svc-num">05</div><span class="svc-icon">🏠</span><div class="svc-name">Estate &amp; Legacy Planning</div><p class="svc-desc">Ensuring your wealth transfers to the right people, in the right way, at the right time. Covers wills, nominations, HUF structures, and NRI-specific repatriation and FEMA considerations.</p></div>
+    <div class="service-card"><div class="svc-num">06</div><span class="svc-icon">🤝</span><div class="svc-name">Ongoing 1:1 Advisory</div><p class="svc-desc">Regular check-ins, strategy adjustments, and direct access to Saravana as your financial life evolves. Live AI market signal dashboards updated in real time for Pro and Elite clients.</p></div>
+  </div>
+
+  <div class="reveal" style="max-width:840px;margin:0 auto 5rem">
+    <div class="sec-center" style="margin-bottom:2.5rem">
+      <div class="section-label">Why Verdant</div>
+      <h2 class="section-title">The difference is <em>direct.</em></h2>
+    </div>
+    <div class="compare-box">
+      <div class="compare-col compare-col-bad">
+        <div class="compare-col-title">Typical Advisory</div>
+        <div class="compare-item">Junior advisors rotate in and out</div>
+        <div class="compare-item">Generic template portfolios</div>
+        <div class="compare-item">Delayed responses, long queues</div>
+        <div class="compare-item">Advice lagging market conditions</div>
+        <div class="compare-item">No AI-augmented analysis</div>
+        <div class="compare-item">Conflict of interest on product sales</div>
+      </div>
+      <div class="compare-col compare-col-good">
+        <div class="compare-col-title">Verdant Wealth Co.</div>
+        <div class="compare-item">Always Saravana, always direct</div>
+        <div class="compare-item">Custom plan for your real life</div>
+        <div class="compare-item">Priority access, fast responses</div>
+        <div class="compare-item">Real-time AI market intelligence</div>
+        <div class="compare-item">6 proprietary AI models in use</div>
+        <div class="compare-item">Advisory only — zero product conflict</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-bottom:5rem">
+    <div class="sec-center" style="margin-bottom:3rem">
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title">Results that<br><em>speak.</em></h2>
+    </div>
+    <div class="testimonial-grid" id="testimonialGrid"></div>
+  </div>
+
+  <div class="reveal" style="text-align:center;padding:4rem;background:var(--card);border:1px solid var(--border);border-radius:4px;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(46,204,113,.04),transparent 70%);pointer-events:none"></div>
+    <div style="position:relative">
+      <h2 class="section-title">Choose the right <em>plan.</em></h2>
+      <p class="prose" style="max-width:420px;margin:0 auto 2rem">See which advisory tier matches your needs and goals.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a href="pricing.html" class="btn-primary">View Pricing</a>
+        <a href="contact.html" class="btn-outline">Talk to Saravana</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<script>
+var g = document.getElementById('testimonialGrid');
+SITE.testimonials.slice(0,3).forEach(function(t){
+  g.innerHTML += '<div class="testimonial-card reveal"><div class="testimonial-stars">' + '★'.repeat(t.stars) + '</div><p class="testimonial-quote">"' + t.quote + '"</p><div style="display:flex;align-items:center;gap:.8rem"><div class="testimonial-initials">' + t.initials + '</div><div><div class="testimonial-name">' + t.name + '</div><div class="testimonial-role">' + t.role + '</div></div></div></div>';
+});
+</script>
+<script>
+renderFooter();
+initAll();
+hideLoading();
+initAnalytics();
+setTimeout(function(){
+  var ls = document.getElementById('loadingScreen');
+  if(ls) ls.classList.add('hide');
+}, 1600);
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-question');
+  if(q) q.addEventListener('click', function(){ item.classList.toggle('open'); });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verdant Wealth Co. — P. Saravana Kumar. Premium personal financial advisory with AI-powered market intelligence. Retirement planning for every Indian investor.">
+<title>About P. Saravana Kumar — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.about-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:5rem;align-items:start;margin-bottom:6rem}
+.photo-wrap{position:relative}
+.advisor-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;display:block}
+.photo-border{position:absolute;inset:-10px;border:1px solid rgba(46,204,113,.18);border-radius:6px;pointer-events:none;z-index:-1}
+.photo-corner{position:absolute;bottom:-18px;right:-18px;width:48%;height:48%;border:1px solid rgba(46,204,113,.1);border-radius:2px;z-index:-1}
+.stat-big{font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--em-glow);line-height:1}
+.stat-lbl{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:2rem}
+.cred-card{background:rgba(46,204,113,.04);border:1px solid rgba(46,204,113,.1);border-radius:4px;padding:1.1rem 1.4rem}
+.cred-lbl{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(46,204,113,.55);margin-bottom:.35rem}
+.cred-val{font-size:.9rem;color:var(--white)}
+.process-step{display:grid;grid-template-columns:56px 1fr;gap:1.5rem;padding:2rem 0;border-bottom:1px solid var(--border);align-items:start}
+.process-step:last-child{border-bottom:none}
+.step-n{font-family:var(--serif);font-size:3rem;font-weight:300;color:rgba(46,204,113,.1);line-height:1;text-align:right}
+.step-t{font-family:var(--serif);font-size:1.3rem;color:var(--white);margin-bottom:.5rem}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr}.cred-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen" style="pointer-events:none">
+  <div class="loading-gem">
+    <svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg>
+  </div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">Verdant Wealth Co.</div>
+</div>
+<script>
+// Safety: hide loading screen even if _shared.js fails to load
+setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
+</script>
+<script src="_shared.js"></script>
+<script>renderNav('about')</script>
+<div class="page-wrap">
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-eyebrow">The Advisor</div>
+  <h1 class="page-title">A person,<br>not a <em>firm.</em></h1>
+  <p class="page-sub">Every client works directly with P. Saravana Kumar — the founder, advisor, and the only person you will ever need to call.</p>
+</div>
+
+<div class="page-content">
+
+  <div class="about-grid reveal">
+    <div class="photo-wrap">
+      <img class="advisor-img" id="advisorImg" src="" alt="P. Saravana Kumar, Founder Verdant Wealth Co." />
+      <div class="photo-border"></div>
+      <div class="photo-corner"></div>
+    </div>
+    <div>
+      <div class="section-label">Founder &amp; Chief Financial Advisor</div>
+      <h2 class="section-title">P. Saravana <em>Kumar</em></h2>
+      <div class="prose">
+        <p>With over 20 years of experience in retirement and long-term financial planning, Saravana has guided more than 200 families — salaried professionals, business owners, and NRIs — toward lasting financial security and generational wealth.</p>
+        <p>Before founding Verdant Wealth Co., he spent a formative decade inside leading financial institutions, observing firsthand the vast gap between the sophisticated planning available to ultra-high-net-worth clients and what ordinary individuals actually received. Verdant was built to close that gap permanently.</p>
+        <p>Today, every client receives what was once reserved for the privileged few: direct, unhurried, undivided attention from a seasoned advisor — augmented by proprietary AI intelligence that brings institutional-grade market analysis to every retirement plan.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2.5rem 0;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+        <div><div class="stat-big">20+</div><div class="stat-lbl">Years Experience</div></div>
+        <div><div class="stat-big">200+</div><div class="stat-lbl">Families Served</div></div>
+        <div><div class="stat-big">1:1</div><div class="stat-lbl">Always Direct</div></div>
+      </div>
+      <div class="cred-grid">
+        <div class="cred-card"><div class="cred-lbl">Specialisation</div><div class="cred-val">Retirement &amp; Long-term Planning</div></div>
+        <div class="cred-card"><div class="cred-lbl">Client Base</div><div class="cred-val">Salaried · Business · NRI</div></div>
+        <div class="cred-card"><div class="cred-lbl">Advisory Model</div><div class="cred-val">1:1 Direct — always Saravana</div></div>
+        <div class="cred-card"><div class="cred-lbl">AI Intelligence</div><div class="cred-val">Solari Prime · 5 more coming</div></div>
+      </div>
+      <div class="tag-row" style="margin-top:2rem">
+        <span class="tag">Retirement Planning</span>
+        <span class="tag">Wealth Preservation</span>
+        <span class="tag">Tax Efficiency</span>
+        <span class="tag">Portfolio Strategy</span>
+        <span class="tag">Estate Planning</span>
+        <span class="tag">NRI Advisory</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:760px;margin:0 auto 6rem" class="reveal">
+    <div class="section-label">Philosophy</div>
+    <h2 class="section-title">Wealth is built slowly,<br>then <em>suddenly.</em></h2>
+    <div class="prose">
+      <p>The biggest mistake in retirement planning is not picking the wrong stock. It is not having a plan at all — or having a generic one designed for someone else's life entirely.</p>
+      <p>Saravana's approach begins with listening. Understanding your timeline, your family, your risk tolerance, and what retirement actually looks and feels like for you. Only then does the strategy take shape.</p>
+      <p>Every plan is reviewed quarterly, adjusted as life changes, and explained in plain language — never jargon. You will always know exactly what you own, why you own it, and what to expect next.</p>
+      <p>The AI intelligence tools — Solari Prime and the upcoming model suite — amplify this human-first approach with real-time market analysis, pattern recognition across decades of NSE/BSE data, and macro intelligence that would otherwise require a team of analysts.</p>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-bottom:6rem">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Four steps to <em>clarity.</em></h2>
+    <div style="margin-top:2.5rem">
+      <div class="process-step"><div class="step-n">01</div><div><div class="step-t">You reach out</div><p class="prose">Fill in the short contact form. No lengthy applications, no screening calls, no waiting lists.</p></div></div>
+      <div class="process-step"><div class="step-n">02</div><div><div class="step-t">Discovery session</div><p class="prose">Saravana schedules a personal call to understand your financial situation, retirement timeline, and what success looks like for you.</p></div></div>
+      <div class="process-step"><div class="step-n">03</div><div><div class="step-t">Your plan is built</div><p class="prose">A tailored strategy crafted specifically for your goals — powered by AI analysis and 20 years of human judgement. Not a template.</p></div></div>
+      <div class="process-step"><div class="step-n">04</div><div><div class="step-t">Ongoing partnership</div><p class="prose">Regular reviews, strategy adjustments, and direct access to Saravana as your life, markets, and goals evolve.</p></div></div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-bottom:6rem">
+    <div class="sec-center" style="margin-bottom:3rem">
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title">Trusted by families<br>across <em>India.</em></h2>
+    </div>
+    <div class="testimonial-grid" id="testimonialGrid"></div>
+  </div>
+
+  <div class="reveal" style="text-align:center;padding:4rem;background:var(--card);border:1px solid var(--border);border-radius:4px;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(46,204,113,.04),transparent 70%);pointer-events:none"></div>
+    <div style="position:relative">
+      <h2 class="section-title">Ready to begin?</h2>
+      <p class="prose" style="max-width:440px;margin:0 auto 2rem">Book a personal session and get a clear picture of where you stand.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a href="contact.html" class="btn-primary">Get Personalized Advice</a>
+        <a href="pricing.html" class="btn-outline">View Pricing</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<script>
+document.getElementById('advisorImg').src = SITE.advisorPhoto;
+var g = document.getElementById('testimonialGrid');
+SITE.testimonials.forEach(function(t){
+  g.innerHTML += '<div class="testimonial-card reveal"><div class="testimonial-stars">' + '★'.repeat(t.stars) + '</div><p class="testimonial-quote">"' + t.quote + '"</p><div style="display:flex;align-items:center;gap:.8rem"><div class="testimonial-initials">' + t.initials + '</div><div><div class="testimonial-name">' + t.name + '</div><div class="testimonial-role">' + t.role + '</div></div></div></div>';
+});
+</script>
+<script>
+renderFooter();
+initAll();
+hideLoading();
+initAnalytics();
+setTimeout(function(){
+  var ls = document.getElementById('loadingScreen');
+  if(ls) ls.classList.add('hide');
+}, 1600);
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-question');
+  if(q) q.addEventListener('click', function(){ item.classList.toggle('open'); });
+});
+</script>
+</body>
+</html>

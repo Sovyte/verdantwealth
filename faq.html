@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verdant Wealth Co. FAQ — answers to common questions about our advisory, pricing, and AI-powered analysis.">
+<title>FAQ — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.page-hero{padding:6rem 4rem;max-width:1100px;margin:0 auto;position:relative}
+.page-eyebrow{font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--em-glow);margin-bottom:1rem}
+.page-title{font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.3rem);line-height:1.1;color:var(--white);margin-bottom:.9rem}
+.page-sub{max-width:760px;font-size:1rem;font-weight:300;color:var(--muted);line-height:1.75}
+.faq-section{padding:4rem;max-width:900px;margin:0 auto}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:6px;margin-bottom:1rem;overflow:hidden;transition:all .28s}
+.faq-item.open{border-color:var(--em-glow);box-shadow:0 8px 25px rgba(0,0,0,.24)}
+.faq-question{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;cursor:pointer;font-family:var(--mono);font-size:.82rem;letter-spacing:.08em;color:var(--white)}
+.faq-answer{max-height:0;opacity:0;transition:all .3s;overflow:hidden;padding:0 1.2rem;line-height:1.75;color:var(--muted)}
+.faq-item.open .faq-answer{max-height:400px;opacity:1;padding:1rem 1.2rem 1.2rem}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-icon{font-size:1.2rem;transition:transform .25s}
+@media(max-width:900px){.page-hero{padding:4.6rem 2rem}.faq-section{padding:2rem}}
+</style>
+</head>
+<body>
+<div class="loading-screen" id="loadingScreen" style="pointer-events:none">
+  <div class="loading-gem"><svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg></div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">Verdant Wealth Co.</div>
+</div>
+<script>setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);</script>
+<script src="_shared.js"></script>
+<script>renderNav('faq')</script>
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-eyebrow">Your questions, directly answered</div>
+    <h1 class="page-title">Frequently Asked Questions</h1>
+    <p class="page-sub">Everything you need to know about our hourly advisory, Solari Prime AI analysis, and how Verdant Wealth helps you build wealth with clarity.</p>
+  </div>
+  <section class="faq-section" id="faqList"></section>
+  <div class="reveal" style="padding:2.4rem 2rem;margin:1rem auto;max-width:880px;background:var(--card);border:1px solid var(--border);border-radius:4px;text-align:center">
+    <h2 style="margin-bottom:.6rem;color:var(--white);font-family:var(--serif);font-size:1.3rem">Need a custom answer?</h2>
+    <p style="color:var(--muted);margin-bottom:1rem">Use the AI Analyzer page to ask for tailored plan guidance in minutes.</p>
+    <a href="analyzer.html" class="btn-primary">Open AI Analyzer</a>
+  </div>
+</div>
+<script>
+renderFAQ('faqList');
+renderFooter();
+initAll();
+hideLoading();
+initAnalytics();
+</script>
+</body>
+</html>

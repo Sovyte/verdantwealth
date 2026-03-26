@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reset Password — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  .auth-section{padding:8rem 2rem;min-height:90vh;display:flex;align-items:center;justify-content:center;position:relative}
+  .auth-bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(46,204,113,.03),transparent 60%);pointer-events:none}
+  .auth-box{width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:2.5rem;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .auth-header{text-align:center;margin-bottom:2rem}
+  .auth-title{font-family:var(--serif);font-size:2rem;color:var(--white);margin-bottom:.5rem;line-height:1.1}
+  .auth-sub{font-size:.85rem;color:var(--muted)}
+  .msg-box{padding:.8rem;border-radius:3px;font-size:.8rem;text-align:center;margin-bottom:1.2rem;display:none;line-height:1.5}
+  .msg-box.error{background:rgba(224,90,58,.1);border:1px solid rgba(224,90,58,.3);color:#e05a3a}
+  .msg-box.success{background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.3);color:var(--em-glow)}
+</style>
+</head>
+<body>
+<script src="_shared.js"></script>
+<script>renderNav('signin')</script>
+
+<div class="auth-section">
+  <div class="auth-bg"></div>
+  <div class="auth-box reveal">
+    <div class="auth-header">
+      <div class="auth-title">Reset Password</div>
+      <div class="auth-sub">Enter your email to receive a reset link.</div>
+    </div>
+    <div class="msg-box" id="msgBox"></div>
+    <form id="resetForm" onsubmit="handleReset(event)">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" class="form-input" placeholder="you@example.com" required>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">Send Reset Link</button>
+    </form>
+    <div style="text-align:center;margin-top:1.5rem">
+      <a href="signin.html" class="btn-ghost" style="border:none">← Back to Sign In</a>
+    </div>
+  </div>
+</div>
+
+<script>
+renderFooter();
+initAll();
+const sb = getSupabase();
+
+async function handleReset(e) {
+  e.preventDefault();
+  if(!sb) { showMsg('error', 'Supabase not configured.'); return; }
+  
+  const email = document.getElementById('email').value;
+  const btn = document.getElementById('submitBtn');
+  
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  document.getElementById('msgBox').style.display = 'none';
+  
+  try {
+    const { data, error } = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/reset-confirm.html', // You'd need a handler page for the actual update
+    });
+    if(error) throw error;
+    showMsg('success', 'Check your email for the password reset link.');
+  } catch(err) {
+    showMsg('error', err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Send Reset Link';
+  }
+}
+
+function showMsg(type, text) {
+  const box = document.getElementById('msgBox');
+  box.className = 'msg-box ' + type;
+  box.textContent = text;
+  box.style.display = 'block';
+}
+</script>
+</body>
+</html>

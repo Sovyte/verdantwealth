@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verdant Wealth Co. — P. Saravana Kumar. Premium personal financial advisory with AI-powered market intelligence. Retirement planning for every Indian investor.">
+<title>Page Not Found — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen" style="pointer-events:none">
+  <div class="loading-gem">
+    <svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg>
+  </div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">Verdant Wealth Co.</div>
+</div>
+<script>
+// Safety: hide loading screen even if _shared.js fails to load
+setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
+</script>
+<script src="_shared.js"></script>
+<script>renderNav('')</script>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;text-align:center;position:relative;overflow:hidden">
+  <div style="position:absolute;font-family:var(--serif);font-size:clamp(8rem,20vw,16rem);font-weight:300;color:rgba(46,204,113,.05);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;white-space:nowrap;line-height:1">404</div>
+  <div style="position:relative;z-index:2;max-width:480px;animation:fadeUp .8s ease">
+    <div style="margin:0 auto 2rem;animation:float 3s ease-in-out infinite"><svg width="56" height="64" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg></div>
+    <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--em-glow);margin-bottom:1rem">Page not found</div>
+    <h1 style="font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:300;line-height:1.1;margin-bottom:1rem">This page doesn't<br><em style="color:var(--em-glow);font-style:italic">exist.</em></h1>
+    <p style="font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:2.5rem">The page you are looking for may have been moved, renamed, or never existed.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="index.html" class="btn-primary">Go to homepage →</a>
+      <a href="contact.html" class="btn-outline">Contact us</a>
+    </div>
+  </div>
+</div>
+<script>
+renderFooter();
+initAll();
+hideLoading();
+initAnalytics();
+setTimeout(function(){
+  var ls = document.getElementById('loadingScreen');
+  if(ls) ls.classList.add('hide');
+}, 1600);
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-question');
+  if(q) q.addEventListener('click', function(){ item.classList.toggle('open'); });
+});
+</script>
+</body>
+</html>

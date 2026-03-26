@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.post-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all .4s;text-decoration:none;display:block;color:inherit}
+.post-card:hover{border-color:rgba(46,204,113,.3);transform:translateY(-5px);box-shadow:var(--shadow)}
+.post-thumb{height:180px;background:linear-gradient(135deg,var(--deep),var(--card2));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.post-thumb-icon{font-size:2.5rem;opacity:.35}
+.post-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(6,9,8,.6))}
+.post-body{padding:1.8rem}
+.post-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.9rem}
+.post-tag{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--em-glow);background:rgba(46,204,113,.07);border:1px solid rgba(46,204,113,.15);padding:.2rem .6rem;border-radius:2px}
+.post-date{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:var(--muted);margin-bottom:.6rem}
+.post-title{font-family:var(--serif);font-size:1.25rem;color:var(--white);line-height:1.3;margin-bottom:.7rem}
+.post-excerpt{font-size:.85rem;color:var(--muted);line-height:1.78;margin-bottom:1.1rem}
+.post-meta{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:.62rem;color:rgba(46,204,113,.5)}
+.featured-post{background:var(--card);border:1px solid rgba(46,204,113,.25);border-radius:4px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;transition:all .4s;text-decoration:none;color:inherit;margin-bottom:3rem}
+.featured-post:hover{border-color:rgba(46,204,113,.45);box-shadow:var(--shadow)}
+.featured-thumb{background:linear-gradient(135deg,rgba(46,204,113,.06),rgba(46,204,113,.02));min-height:280px;display:flex;align-items:center;justify-content:center;position:relative}
+.featured-thumb-inner{text-align:center}
+.featured-body{padding:2.8rem}
+.featured-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--em-glow);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.featured-label::before{content:'';width:16px;height:1px;background:var(--em-glow)}
+.featured-title{font-family:var(--serif);font-size:1.9rem;font-weight:300;color:var(--white);line-height:1.2;margin-bottom:1rem}
+.featured-title em{font-style:italic;color:var(--em-glow)}
+.featured-excerpt{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.nl-wrap{max-width:520px;margin:4rem auto 0;text-align:center;padding:3rem;background:var(--card);border:1px solid var(--border);border-radius:4px}
+.author-badge{display:flex;align-items:center;gap:.7rem;padding-top:1.5rem;margin-top:1.5rem;border-top:1px solid var(--border)}
+.author-av{width:36px;height:36px;border-radius:50%;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.62rem;color:var(--em-glow);flex-shrink:0}
+.author-name{font-size:.85rem;color:var(--white);font-weight:500}
+.author-role{font-family:var(--mono);font-size:.58rem;color:var(--muted)}
+@media(max-width:900px){.featured-post{grid-template-columns:1fr}.featured-thumb{min-height:180px}}
+</style>
+</head>
+<body>
+<div class="loading-screen" id="loadingScreen" style="pointer-events:none">
+  <div class="loading-gem"><svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg></div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">Verdant Wealth Co.</div>
+</div>
+<script>
+// Safety: hide loading screen even if _shared.js fails to load
+setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
+</script>
+<script src="_shared.js"></script>
+<script>renderNav('blog')</script>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-eyebrow">Insights</div>
+    <h1 class="page-title">Wealth thinking,<br><em>written down.</em></h1>
+    <p class="page-sub">Market analysis, retirement strategy, and plain-language explanations of what is moving Indian finance — written by Saravana.</p>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Featured post -->
+    <div id="featuredPost" class="reveal"></div>
+
+    <!-- Post grid -->
+    <div class="section-label reveal" style="margin-bottom:1.5rem">Recent Articles</div>
+    <div class="grid-3 reveal" id="postGrid"></div>
+
+    <!-- Newsletter -->
+    <div class="nl-wrap reveal">
+      <div class="section-label">Newsletter</div>
+      <h2 class="section-title" style="font-size:1.8rem;margin-bottom:.8rem">Market insights,<br>every <em>week.</em></h2>
+      <p class="prose" style="font-size:.88rem;margin-bottom:1.8rem">Saravana's weekly take on what is moving Indian markets and what it means for your retirement.</p>
+      <div style="display:flex;gap:.8rem">
+        <input class="form-input" type="email" id="nlEmail" placeholder="your@email.com" style="flex:1" />
+        <button class="form-submit" style="width:auto;padding:.85rem 1.5rem;white-space:nowrap" onclick="subscribeNL()">Subscribe →</button>
+      </div>
+      <div id="nlMsg" style="font-family:var(--mono);font-size:.7rem;margin-top:.8rem;min-height:1.2rem;color:var(--em-glow)"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+renderFooter();
+initAll();
+hideLoading();
+
+var icons = ['📈','🏦','🌱','💰','🌍','🤖'];
+var thumbColors = [
+  'linear-gradient(135deg,rgba(46,204,113,.08),rgba(46,204,113,.02))',
+  'linear-gradient(135deg,rgba(200,169,110,.06),rgba(46,204,113,.02))',
+  'linear-gradient(135deg,rgba(46,204,113,.06),rgba(26,107,69,.04))',
+  'linear-gradient(135deg,rgba(200,169,110,.08),rgba(26,107,69,.02))',
+  'linear-gradient(135deg,rgba(46,204,113,.05),rgba(200,169,110,.03))',
+  'linear-gradient(135deg,rgba(26,107,69,.06),rgba(46,204,113,.04))',
+];
+
+// Featured post
+var feat = SITE.blog.find(function(b){return b.featured;});
+if(feat){
+  document.getElementById('featuredPost').innerHTML =
+    '<a href="' + feat.slug + '.html" class="featured-post">' +
+      '<div class="featured-thumb" style="background:'+thumbColors[0]+'">' +
+        '<div class="featured-thumb-inner">' +
+          '<div style="font-size:4rem;opacity:.25">📈</div>' +
+          '<div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(46,204,113,.4);margin-top:.8rem">Featured</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="featured-body">' +
+        '<div class="featured-label">Featured · '+feat.date+'</div>' +
+        '<h2 class="featured-title">'+feat.title+'</h2>' +
+        '<p class="featured-excerpt">'+feat.excerpt+'</p>' +
+        '<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem">' +
+          feat.tags.map(function(t){return '<span class="post-tag">'+t+'</span>';}).join('') +
+        '</div>' +
+        '<span style="font-family:var(--mono);font-size:.68rem;color:var(--em-glow)">Read article →</span>' +
+        '<div class="author-badge">' +
+          '<div class="author-av">SK</div>' +
+          '<div><div class="author-name">P. Saravana Kumar</div><div class="author-role">Founder · Verdant Wealth Co. · '+feat.readTime+'</div></div>' +
+        '</div>' +
+      '</div>' +
+    '</a>';
+}
+
+// Regular posts
+var grid = document.getElementById('postGrid');
+SITE.blog.filter(function(b){return !b.featured;}).forEach(function(p, i){
+  grid.innerHTML +=
+    '<a href="' + p.slug + '.html" class="post-card reveal">' +
+      '<div class="post-thumb" style="background:'+thumbColors[(i+1)%thumbColors.length]+'">' +
+        '<div class="post-thumb-icon">'+icons[(i+1)%icons.length]+'</div>' +
+      '</div>' +
+      '<div class="post-body">' +
+        '<div class="post-tags">'+p.tags.map(function(t){return '<span class="post-tag">'+t+'</span>';}).join('')+'</div>' +
+        '<div class="post-date">'+p.date+'</div>' +
+        '<div class="post-title">'+p.title+'</div>' +
+        '<p class="post-excerpt">'+p.excerpt+'</p>' +
+        '<div class="post-meta">' +
+          '<span>P. Saravana Kumar</span>' +
+          '<span>'+p.readTime+'</span>' +
+        '</div>' +
+      '</div>' +
+    '</a>';
+});
+
+function subscribeNL(){
+  var email = document.getElementById('nlEmail').value.trim();
+  var msg = document.getElementById('nlMsg');
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    msg.style.color='#d94f35';
+    msg.textContent='Please enter a valid email address.';
+    return;
+  }
+  msg.style.color='rgba(46,204,113,.8)';
+  msg.textContent='✓ You are on the list. Watch your inbox.';
+  document.getElementById('nlEmail').value='';
+}
+</script>
+</body>
+</html>

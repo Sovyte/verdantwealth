@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verdant Wealth Co. — P. Saravana Kumar. Premium personal financial advisory with AI-powered market intelligence. Retirement planning for every Indian investor.">
+<title>Terms of Service — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen" style="pointer-events:none">
+  <div class="loading-gem">
+    <svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg>
+  </div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">Verdant Wealth Co.</div>
+</div>
+<script>
+// Safety: hide loading screen even if _shared.js fails to load
+setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
+</script>
+<script src="_shared.js"></script>
+<script>renderNav('')</script>
+<div class="page-wrap">
+<div class="page-hero"><div class="page-hero-bg"></div><div class="page-eyebrow">Legal</div><h1 class="page-title">Terms of <em>Service</em></h1><p class="page-sub">Last updated March 2026. Please read these terms carefully before using Verdant Wealth Co.'s services.</p></div>
+<div class="page-content" style="max-width:760px">
+<div class="prose reveal">
+<div style="background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.2);border-radius:3px;padding:1rem 1.2rem;color:var(--em-glow);font-size:.85rem;margin-bottom:2rem">✏️ <strong>Placeholder:</strong> Replace with your actual terms of service drafted by a legal professional.</div>
+<h3>1. Acceptance of Terms</h3><p>By accessing and using Verdant Wealth Co.'s website and services, you accept and agree to be bound by these Terms of Service and our Privacy Policy.</p>
+<h3>2. Services Description</h3><p>Verdant Wealth Co. provides personal financial advisory services including retirement planning, portfolio review, wealth management consultations, and AI-powered market analysis tools.</p>
+<h3>3. Financial Advice Disclaimer</h3><p>The information provided is for educational and advisory purposes only. Past performance is not indicative of future results. All investment decisions are made at your own risk. Verdant Wealth Co. does not directly manage funds or execute transactions on behalf of clients.</p>
+<h3>4. Payment Terms</h3><p>Fees for services are as outlined in your selected plan. Monthly plans are billed in advance. Cancellations require 30 days' written notice. The Basic plan is a one-time payment with no refunds after the session has been delivered.</p>
+<h3>5. Confidentiality</h3><p>All financial information shared with Verdant Wealth Co. is treated with strict confidentiality and will not be disclosed to third parties without your explicit written consent, except as required by law.</p>
+<h3>6. Limitation of Liability</h3><p>Verdant Wealth Co. shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services or reliance on our advice.</p>
+<h3>7. Governing Law</h3><p>These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts of Chennai, Tamil Nadu.</p>
+<h3>8. Contact</h3><p>Questions about these terms can be directed to <a id="terms-email" href="#">-</a></p>
+</div>
+</div>
+</div>
+<script>
+var te=document.getElementById('terms-email');
+if(te){te.textContent=SITE.contact.email;te.href='mailto:'+SITE.contact.email;}
+</script>
+<script>
+renderFooter();
+initAll();
+hideLoading();
+initAnalytics();
+setTimeout(function(){
+  var ls = document.getElementById('loadingScreen');
+  if(ls) ls.classList.add('hide');
+}, 1600);
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-question');
+  if(q) q.addEventListener('click', function(){ item.classList.toggle('open'); });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Verified — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+.verify-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden}
+.verify-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 40%,rgba(46,204,113,.06),transparent 70%);pointer-events:none}
+.verify-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:3.5rem;max-width:500px;width:100%;text-align:center;position:relative;overflow:hidden;animation:fadeUp .6s ease}
+.verify-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--em-glow),transparent)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes checkmark-draw{0%{stroke-dashoffset:60}100%{stroke-dashoffset:0}}
+@keyframes circle-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+.check-circle{width:72px;height:72px;margin:0 auto 2rem;animation:circle-in .6s .2s ease both}
+.check-circle circle{fill:rgba(46,204,113,.1);stroke:var(--em-glow);stroke-width:2}
+.check-circle path{fill:none;stroke:var(--em-glow);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:checkmark-draw .4s .7s ease forwards}
+.v-eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--em-glow);margin-bottom:.8rem}
+.v-title{font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--white);margin-bottom:1rem;line-height:1.1}
+.v-title em{font-style:italic;color:var(--em-glow)}
+.v-sub{font-size:.92rem;color:var(--muted);line-height:1.8;margin-bottom:2.5rem}
+.v-cta{display:inline-block;background:var(--em-glow);color:var(--black);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1rem 2.2rem;border-radius:2px;text-decoration:none;font-weight:500;transition:all .3s;margin-bottom:.8rem;position:relative;overflow:hidden}
+.v-cta::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .4s}
+.v-cta:hover::after{transform:translateX(100%)}
+.v-cta:hover{background:var(--em-mid);transform:translateY(-2px);box-shadow:0 10px 30px rgba(46,204,113,.3)}
+.v-secondary{display:block;font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-top:1rem;transition:color .3s}
+.v-secondary:hover{color:var(--em-glow)}
+.calendly-strip{margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:.8rem;flex-wrap:wrap}
+.calendly-strip-txt{font-size:.85rem;color:var(--muted)}
+.calendly-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.25);color:var(--em-glow);font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:.55rem 1.1rem;border-radius:2px;text-decoration:none;transition:all .3s}
+.calendly-btn:hover{background:rgba(46,204,113,.15);border-color:var(--em-glow);transform:translateY(-1px)}
+.error-card .check-circle circle{stroke:#e05a3a;fill:rgba(224,90,58,.1)}
+.error-card .check-circle path{stroke:#e05a3a}
+.error-card .v-eyebrow{color:#e05a3a}
+.error-card .v-title em{color:#e05a3a}
+#loading-state{text-align:center;padding:3rem}
+.loading-spinner{width:40px;height:40px;border:2px solid rgba(46,204,113,.1);border-top-color:var(--em-glow);border-radius:50%;animation:spin360 .8s linear infinite;margin:0 auto 1rem}
+@keyframes spin360{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<script>
+// Safety: hide loading screen even if _shared.js fails to load
+setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
+</script>
+<script src="_shared.js"></script>
+<script>renderNav()</script>
+
+<div class="verify-wrap">
+  <div class="verify-bg"></div>
+  <div id="loading-state">
+    <div class="loading-spinner"></div>
+    <div style="font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">Verifying your email...</div>
+  </div>
+</div>
+
+<script>
+const sb = (window.supabase||supabase).createClient(
+  'https://aivctqxlrzpucahuaxsy.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpdmN0cXhscnpwdWNhaHVheHN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDE5NTYsImV4cCI6MjA4OTIxNzk1Nn0.GOZZ6Z-WqcGRm9fEmrFwVZm6NKzAcrArfkh7xqOa9Hg'
+);
+
+function showSuccess(session) {
+  const name = session.user?.user_metadata?.full_name || 'there';
+  const plan = session.user?.user_metadata?.plan || 'Basic';
+  const email = session.user?.email || '';
+
+  document.querySelector('.verify-wrap').innerHTML = `
+    <div class="verify-bg"></div>
+    <div class="verify-card">
+      <svg class="check-circle" viewBox="0 0 72 72">
+        <circle cx="36" cy="36" r="34"/>
+        <path d="M20 36 L30 46 L52 26"/>
+      </svg>
+      <div class="v-eyebrow">Email verified</div>
+      <h1 class="v-title">You're <em>in.</em></h1>
+      <p class="v-sub">Welcome, ${name}. Your <strong style="color:#f4f4f0">${plan.charAt(0).toUpperCase()+plan.slice(1)} plan</strong> account is now active. Saravana will reach out within 24 hours to schedule your first session.</p>
+      <a href="index.html" class="v-cta">Go to homepage →</a>
+      <div class="calendly-strip">
+        <span class="calendly-strip-txt">Or book your first session right now —</span>
+        <a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank" class="calendly-btn">📅 Schedule a free call</a>
+      </div>
+    </div>
+  `;
+
+  // Send welcome email via Flask backend
+  fetch('/send-welcome', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, name, plan })
+  }).catch(() => {}); // fire and forget
+}
+
+function showError() {
+  document.querySelector('.verify-wrap').innerHTML = `
+    <div class="verify-bg"></div>
+    <div class="verify-card error-card">
+      <svg class="check-circle" viewBox="0 0 72 72">
+        <circle cx="36" cy="36" r="34"/>
+        <path d="M24 24 L48 48 M48 24 L24 48"/>
+      </svg>
+      <div class="v-eyebrow">Link expired</div>
+      <h1 class="v-title">Link <em>expired.</em></h1>
+      <p class="v-sub">This verification link has expired or already been used. Request a new one from the sign-in page.</p>
+      <a href="signin.html" class="v-cta">Back to sign in →</a>
+    </div>
+  `;
+}
+
+// Listen for the auth state change — Supabase handles the token from URL hash
+sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN' && session) {
+    showSuccess(session);
+  } else if (event === 'TOKEN_REFRESHED') {
+    // still processing
+  } else if (document.querySelector('.loading-spinner')) {
+    // Only show error if we haven't already resolved
+    setTimeout(() => {
+      if (document.querySelector('.loading-spinner')) showError();
+    }, 3000);
+  }
+});
+
+// Also check current session in case already signed in
+setTimeout(async () => {
+  if (!document.querySelector('.loading-spinner')) return;
+  const { data } = await sb.auth.getSession();
+  if (data.session) {
+    showSuccess(data.session);
+  } else {
+    showError();
+  }
+}, 4000);
+</script>
+
+<script>renderFooter(); initCursor(); setTimeout(function(){var ls=document.getElementById("loadingScreen");if(ls){ls.style.opacity="0";ls.style.visibility="hidden";ls.style.pointerEvents="none";}},1000);</script>
+</body>
+</html>

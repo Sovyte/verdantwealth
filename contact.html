@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verdant Wealth Co. — P. Saravana Kumar. Premium personal financial advisory with AI-powered market intelligence. Retirement planning for every Indian investor.">
+<title>Contact — Verdant Wealth Co.</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:2.5rem;position:relative;overflow:hidden}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--em-glow),transparent);opacity:.5}
+.info-row{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1.4rem 1.6rem;display:flex;gap:1rem;align-items:center;margin-bottom:.9rem;transition:all .3s}
+.info-row:hover{border-color:rgba(46,204,113,.3);transform:translateX(4px)}
+.info-icon{font-size:1.3rem;flex-shrink:0}
+.info-lbl{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.info-val{font-size:.9rem;color:var(--white)}
+.info-val a{color:var(--em-glow);text-decoration:none}
+.calendly-cta{background:linear-gradient(135deg,rgba(46,204,113,.06),rgba(46,204,113,.03));border:1px solid rgba(46,204,113,.25);border-radius:4px;padding:1.8rem;margin-top:1.5rem;text-align:center}
+.char-count{font-family:var(--mono);font-size:.6rem;color:var(--muted);text-align:right;margin-top:.3rem}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen" style="pointer-events:none">
+  <div class="loading-gem">
+    <svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg>
+  </div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">Verdant Wealth Co.</div>
+</div>
+<script>
+// Safety: hide loading screen even if _shared.js fails to load
+setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
+</script>
+<script src="_shared.js"></script>
+<script>renderNav('contact')</script>
+<div class="page-wrap">
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-eyebrow">Get In Touch</div>
+  <h1 class="page-title">Start the<br><em>conversation.</em></h1>
+  <p class="page-sub">Fill in the form and Saravana will personally respond within 24 hours. No automated replies. Always human.</p>
+</div>
+<div class="page-content">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="form-card">
+        <div id="form-state">
+          <h2 style="font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:.4rem">Send a message</h2>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:2rem;line-height:1.6">All fields help Saravana prepare for your conversation.</p>
+          <div class="form-group"><label>Full Name *</label><input class="form-input" type="text" id="f-name" placeholder="Your full name" /></div>
+          <div class="form-group"><label>Email Address *</label><input class="form-input" type="email" id="f-email" placeholder="you@email.com" /></div>
+          <div class="form-group"><label>Phone Number</label><input class="form-input" type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX" /></div>
+          <div class="form-group"><label>Preferred Plan</label><select class="form-input" id="f-plan"><option value="">Select a plan</option><option>Basic — ₹4,500 one-time</option><option>Pro — ₹7,999/month</option><option>Elite — ₹19,999/month</option><option>Not sure — help me decide</option></select></div>
+          <div class="form-group"><label>Your Primary Goal *</label><textarea class="form-input" id="f-goal" maxlength="500" placeholder="e.g. I am 42 and want to retire comfortably by 60. I have some savings but no clear plan..." oninput="document.getElementById('gc').textContent=this.value.length+'/500'"></textarea><div class="char-count" id="gc">0/500</div></div>
+          <div class="form-group"><label>How did you hear about us?</label><select class="form-input" id="f-ref"><option value="">Select one</option><option>Google / Search</option><option>LinkedIn</option><option>Referral from a friend</option><option>Social media</option><option>Other</option></select></div>
+          <div id="form-msg" style="margin-bottom:.8rem"></div>
+          <button class="form-submit" id="submit-btn" onclick="submitContact()">Send My Request →</button>
+          <p style="font-size:.72rem;color:rgba(240,244,240,.2);margin-top:.9rem;text-align:center">We respond within 24 hours on business days.</p>
+        </div>
+        <div id="success-state" style="display:none;text-align:center;padding:2rem 0;animation:fadeIn .4s ease">
+          <div style="font-size:3rem;margin-bottom:1.2rem">✅</div>
+          <h3 style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--white);margin-bottom:.8rem">Message sent.</h3>
+          <p style="font-size:.9rem;color:var(--muted);line-height:1.75;margin-bottom:2rem">Saravana has received your message and will personally respond within 24 hours. A confirmation email is on its way.</p>
+          <a href="" id="calendly-cta-btn" target="_blank" rel="noopener" class="btn-primary">📅 Book a Free Session Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div style="margin-bottom:2rem">
+        <div class="section-label">Direct Contact</div>
+        <h2 class="section-title">Prefer to reach out <em>directly?</em></h2>
+      </div>
+      <div class="info-row"><div class="info-icon">✉️</div><div><div class="info-lbl">Email</div><div class="info-val"><a id="c-email" href="#">-</a></div></div></div>
+      <div class="info-row"><div class="info-icon">📞</div><div><div class="info-lbl">Phone</div><div class="info-val" id="c-phone">-</div></div></div>
+      <div class="info-row"><div class="info-icon">💬</div><div><div class="info-lbl">WhatsApp</div><div class="info-val"><a id="c-wa" href="#">Chat on WhatsApp →</a></div></div></div>
+      <div class="info-row"><div class="info-icon">📍</div><div><div class="info-lbl">Location</div><div class="info-val" id="c-loc">-</div></div></div>
+      <div class="calendly-cta">
+        <h3 style="font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--white);margin-bottom:.5rem">Book a free discovery call</h3>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.3rem;line-height:1.7">15 minutes with Saravana — no pressure, no commitment. An honest conversation about your financial goals.</p>
+        <a id="calendly-btn" href="#" target="_blank" rel="noopener" class="btn-primary">📅 Schedule on Calendly</a>
+      </div>
+      <div style="padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:4px;margin-top:1.5rem;font-size:.85rem;color:var(--muted);line-height:1.75">
+        <strong style="color:var(--white)">Response time:</strong> Basic and Pro clients receive responses within <strong style="color:var(--white)">24 hours</strong> on business days. Elite clients within <strong style="color:var(--white)">4 hours</strong>, including weekends for urgent matters.
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+var ce=document.getElementById('c-email');
+ce.textContent=SITE.contact.email;
+ce.href='mailto:'+SITE.contact.email;
+document.getElementById('c-phone').textContent=SITE.contact.phone;
+var waNum=SITE.contact.whatsapp.replace(/[^0-9]/g,'');
+var waEl=document.getElementById('c-wa');
+waEl.href='https://wa.me/'+waNum;
+document.getElementById('c-loc').textContent=SITE.contact.location;
+document.getElementById('calendly-btn').href=SITE.contact.calendly;
+document.getElementById('calendly-cta-btn').href=SITE.contact.calendly;
+
+function showMsg(msg,type){
+  var el=document.getElementById('form-msg');
+  el.innerHTML='<div style="padding:.8rem 1rem;border-radius:3px;font-size:.83rem;animation:fadeIn .3s ease;background:'+(type==='error'?'rgba(224,90,58,.08)':'rgba(46,204,113,.08)')+';border:1px solid '+(type==='error'?'rgba(224,90,58,.25)':'rgba(46,204,113,.2)')+';color:'+(type==='error'?'#e05a3a':'#2ecc71')+';margin-bottom:.5rem">'+msg+'</div>';
+}
+async function submitContact(){
+  var name=document.getElementById('f-name').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var phone=document.getElementById('f-phone').value.trim();
+  var plan=document.getElementById('f-plan').value;
+  var goal=document.getElementById('f-goal').value.trim();
+  var ref=document.getElementById('f-ref').value;
+  if(!name){showMsg('⚠ Please enter your name.','error');return;}
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showMsg('⚠ Please enter a valid email.','error');return;}
+  if(!goal){showMsg('⚠ Please describe your primary goal.','error');return;}
+  var btn=document.getElementById('submit-btn');
+  btn.innerHTML='<span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(9,12,9,.3);border-top-color:#090c09;border-radius:50%;animation:spin .7s linear infinite;margin-right:.4rem;vertical-align:middle"></span>Sending...';
+  btn.disabled=true;
+  try{
+    var res=await fetch(SITE.api.contactEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,phone,plan,goal,referral:ref})});
+    var data=await res.json();
+    if(data.success){
+      document.getElementById('form-state').style.display='none';
+      document.getElementById('success-state').style.display='block';
+    }else{showMsg('⚠ '+(data.error||'Something went wrong. Please try again.'),'error');btn.textContent='Send My Request →';btn.disabled=false;}
+  }catch(e){showMsg('⚠ Could not send. Please email us at '+SITE.contact.email,'error');btn.textContent='Send My Request →';btn.disabled=false;}
+}
+</script>
+<script>
+renderFooter();
+initAll();
+hideLoading();
+initAnalytics();
+setTimeout(function(){
+  var ls = document.getElementById('loadingScreen');
+  if(ls) ls.classList.add('hide');
+}, 1600);
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-question');
+  if(q) q.addEventListener('click', function(){ item.classList.toggle('open'); });
+});
+</script>
+</body>
+</html>
