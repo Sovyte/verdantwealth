@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="_shared.css">
 <style>
 /* ── HERO ── */
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 4rem 0 4rem;position:relative;overflow:hidden}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 4rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 65% 70% at 78% 45%,rgba(46,204,113,.06) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 15% 80%,rgba(26,107,69,.03) 0%,transparent 60%);pointer-events:none}
 .hero-orb{position:absolute;right:-2vw;top:50%;transform:translateY(-50%);width:46vw;height:78vh;pointer-events:none;overflow:hidden;opacity:.85}
 .hero-eyebrow{font-family:var(--mono);font-size:.66rem;letter-spacing:.25em;text-transform:uppercase;color:var(--em-glow);margin-bottom:2rem;display:flex;align-items:center;gap:.7rem;opacity:0;animation:fadeUp 1s .3s forwards}
@@ -25,9 +25,12 @@
 .advisor-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:2.8rem;position:relative;overflow:hidden}
 .advisor-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--em-glow),transparent)}
 .advisor-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;display:block;margin-bottom:1.5rem}
-.advisor-name{font-family:var(--serif);font-size:1.8rem;font-weight:400;color:var(--white);margin-bottom:.25rem}
+.advisor-name{font-family:var(--serif);font-size:1.8rem;color:var(--white);margin-bottom:.25rem}
 .advisor-role{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--em-glow);margin-bottom:1.4rem}
 .advisor-bio{font-size:.88rem;font-weight:300;line-height:1.82;color:var(--muted);margin-bottom:1.8rem}
+/* ── TESTIMONIALS MARQUEE SECTION ── */
+.tmarq-section{padding:7rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg);overflow:hidden}
+.tmarq-header{padding:0 4rem;margin-bottom:3rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1200px;margin-left:auto;margin-right:auto}
 /* ── SERVICES ── */
 .services-section{padding:8rem 4rem;background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .services-inner{max-width:1200px;margin:0 auto}
@@ -40,64 +43,55 @@
 .feat-icon{font-size:1.4rem;margin-bottom:1.1rem;display:block}
 .feat-name{font-family:var(--serif);font-size:1.25rem;margin-bottom:.7rem;color:var(--white)}
 .feat-desc{font-size:.83rem;line-height:1.85;color:var(--muted)}
-/* ── TESTIMONIALS SECTION ── */
-.testimonials-section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
-.testimonials-marquee-wrap{overflow:hidden;position:relative;margin-top:3rem}
-.testimonials-marquee-wrap::before,.testimonials-marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
-.testimonials-marquee-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
-.testimonials-marquee-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
-.testimonials-row{display:flex;gap:1.5rem;animation:marquee-left 40s linear infinite}
-.testimonials-row:hover{animation-play-state:paused}
-@keyframes marquee-left{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.t-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem 2.2rem;min-width:340px;max-width:340px;flex-shrink:0;position:relative;transition:border-color .3s}
-.t-card:hover{border-color:rgba(46,204,113,.3)}
-.t-card::before{content:'\201C';position:absolute;top:.4rem;right:1.2rem;font-family:var(--serif);font-size:4rem;color:rgba(46,204,113,.08);line-height:1}
-.t-stars{color:var(--gold);font-size:.8rem;letter-spacing:.1em;margin-bottom:.9rem}
-.t-quote{font-size:.88rem;color:var(--muted);line-height:1.75;font-style:italic;margin-bottom:1.4rem}
-.t-person{display:flex;align-items:center;gap:.8rem}
-.t-av{width:36px;height:36px;border-radius:50%;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;color:var(--em-glow);flex-shrink:0}
-.t-name{font-size:.85rem;font-weight:500;color:var(--white)}
-.t-role{font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-top:.1rem}
+/* ── AI MODELS ── */
+.models-section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:4rem}
+.model-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:2rem 1.8rem;position:relative;overflow:hidden;transition:all .4s}
+.model-card:hover{border-color:rgba(46,204,113,.4);transform:translateY(-4px);box-shadow:var(--shadow)}
+.model-visual{height:130px;border-radius:4px;margin-bottom:1.5rem;background:var(--deep);overflow:hidden}
+.model-badge{font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--em-glow);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
+.model-badge::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--em-glow);opacity:.6}
+.model-name{font-family:var(--serif);font-size:1.35rem;line-height:1.2;margin-bottom:.5rem;color:var(--white)}
+.model-name em{font-style:italic;color:var(--em-glow)}
+.model-tagline{font-size:.8rem;color:var(--muted);line-height:1.75;margin-bottom:1.2rem}
+.model-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+.model-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;padding:.2rem .65rem;border:1px solid var(--border);border-radius:20px;color:var(--muted)}
+.model-status{position:absolute;top:1.2rem;right:1.2rem;font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;border-radius:20px;padding:.2rem .6rem}
+.status-live{color:rgba(46,204,113,.8);border:1px solid rgba(46,204,113,.25)}
+.status-soon{color:rgba(200,169,110,.5);border:1px solid rgba(200,169,110,.18)}
 /* ── PRICING ── */
 .pricing-section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
 /* ── CTA ── */
 .cta-section{padding:9rem 4rem;text-align:center;position:relative;overflow:hidden;background:var(--deep);border-top:1px solid var(--border)}
 .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(26,107,69,.1) 0%,transparent 65%);pointer-events:none}
 .cta-section-inner{max-width:640px;margin:0 auto;position:relative}
-.cta-eyebrow{font-family:var(--mono);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--em-glow);margin-bottom:1.5rem}
 .cta-title{font-family:var(--serif);font-size:clamp(2.2rem,5vw,4rem);font-weight:300;line-height:1.12;color:var(--white);margin-bottom:1.2rem}
 .cta-title em{font-style:italic;color:var(--em-glow)}
-.cta-sub{font-size:.95rem;font-weight:300;color:var(--muted);margin-bottom:2.5rem;line-height:1.75}
 .trust-row{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-top:2rem}
 .trust-item{display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .trust-check{color:var(--em-glow)}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.14);opacity:1}}
 @media(max-width:900px){
   .hero{padding:0 1.5rem}
-  .about-section,.services-section,.pricing-section,.testimonials-section{padding:5rem 1.5rem}
+  .about-section,.services-section,.models-section,.pricing-section{padding:5rem 1.5rem}
   .about-section{grid-template-columns:1fr}
-  .feat-grid{grid-template-columns:1fr}
-  .testimonials-row{animation-duration:30s}
-  .t-card{min-width:280px;max-width:280px}
-}
-@media(max-width:760px){
+  .feat-grid,.models-grid{grid-template-columns:1fr}
+  .tmarq-header{padding:0 1.5rem}
   .cta-section{padding:5rem 1.5rem}
-  .trust-row{gap:1.2rem}
+}
+@media(max-width:680px){
+  .hero-stats{gap:2rem}
+  .tmarq-header{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
 <body>
-
 <div class="loading-screen" id="loadingScreen" style="pointer-events:none">
-  <div class="loading-gem">
-    <svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg>
-  </div>
+  <div class="loading-gem"><svg width="48" height="56" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.9"/></svg></div>
   <div class="loading-bar"><div class="loading-bar-fill"></div></div>
   <div class="loading-text">Verdant Wealth Co.</div>
 </div>
-
-<script>
-setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);
-</script>
+<script>setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.opacity='0';ls.style.visibility='hidden';ls.style.pointerEvents='none';}},1200);</script>
 <script src="_shared.js"></script>
 <script>renderNav('home')</script>
 
@@ -106,7 +100,7 @@ setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.
   <div class="hero-bg"></div>
   <div class="hero-orb">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 680" style="width:100%;height:100%;position:absolute;inset:0">
-    <style>.r1{animation:orbit 18s linear infinite;transform-origin:340px 340px}.r2{animation:orbit 26s linear infinite reverse;transform-origin:340px 340px}.r3{animation:orbit 38s linear infinite;transform-origin:340px 340px}.c2{animation:breathe 3s ease-in-out infinite}@keyframes breathe{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.14);opacity:1}}</style>
+    <style>.r1{animation:orbit 18s linear infinite;transform-origin:340px 340px}.r2{animation:orbit 26s linear infinite reverse;transform-origin:340px 340px}.r3{animation:orbit 38s linear infinite;transform-origin:340px 340px}.c2{animation:breathe 3s ease-in-out infinite}</style>
     <g class="r3"><ellipse cx="340" cy="340" rx="240" ry="88" fill="none" stroke="#2ecc71" stroke-width="0.6" opacity="0.18"/></g>
     <g class="r2"><ellipse cx="340" cy="340" rx="190" ry="70" fill="none" stroke="#2ecc71" stroke-width="0.5" opacity="0.22" transform="rotate(55 340 340)"/></g>
     <g class="r1"><ellipse cx="340" cy="340" rx="160" ry="58" fill="none" stroke="#2ecc71" stroke-width="0.5" opacity="0.28" transform="rotate(-30 340 340)"/></g>
@@ -122,12 +116,12 @@ setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.
     <circle cx="340" cy="200" r="3" fill="#2ecc71" opacity="0.6"/><circle cx="420" cy="280" r="3" fill="#2ecc71" opacity="0.6"/><circle cx="420" cy="400" r="3" fill="#2ecc71" opacity="0.6"/><circle cx="340" cy="480" r="3" fill="#2ecc71" opacity="0.6"/><circle cx="260" cy="400" r="3" fill="#2ecc71" opacity="0.6"/><circle cx="260" cy="280" r="3" fill="#2ecc71" opacity="0.6"/>
     </svg>
   </div>
-  <div class="hero-eyebrow">Retirement &amp; Long-Term Planning · Personal Advisory</div>
+  <div class="hero-eyebrow">Retirement &amp; Long-Term Planning · AI-Powered Intelligence</div>
   <h1 class="hero-title">Your wealth,<br><em>intelligently</em><br>cultivated.</h1>
-  <p class="hero-sub">Personal 1:1 advisory from P. Saravana Kumar — 20+ years of experience guiding Indian families toward financial security and generational wealth.</p>
+  <p class="hero-sub">Personal 1:1 advisory from P. Saravana Kumar — augmented by AI market intelligence. Human wisdom meets machine precision, for your retirement.</p>
   <div class="hero-actions">
     <a href="contact.html" class="btn-primary">Get Personalized Advice</a>
-    <a href="services.html" class="btn-ghost">Explore Services →</a>
+    <a href="analyzer.html" class="btn-ghost">Try AI Analyzer →</a>
   </div>
   <div class="hero-stats" id="heroStats"></div>
   <div class="scroll-hint" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" title="Scroll Down">
@@ -137,11 +131,8 @@ setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.
 
 <!-- TICKER -->
 <div class="ticker-section">
-  <div class="ticker-live-indicator">
-    <span class="live-dot"></span>
-    <span class="live-text">LIVE</span>
-  </div>
-  <div class="ticker-inner" id="tickerInner"></div>
+  <div class="ticker-live-indicator"><span class="live-dot"></span><span class="live-text">LIVE</span></div>
+  <div class="ticker-track"><div class="ticker-inner" id="tickerInner"></div></div>
 </div>
 
 <!-- ABOUT -->
@@ -151,26 +142,39 @@ setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.
       <div class="section-label">The Advisor</div>
       <h2 class="section-title">Not a firm.<br>A <em>person</em> who cares.</h2>
       <p class="prose" style="margin-bottom:1.2rem">At Verdant Wealth Co., there are no junior advisors, no rotating associates, no one-size-fits-all templates. Every client works directly with P. Saravana Kumar — always.</p>
-      <p class="prose" style="margin-bottom:2rem">With over 20 years of experience in retirement and long-term financial planning, Saravana has guided more than 200 families — salaried professionals, business owners, and NRIs — toward lasting financial security.</p>
+      <p class="prose" style="margin-bottom:2rem">Paired with our proprietary AI intelligence engine, Saravana delivers advice that combines 20+ years of human judgement with machine-precision market analysis — giving you a true edge in long-term planning.</p>
       <div style="display:flex;gap:1rem;flex-wrap:wrap">
         <a href="about.html" class="btn-primary">Meet Saravana</a>
         <a href="services.html" class="btn-outline">View Services</a>
       </div>
     </div>
     <div class="advisor-card reveal">
-      <img src="saravana.png" alt="P. Saravana Kumar" class="advisor-photo" id="advisorPhoto" onerror="this.style.display='none'">
+      <img src="saravana.png" alt="P. Saravana Kumar" class="advisor-photo" onerror="this.style.display='none'">
       <div class="advisor-name">P. Saravana Kumar</div>
       <div class="advisor-role">Founder &amp; Chief Financial Advisor</div>
-      <p class="advisor-bio">A specialist in retirement and long-term financial planning with over 20 years of experience. His approach is rooted in clarity, patience, and a deep understanding of long-term market dynamics.</p>
+      <p class="advisor-bio">A specialist in retirement and long-term financial planning with over 20 years of experience. His approach is rooted in clarity, patience, and a deep understanding of long-term market dynamics — now augmented by AI-powered analysis tools built in-house.</p>
       <div class="tag-row">
-        <span class="tag">Retirement Planning</span>
-        <span class="tag">Wealth Preservation</span>
-        <span class="tag">Tax Efficiency</span>
-        <span class="tag">NRI Advisory</span>
-        <span class="tag">Estate Planning</span>
+        <span class="tag">Retirement Planning</span><span class="tag">Wealth Preservation</span>
+        <span class="tag">Tax Efficiency</span><span class="tag">NRI Advisory</span>
+        <span class="tag">Estate Planning</span><span class="tag">AI-Augmented</span>
       </div>
     </div>
   </div>
+</section>
+
+<!-- INFINITE MARQUEE TESTIMONIALS -->
+<section class="tmarq-section" id="testimonials">
+  <div class="tmarq-header reveal">
+    <div>
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title" style="margin-bottom:.5rem">Trusted by families<br>across <em>India.</em></h2>
+      <p class="prose" style="max-width:440px">Real progress — portfolio clarity, retirement confidence, and tax-smart decisions that compound for decades.</p>
+    </div>
+    <a href="contact.html" class="btn-primary" style="align-self:flex-end;white-space:nowrap">Start Your Story →</a>
+  </div>
+  <!-- Marquee rows injected by JS -->
+  <div class="tmarq-outer reveal" id="tmarqContainer"></div>
+  <!-- Mobile static fallback is handled by CSS (hides rows 2 and 3 of tripled array) -->
 </section>
 
 <!-- SERVICES -->
@@ -181,29 +185,29 @@ setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.
       <h2 class="section-title">Focused expertise.<br><em>Real outcomes.</em></h2>
     </div>
     <div class="feat-grid reveal">
-      <div class="feat-card"><div class="feat-num">01</div><span class="feat-icon">🌱</span><div class="feat-name">Retirement Roadmap</div><p class="feat-desc">A comprehensive plan built around your retirement age, lifestyle goals, and current position — backed by 20 years of NSE/BSE market knowledge.</p></div>
-      <div class="feat-card"><div class="feat-num">02</div><span class="feat-icon">📊</span><div class="feat-name">Portfolio Review</div><p class="feat-desc">Deep analysis of your investments — covering NIFTY, sector momentum, macro factors — with clear, human-readable recommendations.</p></div>
-      <div class="feat-card"><div class="feat-num">03</div><span class="feat-icon">🛡️</span><div class="feat-name">Wealth Protection</div><p class="feat-desc">Strategies to safeguard your assets against inflation, market volatility, and unforeseen events. Your hard-earned wealth, defended intelligently.</p></div>
+      <div class="feat-card"><div class="feat-num">01</div><span class="feat-icon">🌱</span><div class="feat-name">Retirement Roadmap</div><p class="feat-desc">A comprehensive plan built around your retirement age, lifestyle goals, and current position — backed by AI scenario modelling using 20 years of NSE/BSE data.</p></div>
+      <div class="feat-card"><div class="feat-num">02</div><span class="feat-icon">📊</span><div class="feat-name">AI Portfolio Review</div><p class="feat-desc">Deep analysis using Solari Prime — covering NIFTY, sector momentum, macro factors — with clear, human-readable recommendations.</p></div>
+      <div class="feat-card"><div class="feat-num">03</div><span class="feat-icon">🛡️</span><div class="feat-name">Wealth Protection</div><p class="feat-desc">Strategies to safeguard your assets against inflation, market volatility, and unforeseen events using AI-powered VaR and drawdown intelligence.</p></div>
       <div class="feat-card"><div class="feat-num">04</div><span class="feat-icon">💰</span><div class="feat-name">Tax-Efficient Investing</div><p class="feat-desc">Structuring your portfolio to legally minimise tax exposure and maximise net returns over decades with full RBI policy and budget awareness.</p></div>
-      <div class="feat-card"><div class="feat-num">05</div><span class="feat-icon">🏠</span><div class="feat-name">Estate &amp; Legacy Planning</div><p class="feat-desc">Ensuring your wealth transfers to the right people, in the right way — covering wills, nominations, HUF structures, and NRI considerations.</p></div>
-      <div class="feat-card"><div class="feat-num">06</div><span class="feat-icon">🤝</span><div class="feat-name">Ongoing 1:1 Advisory</div><p class="feat-desc">Regular check-ins, strategy adjustments, and direct access to Saravana as your financial life evolves — a true long-term partnership.</p></div>
+      <div class="feat-card"><div class="feat-num">05</div><span class="feat-icon">🏠</span><div class="feat-name">Estate &amp; Legacy Planning</div><p class="feat-desc">Ensuring your wealth transfers to the right people, in the right way — covering wills, nominations, HUF structures, and NRI-specific considerations.</p></div>
+      <div class="feat-card"><div class="feat-num">06</div><span class="feat-icon">🤝</span><div class="feat-name">Ongoing 1:1 Advisory</div><p class="feat-desc">Regular check-ins, strategy adjustments, and direct access to Saravana as your financial life evolves — plus live AI signal dashboards.</p></div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS — Marquee -->
-<section class="testimonials-section" id="testimonials">
+<!-- AI MODELS -->
+<section class="models-section" id="models">
   <div class="sec-center reveal">
-    <div class="section-label">Client Stories</div>
-    <h2 class="section-title">Trusted by families<br>across <em>India.</em></h2>
-    <p class="prose" style="max-width:580px;margin:.8rem auto 0;text-align:center">Real outcomes from real people. From Chennai to Dubai, Saravana's clients are building wealth with confidence.</p>
+    <div class="section-label">AI Intelligence Suite</div>
+    <h2 class="section-title">Built for the <em>Indian edge.</em></h2>
   </div>
-  <div class="testimonials-marquee-wrap reveal">
-    <div class="testimonials-row" id="testimonialsMarquee"></div>
-  </div>
-  <div style="text-align:center;margin-top:3rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-    <a href="contact.html" class="btn-primary">Get Personalized Advice →</a>
-    <a href="about.html" class="btn-outline">Meet Saravana</a>
+  <div class="models-grid reveal">
+    <div class="model-card"><div class="model-status status-live">Live</div><div class="model-visual"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" style="width:100%;height:100%"><rect width="680" height="260" fill="#0d110d"/><circle cx="340" cy="130" r="90" fill="#0d110d" stroke="#2ecc71" stroke-width="0.8" opacity="0.4"/><circle cx="340" cy="130" r="60" fill="#0d110d" stroke="#2ecc71" stroke-width="0.6" opacity="0.3"/><circle cx="340" cy="130" r="30" fill="#121a12" stroke="#2ecc71" stroke-width="1" opacity="0.8"/><circle cx="340" cy="130" r="14" fill="#2ecc71" opacity="0.7"/><line x1="340" y1="30" x2="340" y2="62" stroke="#2ecc71" stroke-width="1" opacity="0.5"/><line x1="340" y1="198" x2="340" y2="230" stroke="#2ecc71" stroke-width="1" opacity="0.5"/><line x1="240" y1="130" x2="272" y2="130" stroke="#2ecc71" stroke-width="1" opacity="0.5"/><line x1="408" y1="130" x2="440" y2="130" stroke="#2ecc71" stroke-width="1" opacity="0.5"/></svg></div><div class="model-badge">Core · solari.ai</div><div class="model-name">Solari <em>Prime</em></div><p class="model-tagline">The foundational intelligence engine — turning raw Indian market data into retirement-grade clarity.</p><div class="model-tags"><span class="model-tag">Auto-CoT</span><span class="model-tag">NIFTY</span><span class="model-tag">Macro</span></div></div>
+    <div class="model-card"><div class="model-status status-soon">Coming Soon</div><div class="model-visual" style="display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;color:rgba(46,204,113,.25)">Pythia</div><div class="model-badge">Forecasting · pythia.ai</div><div class="model-name">Pythia</div><p class="model-tagline">Deep-horizon forecasting trained on 20 years of NSE/BSE data. Speaks in probabilities, not guesses.</p><div class="model-tags"><span class="model-tag">Time-Series</span><span class="model-tag">NSE/BSE</span><span class="model-tag">Forecast</span></div></div>
+    <div class="model-card"><div class="model-status status-soon">Coming Soon</div><div class="model-visual" style="display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;color:rgba(46,204,113,.25)">Scutum</div><div class="model-badge">Risk · scutum.ai</div><div class="model-name">Scutum</div><p class="model-tagline">Portfolio-grade protection: real-time VaR, drawdown intelligence, hedging signals, black swan detection.</p><div class="model-tags"><span class="model-tag">VaR</span><span class="model-tag">Hedging</span><span class="model-tag">Portfolio</span></div></div>
+    <div class="model-card"><div class="model-status status-soon">Coming Soon</div><div class="model-visual" style="display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;color:rgba(46,204,113,.25)">Mercur</div><div class="model-badge">Sentiment · mercur.ai</div><div class="model-name">Mercur</div><p class="model-tagline">Parses SEBI filings, budget speeches, and RBI communications in real time to surface signals before they move markets.</p><div class="model-tags"><span class="model-tag">NLP</span><span class="model-tag">SEBI</span><span class="model-tag">RBI</span></div></div>
+    <div class="model-card"><div class="model-status status-soon">Coming Soon</div><div class="model-visual" style="display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;color:rgba(46,204,113,.25)">Bellator</div><div class="model-badge">Derivatives · bellator.ai</div><div class="model-name">Bellator</div><p class="model-tagline">Options and futures specialist: open interest analysis, IV surface modeling, and expiry-week pattern recognition.</p><div class="model-tags"><span class="model-tag">Options</span><span class="model-tag">Futures</span><span class="model-tag">IV Model</span></div></div>
+    <div class="model-card"><div class="model-status status-soon">Coming Soon</div><div class="model-visual" style="display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;color:rgba(46,204,113,.25)">Janus</div><div class="model-badge">Macro · janus.ai</div><div class="model-name">Janus</div><p class="model-tagline">Looks backward into history and forward into macro futures — RBI cycles, budget timelines, FII/DII flows.</p><div class="model-tags"><span class="model-tag">RBI</span><span class="model-tag">Budget</span><span class="model-tag">FII/DII</span></div></div>
   </div>
 </section>
 
@@ -229,9 +233,9 @@ setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.
 <!-- CTA -->
 <section class="cta-section" id="cta">
   <div class="cta-section-inner">
-    <div class="cta-eyebrow reveal">Ready to begin?</div>
+    <div class="section-label reveal" style="justify-content:center;display:flex">Ready to begin?</div>
     <h2 class="cta-title reveal">Your retirement<br>shouldn't be left to <em>chance.</em></h2>
-    <p class="cta-sub reveal">Expert guidance. Every signal. A plan built for your life — not someone else's.</p>
+    <p class="prose reveal" style="color:var(--muted);margin-bottom:2.5rem;text-align:center">Expert guidance. Every signal. A plan built for your life — not someone else's.</p>
     <div class="reveal" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem">
       <a href="pricing.html" class="btn-primary">View Pricing Plans →</a>
     </div>
@@ -239,58 +243,25 @@ setTimeout(function(){var ls=document.getElementById('loadingScreen');if(ls){ls.
       <div class="trust-item"><span class="trust-check">✓</span> No hidden fees</div>
       <div class="trust-item"><span class="trust-check">✓</span> Cancel anytime</div>
       <div class="trust-item"><span class="trust-check">✓</span> Always Saravana directly</div>
-      <div class="trust-item"><span class="trust-check">✓</span> 200+ families served</div>
+      <div class="trust-item"><span class="trust-check">✓</span> 6 AI models included</div>
     </div>
   </div>
 </section>
 
-<!-- MOBILE CHAT FAB -->
-<button class="mobile-chat-fab" id="mobileChatFab" title="Chat with us">💬</button>
-
-<!-- MOBILE CHAT OVERLAY -->
-<div class="mobile-chat-overlay" id="mobileChatOverlay">
-  <div class="mobile-chat-header">
-    <button class="mobile-chat-back" onclick="closeMobileChat()">←</button>
-    <div>
-      <div class="mobile-chat-title">Verdant <span>Wealth</span></div>
-      <div style="font-family:var(--mono);font-size:.55rem;color:var(--muted);letter-spacing:.1em">P. Saravana Kumar · Advisory</div>
-    </div>
-    <div style="margin-left:auto;display:flex;align-items:center;gap:.4rem">
-      <div style="width:7px;height:7px;border-radius:50%;background:var(--em-glow);animation:blink 2s infinite"></div>
-      <span style="font-family:var(--mono);font-size:.58rem;color:var(--muted)">Online</span>
-    </div>
-  </div>
-  <div class="mobile-quick-btns" id="mobileChatQuickBtns">
-    <button class="mobile-quick-btn" onclick="sendMobileQuick('I want to learn about retirement planning')">Retirement Planning</button>
-    <button class="mobile-quick-btn" onclick="sendMobileQuick('What are your pricing plans?')">Pricing</button>
-    <button class="mobile-quick-btn" onclick="sendMobileQuick('I am an NRI looking for India investment advice')">NRI Advisory</button>
-    <button class="mobile-quick-btn" onclick="sendMobileQuick('How do I book a free consultation?')">Book a Call</button>
-  </div>
-  <div class="mobile-chat-body" id="mobileChatBody">
-    <div class="mobile-msg">
-      <div class="mobile-msg-av">🌿</div>
-      <div class="mobile-bubble bot">Hello! I'm here to help you connect with Saravana. Ask me anything about our services, pricing, or retirement planning — or tap a quick question above.</div>
-    </div>
-  </div>
-  <div class="mobile-chat-input-row">
-    <input type="text" class="mobile-chat-input" id="mobileChatInput" placeholder="Type a message..." autocomplete="off"
-      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMobileMessage();}">
-    <button class="mobile-chat-send" onclick="sendMobileMessage()">➤</button>
-  </div>
-</div>
+<!-- DEVELOPER SECTION — injected by JS -->
+<div id="devSectionMount"></div>
 
 <script>
 renderFooter();
+renderMobileChat();
 initAll();
 initAnalytics();
 hideLoading();
 refreshMarketTicker();
 
 /* Hero stats */
-var hs = document.getElementById('heroStats');
-if(hs) SITE.heroStats.forEach(function(s){
-  hs.innerHTML += '<div><div class="stat-num">'+s.num+'</div><div class="stat-lbl">'+s.lbl+'</div></div>';
-});
+var hs=document.getElementById('heroStats');
+if(hs)SITE.heroStats.forEach(function(s){hs.innerHTML+='<div><div class="stat-num">'+s.num+'</div><div class="stat-lbl">'+s.lbl+'</div></div>';});
 
 /* Ticker */
 renderTicker('tickerInner');
@@ -298,24 +269,11 @@ renderTicker('tickerInner');
 /* Pricing */
 renderPricingCards('homePricingGrid');
 
-/* Testimonials marquee — duplicate for infinite scroll */
-var mq = document.getElementById('testimonialsMarquee');
-if(mq){
-  var allTestimonials = SITE.testimonials.concat(SITE.testimonials); /* duplicate */
-  allTestimonials.forEach(function(t){
-    mq.innerHTML += '<div class="t-card">' +
-      '<div class="t-stars">'+'★'.repeat(t.stars)+'</div>' +
-      '<p class="t-quote">"'+t.quote+'"</p>' +
-      '<div class="t-person">' +
-        '<div class="t-av">'+t.initials+'</div>' +
-        '<div><div class="t-name">'+t.name+'</div><div class="t-role">'+t.role+'</div></div>' +
-      '</div>' +
-    '</div>';
-  });
-}
+/* Marquee testimonials */
+renderTestimonialsMarquee('tmarqContainer');
 
-/* Mobile chat */
-initMobileChat();
+/* Developer section */
+renderDevInfo('devSectionMount');
 </script>
 </body>
 </html>
