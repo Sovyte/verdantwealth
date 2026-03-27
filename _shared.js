@@ -1,4 +1,4 @@
-/* ── AUTO-HIDE LOADING SCREEN (fires as soon as this script loads) ── */
+/* ── AUTO-HIDE LOADING SCREEN ── */
 (function(){
   function doHide(){
     var ls=document.getElementById('loadingScreen');
@@ -14,30 +14,20 @@
 
 /* ============================================================
    VERDANT WEALTH CO. — MASTER SITE CONFIG
-   ✏️  Edit ALL constants here. One file controls everything.
    ============================================================ */
-
 const SITE = {
-
-  /* ── Brand ── */
   brand:    'Verdant Wealth Co.',
   tagline:  'Your wealth, intelligently cultivated.',
   advisor:  'P. Saravana Kumar',
   year:     '2026',
-
-  /* ── Theme ── */
   defaultTheme: 'dark',
-
-  /* ── Photo ── */
   advisorPhoto: 'saravana.png',
 
-  /* ── Pages ── */
   pages: {
     home:      'index.html',
     about:     'about.html',
     services:  'services.html',
     models:    'models.html',
-    analyzer:  'analyzer.html',
     pricing:   'pricing.html',
     blog:      'blog.html',
     faq:       'faq.html',
@@ -47,7 +37,6 @@ const SITE = {
     notfound:  '404.html',
   },
 
-  /* ── Contact ── */
   contact: {
     email:    'ilamugilan343@gmail.com',
     phone:    '+91 98765 43210',
@@ -56,7 +45,6 @@ const SITE = {
     calendly: 'https://calendly.com/ilamugilan343/new-meeting',
   },
 
-  /* ── Social ── */
   social: {
     twitter:   '#',
     linkedin:  '#',
@@ -64,33 +52,27 @@ const SITE = {
     instagram: '#',
   },
 
-  /* ── API endpoints ── */
   api: {
     baseUrl:         'http://127.0.0.1:8080',
-    analyzeEndpoint: 'http://127.0.0.1:8080/analyze',
     contactEndpoint: 'http://127.0.0.1:8080/contact',
     welcomeEndpoint: 'http://127.0.0.1:8080/send-welcome',
   },
 
-  /* ── Supabase ── */
   supabase: {
     url:     'https://aivctqxlrzpucahuaxsy.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpdmN0cXhscnpwdWNhaHVheHN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDE5NTYsImV4cCI6MjA4OTIxNzk1Nn0.GOZZ6Z-WqcGRm9fEmrFwVZm6NKzAcrArfkh7xqOa9Hg',
   },
 
-  /* ── Analytics ── */
   analytics: {
     googleId: 'YOUR_GA_MEASUREMENT_ID',
   },
 
-  /* ── Database ── */
   database: {
     type: 'sqlite',
     file: 'verdant_wealth.db',
     enabled: true
   },
 
-  /* ── Pricing ── */
   pricing: {
     basic: {
       name:    'Basic',
@@ -135,7 +117,6 @@ const SITE = {
     },
   },
 
-  /* ── Testimonials ── */
   testimonials: [
     {
       name:     'Rajesh Menon',
@@ -147,7 +128,7 @@ const SITE = {
     {
       name:     'Priya & Arun Nair',
       role:     'Business Owners · Coimbatore',
-      quote:    'We came to Saravana with no financial plan and a lot of anxiety. He was patient, direct, and never talked down to us. The AI tools gave us confidence that our decisions are backed by real data — not just gut feel.',
+      quote:    'We came to Saravana with no financial plan and a lot of anxiety. He was patient, direct, and never talked down to us. The depth of his knowledge about Indian markets gave us real confidence.',
       stars:    5,
       initials: 'PN',
     },
@@ -168,7 +149,7 @@ const SITE = {
     {
       name:     'Vikram Sharma',
       role:     'Entrepreneur · Mumbai',
-      quote:    'The Elite plan is genuinely elite. Bi-weekly calls, instant responses, and an advisor who knows my business and personal situation in depth. The AI analyzer flagged a sector risk I would have completely missed.',
+      quote:    'Bi-weekly calls, instant responses, and an advisor who knows my business and personal situation in depth. The Elite plan is genuinely elite. I\'ve never felt more in control of my financial future.',
       stars:    5,
       initials: 'VS',
     },
@@ -188,7 +169,7 @@ const SITE = {
     },
     {
       q: 'Is there a free trial or introductory offer?',
-      a: 'The Basic plan at ₹4,500 is designed as a risk-free entry point. You receive a full 60-minute session, a financial health assessment, and a Solari Prime AI report before committing to any ongoing plan.',
+      a: 'The Basic plan at ₹4,000/hr is designed as a risk-free entry point. You receive a full 60-minute session, a financial health assessment, and detailed written recommendations before committing to any ongoing plan.',
     },
     {
       q: 'Can I switch or cancel my plan?',
@@ -197,10 +178,6 @@ const SITE = {
     {
       q: 'I am an NRI. Can you advise on India-specific planning?',
       a: 'Absolutely. Saravana has deep experience with NRI financial planning — FEMA regulations, NRE/NRO accounts, repatriation, double taxation, and India portfolio management from abroad.',
-    },
-    {
-      q: 'What does the AI analysis actually do?',
-      a: 'The Solari Prime engine analyses NIFTY, sector momentum, RBI policy, FII/DII flows, global macro events, and more — producing a structured report with confidence scores, risk alerts, and a step-by-step reasoning chain.',
     },
     {
       q: 'How quickly do you respond?',
@@ -216,114 +193,94 @@ const SITE = {
     },
   ],
 
-  /* ── Blog posts ── */
-  blog: [
-    {
-      slug:     'rbi-rate-cycle-2026',
-      title:    'The RBI rate cycle and what it means for your retirement portfolio in 2026',
-      excerpt:  'With the MPC holding rates steady for the third consecutive quarter, here is what every long-term investor should be doing with their debt and equity allocation right now.',
-      date:     'March 2026',
-      readTime: '6 min read',
-      tags:     ['RBI', 'Retirement', 'Portfolio'],
-      featured: true,
-      body:     '',
-    },
-    {
-      slug:     'nri-india-planning-guide',
-      title:    'The complete NRI guide to building wealth in India from abroad',
-      excerpt:  'Managing Indian assets from Dubai, Singapore, or London comes with unique challenges — FEMA rules, repatriation limits, NRE vs NRO accounts. Here is the full picture.',
-      date:     'February 2026',
-      readTime: '8 min read',
-      tags:     ['NRI', 'Planning', 'Tax'],
-      featured: false,
-      body:     '',
-    },
-    {
-      slug:     'retire-at-55-india',
-      title:    'How to retire at 55 in India — a realistic roadmap',
-      excerpt:  'Early retirement is not just for the ultra-wealthy. With the right strategy starting in your 30s, retiring at 55 is achievable on a normal Indian salary. Here is the maths.',
-      date:     'January 2026',
-      readTime: '7 min read',
-      tags:     ['Retirement', 'Planning', 'Strategy'],
-      featured: false,
-      body:     '',
-    },
-    {
-      slug:     'gold-vs-equity-2026',
-      title:    'Gold vs equities for Indian retirement portfolios — the 2026 case',
-      excerpt:  'With gold at all-time highs and NIFTY volatile, where should the next decade of savings go? Solari Prime data and Saravana\'s take.',
-      date:     'December 2025',
-      readTime: '5 min read',
-      tags:     ['Gold', 'Equity', 'Allocation'],
-      featured: false,
-      body:     '',
-    },
-    {
-      slug:     'fii-dii-explained',
-      title:    'FII vs DII flows explained — and why it matters for your portfolio',
-      excerpt:  'Foreign and domestic institutional investors move markets. Understanding their behaviour is one of the most useful edges a retail investor can have.',
-      date:     'November 2025',
-      readTime: '5 min read',
-      tags:     ['FII/DII', 'Macro', 'Markets'],
-      featured: false,
-      body:     '',
-    },
-    {
-      slug:     'ai-in-personal-finance',
-      title:    'How AI is changing personal finance — and what it means for you',
-      excerpt:  'The technology behind Solari Prime, and why AI-augmented advice is the next evolution of financial planning for individual investors.',
-      date:     'October 2025',
-      readTime: '6 min read',
-      tags:     ['AI', 'Technology', 'Future'],
-      featured: false,
-      body:     '',
-    },
-  ],
-
-  /* ── Ticker ── */
+  /* ── Rich ticker data ── */
   ticker: [
-    {label:'NIFTY 50',  val:'22,450', change:'+1.12%', up:true},
-    {label:'BANK NIFTY',val:'48,210', change:'+0.85%', up:true},
-    {label:'SENSEX',    val:'73,980', change:'+0.92%', up:true},
-    {label:'USD/INR',   val:'83.45',  change:'+0.04%', up:true},
-    {label:'RELIANCE',  val:'2,910',  change:'+1.45%', up:true},
-    {label:'TCS',       val:'3,820',  change:'+0.25%', up:true},
-    {label:'INFY',      val:'1,585',  change:'-0.42%', up:false},
-    {label:'GOLD',      val:'$2,150', change:'+0.65%', up:true},
-    {label:'SILVER',    val:'$24.80', change:'+1.20%', up:true},
-    {label:'BRENT',     val:'$84.15', change:'-0.35%', up:false},
-    {label:'BITCOIN',   val:'$68,200',change:'+3.10%', up:true},
+    {label:'NIFTY 50',     val:'22,450',  change:'+1.12%', up:true,  extra:'22,100–22,520'},
+    {label:'BANK NIFTY',   val:'48,210',  change:'+0.85%', up:true,  extra:'47,900–48,350'},
+    {label:'SENSEX',       val:'73,980',  change:'+0.92%', up:true,  extra:'73,500–74,050'},
+    {label:'MIDCAP 100',   val:'46,120',  change:'+1.35%', up:true,  extra:'Vol:High'},
+    {label:'SMALLCAP 250', val:'14,890',  change:'+1.78%', up:true,  extra:'Momentum+'},
+    {label:'NIFTY IT',     val:'36,200',  change:'+2.10%', up:true,  extra:'Sector Leader'},
+    {label:'NIFTY PHARMA', val:'19,450',  change:'+0.55%', up:true,  extra:'Steady'},
+    {label:'NIFTY AUTO',   val:'24,100',  change:'+1.90%', up:true,  extra:'EV Rally'},
+    {label:'NIFTY FMCG',   val:'53,200',  change:'-0.22%', up:false, extra:'Range-bound'},
+    {label:'NIFTY METAL',  val:'9,840',   change:'-0.65%', up:false, extra:'China concerns'},
+    {label:'NIFTY REALTY', val:'1,020',   change:'+2.40%', up:true,  extra:'Breakout'},
+    {label:'NIFTY ENERGY', val:'38,750',  change:'+0.45%', up:true,  extra:'Crude stable'},
+    {label:'RELIANCE',     val:'2,910',   change:'+1.45%', up:true,  extra:'NSE'},
+    {label:'TCS',          val:'3,820',   change:'+0.25%', up:true,  extra:'NSE'},
+    {label:'HDFC BANK',    val:'1,620',   change:'-0.42%', up:false, extra:'NSE'},
+    {label:'INFY',         val:'1,585',   change:'-0.38%', up:false, extra:'NSE'},
+    {label:'ICICI BANK',   val:'1,240',   change:'+1.10%', up:true,  extra:'NSE'},
+    {label:'WIPRO',        val:'480',     change:'+1.85%', up:true,  extra:'NSE'},
+    {label:'LT',           val:'3,600',   change:'+0.92%', up:true,  extra:'Infra'},
+    {label:'BAJAJ FIN',    val:'7,100',   change:'+2.20%', up:true,  extra:'NBFC'},
+    {label:'USD/INR',      val:'83.45',   change:'+0.04%', up:true,  extra:'RBI Watch'},
+    {label:'EUR/INR',      val:'90.20',   change:'-0.12%', up:false, extra:'Forex'},
+    {label:'GBP/INR',      val:'105.80',  change:'+0.08%', up:true,  extra:'Forex'},
+    {label:'GOLD',         val:'₹72,400', change:'+0.65%', up:true,  extra:'MCX/10g'},
+    {label:'SILVER',       val:'₹87,200', change:'+1.20%', up:true,  extra:'MCX/kg'},
+    {label:'CRUDE BRENT',  val:'$84.15',  change:'-0.35%', up:false, extra:'$/bbl'},
+    {label:'BITCOIN',      val:'$68,200', change:'+3.10%', up:true,  extra:'BTC/USD'},
+    {label:'10YR GSEC',    val:'6.82%',   change:'-2bps',  up:false, extra:'Yield'},
+    {label:'RBI REPO',     val:'6.50%',   change:'Steady', up:true,  extra:'Policy Rate'},
+    {label:'CPI INDIA',    val:'4.85%',   change:'MoM',    up:false, extra:'Feb 2026'},
+    {label:'INR LIBOR',    val:'7.15%',   change:'+5bps',  up:true,  extra:'3M'},
+    {label:'FII FLOW',     val:'+₹2,840cr',change:'Today', up:true,  extra:'Net Buy'},
+    {label:'DII FLOW',     val:'+₹1,220cr',change:'Today', up:true,  extra:'Net Buy'},
+    {label:'VIX INDIA',    val:'13.42',   change:'-0.88%', up:false, extra:'Fear Index'},
   ],
 
-  /* ── Hero stats ── */
   heroStats: [
     {num:'20+',  lbl:'Years Experience'},
     {num:'200+', lbl:'Families Served'},
     {num:'1:1',  lbl:'Direct Advisory'},
-    {num:'6',    lbl:'AI Models'},
+    {num:'₹100cr+', lbl:'Assets Guided'},
   ],
-
-  /* ── AI Analyzer chips ── */
-  analyzerChips: [
-    'Analyze NIFTY50 outlook for retirement portfolio over next 12 months',
-    'Best sectors for retirement wealth building considering RBI policy',
-    'FII vs DII flow analysis and impact on long-term portfolio',
-    'Impact of RBI rate cycle on debt and equity allocation for retirement',
-    'Gold vs equity allocation strategy for Indian retirement portfolio',
-  ],
-
-  /* ── Model pages ── */
-  modelPages: {
-    solari:'models.html', pythia:'models.html', scutum:'models.html',
-    mercur:'models.html', bellator:'models.html', janus:'models.html',
-  },
 
   legal: {privacy:'privacy.html', terms:'terms.html'},
+
+  blog: [
+    {
+      slug:'rbi-rate-cycle-2026',
+      title:'The RBI rate cycle and what it means for your retirement portfolio in 2026',
+      excerpt:'With the MPC holding rates steady for the third consecutive quarter, here is what every long-term investor should be doing with their debt and equity allocation right now.',
+      date:'March 2026',readTime:'6 min read',tags:['RBI','Retirement','Portfolio'],featured:true,body:'',
+    },
+    {
+      slug:'nri-india-planning-guide',
+      title:'The complete NRI guide to building wealth in India from abroad',
+      excerpt:'Managing Indian assets from Dubai, Singapore, or London comes with unique challenges — FEMA rules, repatriation limits, NRE vs NRO accounts. Here is the full picture.',
+      date:'February 2026',readTime:'8 min read',tags:['NRI','Planning','Tax'],featured:false,body:'',
+    },
+    {
+      slug:'retire-at-55-india',
+      title:'How to retire at 55 in India — a realistic roadmap',
+      excerpt:'Early retirement is not just for the ultra-wealthy. With the right strategy starting in your 30s, retiring at 55 is achievable on a normal Indian salary.',
+      date:'January 2026',readTime:'7 min read',tags:['Retirement','Planning','Strategy'],featured:false,body:'',
+    },
+    {
+      slug:'gold-vs-equity-2026',
+      title:'Gold vs equities for Indian retirement portfolios — the 2026 case',
+      excerpt:'With gold at all-time highs and NIFTY volatile, where should the next decade of savings go? Saravana\'s take.',
+      date:'December 2025',readTime:'5 min read',tags:['Gold','Equity','Allocation'],featured:false,body:'',
+    },
+    {
+      slug:'fii-dii-explained',
+      title:'FII vs DII flows explained — and why it matters for your portfolio',
+      excerpt:'Foreign and domestic institutional investors move markets. Understanding their behaviour is one of the most useful edges a retail investor can have.',
+      date:'November 2025',readTime:'5 min read',tags:['FII/DII','Macro','Markets'],featured:false,body:'',
+    },
+    {
+      slug:'tax-saving-retirement-india',
+      title:'Tax-smart retirement planning — maximising 80C, 80D and more',
+      excerpt:'How to structure your portfolio to legally minimise tax year after year, compounding the difference into a larger retirement corpus.',
+      date:'October 2025',readTime:'6 min read',tags:['Tax','Planning','80C'],featured:false,body:'',
+    },
+  ],
 };
 
-/* ═══════════════════════════════════════════════════════════
-   THEME SYSTEM
-═══════════════════════════════════════════════════════════ */
+/* ═══ THEME ═══ */
 (function(){
   var saved = localStorage.getItem('vwc_theme') || SITE.defaultTheme;
   document.documentElement.setAttribute('data-theme', saved);
@@ -338,26 +295,20 @@ function toggleTheme(){
   if(btn) btn.textContent = next === 'dark' ? '☀' : '☽';
 }
 
-/* ═══════════════════════════════════════════════════════════
-   TRACKING
-═══════════════════════════════════════════════════════════ */
+/* ═══ TRACKING ═══ */
 function trackEvent(eventName, data) {
   if (SITE.database && SITE.database.enabled) {
-    console.log('[DB Log] Event: ' + eventName, data);
+    console.log('[Log] Event: ' + eventName, data);
   }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   LOGO SVG
-═══════════════════════════════════════════════════════════ */
+/* ═══ LOGO SVG ═══ */
 function logoSVG(w,h){
   w=w||34;h=h||38;
   return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="var(--logo-bg)" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polygon points="22,32 46,32 45,46 23,46" fill="#2ecc71" opacity="0.22"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.8"/><line x1="34" y1="16" x2="34" y2="29" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="22" y2="32" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="46" y2="32" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="34" y2="58" stroke="#2ecc71" stroke-width="0.5" opacity="0.3"/></svg>';
 }
 
-/* ═══════════════════════════════════════════════════════════
-   NAV RENDERER  (no cursor div, no cursor ring)
-═══════════════════════════════════════════════════════════ */
+/* ═══ NAV RENDERER ═══ */
 function renderNav(activePage){
   activePage = activePage||'';
   var p = SITE.pages;
@@ -371,8 +322,6 @@ function renderNav(activePage){
         '<li><a href="'+p.home+'"     class="'+(activePage==='home'?'nav-active':'')+'">Home</a></li>' +
         '<li><a href="'+p.about+'"    class="'+(activePage==='about'?'nav-active':'')+'">About</a></li>' +
         '<li><a href="'+p.services+'" class="'+(activePage==='services'?'nav-active':'')+'">Services</a></li>' +
-        '<li><a href="'+p.models+'"   class="'+(activePage==='models'?'nav-active':'')+'">AI Models</a></li>' +
-        '<li><a href="'+p.analyzer+'" class="'+(activePage==='analyzer'?'nav-active':'')+'">Analyzer</a></li>' +
         '<li><a href="'+p.pricing+'"  class="'+(activePage==='pricing'?'nav-active':'')+'">Pricing</a></li>' +
         '<li><a href="'+p.faq+'"      class="'+(activePage==='faq'?'nav-active':'')+'">FAQ</a></li>' +
         '<li><a href="'+p.blog+'"     class="'+(activePage==='blog'?'nav-active':'')+'">Blog</a></li>' +
@@ -390,22 +339,21 @@ function renderNav(activePage){
         '<li><a href="'+p.home+'"     onclick="toggleMobileNav()">Home</a></li>' +
         '<li><a href="'+p.about+'"    onclick="toggleMobileNav()">About</a></li>' +
         '<li><a href="'+p.services+'" onclick="toggleMobileNav()">Services</a></li>' +
-        '<li><a href="'+p.models+'"   onclick="toggleMobileNav()">AI Models</a></li>' +
-        '<li><a href="'+p.analyzer+'" onclick="toggleMobileNav()">Analyzer</a></li>' +
         '<li><a href="'+p.pricing+'"  onclick="toggleMobileNav()">Pricing</a></li>' +
         '<li><a href="'+p.faq+'"      onclick="toggleMobileNav()">FAQ</a></li>' +
         '<li><a href="'+p.blog+'"     onclick="toggleMobileNav()">Blog</a></li>' +
         '<li><a href="'+p.contact+'"  onclick="toggleMobileNav()">Contact</a></li>' +
       '</ul>' +
-    '</div>'
+    '</div>' +
+    /* Custom cursor elements (hidden on touch via CSS) */
+    '<div class="cursor" id="cursorDot"></div>' +
+    '<div class="cursor-ring" id="cursorRing"></div>'
   );
 }
 
-/* ═══════════════════════════════════════════════════════════
-   FOOTER RENDERER
-═══════════════════════════════════════════════════════════ */
+/* ═══ FOOTER RENDERER ═══ */
 function renderFooter(){
-  var p=SITE.pages, mp=SITE.modelPages, s=SITE.social;
+  var p=SITE.pages, s=SITE.social;
   document.write(
     '<footer>' +
       '<div class="footer-top">' +
@@ -424,32 +372,28 @@ function renderFooter(){
           '<a href="'+SITE.contact.calendly+'" target="_blank" rel="noopener" class="footer-calendly-btn">📅 Book a Free Session</a>' +
         '</div>' +
         '<div>' +
-          '<div class="foot-col-title">AI Models</div>' +
-          '<ul class="foot-col-links">' +
-            '<li><a href="'+mp.solari+'">Solari Prime <span class="link-badge">Live</span></a></li>' +
-            '<li><a href="'+mp.pythia+'">Pythia <span class="link-badge">Soon</span></a></li>' +
-            '<li><a href="'+mp.scutum+'">Scutum <span class="link-badge">Soon</span></a></li>' +
-            '<li><a href="'+mp.mercur+'">Mercur <span class="link-badge">Soon</span></a></li>' +
-            '<li><a href="'+mp.bellator+'">Bellator <span class="link-badge">Soon</span></a></li>' +
-            '<li><a href="'+mp.janus+'">Janus <span class="link-badge">Soon</span></a></li>' +
-          '</ul>' +
-        '</div>' +
-        '<div>' +
           '<div class="foot-col-title">Advisory</div>' +
           '<ul class="foot-col-links">' +
             '<li><a href="'+p.services+'">Services</a></li>' +
             '<li><a href="'+p.pricing+'">Pricing</a></li>' +
             '<li><a href="'+p.about+'">About Saravana</a></li>' +
-            '<li><a href="'+p.analyzer+'">AI Analyzer</a></li>' +
             '<li><a href="'+p.blog+'">Blog</a></li>' +
             '<li><a href="'+p.contact+'">Contact</a></li>' +
+          '</ul>' +
+        '</div>' +
+        '<div>' +
+          '<div class="foot-col-title">Resources</div>' +
+          '<ul class="foot-col-links">' +
+            '<li><a href="'+p.faq+'">FAQ</a></li>' +
+            '<li><a href="'+p.blog+'">Market Insights</a></li>' +
+            '<li><a href="'+p.pricing+'">View Pricing</a></li>' +
+            '<li><a href="'+SITE.contact.calendly+'" target="_blank" rel="noopener">Book a Call</a></li>' +
           '</ul>' +
         '</div>' +
         '<div>' +
           '<div class="foot-col-title">Company</div>' +
           '<ul class="foot-col-links">' +
             '<li><a href="'+p.about+'">About</a></li>' +
-            '<li><a href="'+p.blog+'">Blog</a></li>' +
             '<li><a href="'+p.contact+'">Contact</a></li>' +
             '<li><a href="'+p.privacy+'">Privacy Policy</a></li>' +
             '<li><a href="'+p.terms+'">Terms of Service</a></li>' +
@@ -476,13 +420,70 @@ function renderFooter(){
   );
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SHARED UTILITIES
-═══════════════════════════════════════════════════════════ */
+/* ═══ CUSTOM CURSOR (desktop/pointer only) ═══ */
+function initCursor(){
+  /* Only activate on genuine pointer devices */
+  var isPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if(!isPointer) return;
 
-/* initCursor — no-op; custom cursor removed */
-function initCursor(){ /* intentionally empty */ }
+  var dot  = document.getElementById('cursorDot');
+  var ring = document.getElementById('cursorRing');
+  if(!dot || !ring) return;
 
+  var mx=0, my=0, rx=0, ry=0, raf;
+
+  document.addEventListener('mousemove', function(e){
+    mx = e.clientX;
+    my = e.clientY;
+    /* Dot snaps instantly */
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  /* Ring lags behind smoothly */
+  function animateRing(){
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    raf = requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  /* Hover state */
+  var hoverEls = 'a, button, [role="button"], .plan-card, .testimonial-card, .card-base, .nav-cta, .faq-question, .back-to-top, .whatsapp-float, .cookie-accept, .cookie-decline';
+  document.querySelectorAll(hoverEls).forEach(function(el){
+    el.addEventListener('mouseenter', function(){
+      dot.classList.add('hover');
+      ring.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', function(){
+      dot.classList.remove('hover');
+      ring.classList.remove('hover');
+    });
+  });
+
+  /* Use MutationObserver to catch dynamically added elements */
+  var mo = new MutationObserver(function(){
+    document.querySelectorAll(hoverEls).forEach(function(el){
+      if(el._cursorBound) return;
+      el._cursorBound = true;
+      el.addEventListener('mouseenter', function(){ dot.classList.add('hover'); ring.classList.add('hover'); });
+      el.addEventListener('mouseleave', function(){ dot.classList.remove('hover'); ring.classList.remove('hover'); });
+    });
+  });
+  mo.observe(document.body, {childList:true, subtree:true});
+
+  /* Click animation */
+  document.addEventListener('mousedown', function(){ dot.classList.add('clicking'); ring.classList.add('clicking'); });
+  document.addEventListener('mouseup',   function(){ dot.classList.remove('clicking'); ring.classList.remove('clicking'); });
+
+  /* Hide when leaving window */
+  document.addEventListener('mouseleave', function(){ dot.style.opacity='0'; ring.style.opacity='0'; });
+  document.addEventListener('mouseenter', function(){ dot.style.opacity='1'; ring.style.opacity='1'; });
+}
+
+/* ═══ SHARED UTILITIES ═══ */
 function initReveal(){
   var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.07});
   document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
@@ -501,12 +502,10 @@ function toggleMobileNav(){
   if(!nav)return;
   var isOpen = nav.classList.toggle('open');
   if(btn)btn.classList.toggle('open', isOpen);
-  // Prevent body scroll when menu open
   document.body.style.overflow = isOpen ? 'hidden' : '';
   if(btn)btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
 }
 
-// Close mobile nav on Escape key
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){
     var nav = document.getElementById('mobileNav');
@@ -573,7 +572,7 @@ function initAnalytics(){
 
 function initAll(){
   initTheme();
-  initCursor();   /* no-op */
+  initCursor();
   initReveal();
   initNavScroll();
   initCookieBanner();
@@ -581,14 +580,13 @@ function initAll(){
   initBackToTop();
 }
 
-/* ── Loading screen hide ── */
 function hideLoading(){
   var ls=document.getElementById('loadingScreen');
   if(!ls)return;
   setTimeout(function(){ls.classList.add('hide');},800);
 }
 
-/* ── Helpers ── */
+/* ═══ RENDER HELPERS ═══ */
 function renderTestimonials(containerId, count){
   count = count||6;
   var el=document.getElementById(containerId);
@@ -638,46 +636,120 @@ function renderPricingCards(containerId){
   });
 }
 
+/* ═══ RICH TICKER ═══ */
 function renderTicker(containerId){
   var el=document.getElementById(containerId);
   if(!el)return;
   var ticks = (SITE.ticker && SITE.ticker.length) ? SITE.ticker : [];
-  if(!ticks.length){
-    ticks = [{label:'NIFTY',val:'22,200',change:'+0.95%',up:true},{label:'BANKNIFTY',val:'48,100',change:'+0.38%',up:true}];
-  }
+  if(!ticks.length) return;
   var html='';
+  /* Triple-loop so the scroll never shows a gap */
   var loop = ticks.concat(ticks, ticks);
   loop.forEach(function(t){
-    html+='<span class="tick-item"><span class="ts">'+t.label+'</span>' +
-      '<span class="'+(t.up?'tu':'td')+'">'+(t.up?'▲':'▼')+' '+t.val+(t.change?' '+t.change:'')+'</span></span>';
+    html+='<span class="tick-item" style="display:inline-flex;align-items:center;gap:.35rem">' +
+      '<span class="ts">'+t.label+'</span>' +
+      '<span class="'+(t.up?'tu':'td')+'">'+(t.up?'▲':'▼')+' '+t.val+'</span>' +
+      '<span style="color:'+(t.up?'var(--green)':'var(--red)')+';font-size:.65rem">'+(t.change||'')+'</span>' +
+      (t.extra ? '<span class="tick-extra">'+t.extra+'</span>' : '') +
+      '<span class="tick-sep">·</span>' +
+    '</span>';
   });
   el.innerHTML=html;
-  var speed = parseInt(localStorage.getItem('vwc_ticker_speed')||'15');
-  el.style.animationDuration = speed + 's';
+  el.style.animationDuration = '55s';
 }
 
-/* ── Settings helpers ── */
-function getSetting(key, def){
-  var v = localStorage.getItem('vwc_'+key);
-  return (v !== null) ? v : def;
-}
-function setSetting(key, val){
-  localStorage.setItem('vwc_'+key, val);
-}
-function getAnalyzerSettings(){
-  return {
-    model:        getSetting('ai_model', 'groq-llama3'),
-    temperature:  parseFloat(getSetting('ai_temp', '0.4')),
-    responseLen:  getSetting('ai_len', 'detailed'),
-    autoFollowUp: getSetting('ai_followup', 'true') === 'true',
-    streamText:   getSetting('ai_stream', 'true') === 'true',
-    tickerSpeed:  parseInt(getSetting('ticker_speed', '12')),
-    showMindmap:  getSetting('show_mindmap', 'true') === 'true',
-    showPie:      getSetting('show_pie', 'true') === 'true',
-    focusArea:    getSetting('focus_area', 'retirement'),
-  };
+/* ═══ MOBILE CHAT INTERFACE ═══ */
+function initMobileChat(){
+  /* Only show FAB on mobile/tablet */
+  var fab = document.getElementById('mobileChatFab');
+  if(!fab) return;
+
+  /* Show FAB only below 900px */
+  function checkFAB(){
+    if(window.innerWidth <= 900){
+      fab.classList.add('show');
+    } else {
+      fab.classList.remove('show');
+    }
+  }
+  checkFAB();
+  window.addEventListener('resize', checkFAB);
+
+  fab.addEventListener('click', function(){ openMobileChat(); });
 }
 
+function openMobileChat(){
+  var overlay = document.getElementById('mobileChatOverlay');
+  if(!overlay) return;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  /* Focus input */
+  setTimeout(function(){
+    var inp = document.getElementById('mobileChatInput');
+    if(inp) inp.focus();
+  }, 300);
+}
+
+function closeMobileChat(){
+  var overlay = document.getElementById('mobileChatOverlay');
+  if(!overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function sendMobileMessage(){
+  var inp = document.getElementById('mobileChatInput');
+  if(!inp) return;
+  var text = inp.value.trim();
+  if(!text) return;
+  inp.value = '';
+  appendMobileMsg(text, true);
+
+  /* Auto-reply with contact prompt */
+  setTimeout(function(){
+    var replies = [
+      'Thank you for reaching out! Saravana will personally get back to you. For the fastest response, please use our contact form.',
+      'Great question! This is something Saravana covers in detail during consultations. Would you like to book a free 15-minute call?',
+      'We appreciate you connecting with us. For personalized advice on this, please leave your details and Saravana will respond within 24 hours.',
+    ];
+    var reply = replies[Math.floor(Math.random() * replies.length)];
+    appendMobileMsg(reply, false);
+    appendMobileCTA();
+  }, 800);
+}
+
+function appendMobileMsg(text, isUser){
+  var body = document.getElementById('mobileChatBody');
+  if(!body) return;
+  var div = document.createElement('div');
+  div.className = 'mobile-msg' + (isUser ? ' user' : '');
+  div.innerHTML = '<div class="mobile-msg-av'+(isUser?' user':'')+'">'+
+    (isUser ? '👤' : '🌿') +
+  '</div><div class="mobile-bubble '+(isUser?'user':'bot')+'">'+text+'</div>';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function appendMobileCTA(){
+  var body = document.getElementById('mobileChatBody');
+  if(!body) return;
+  var div = document.createElement('div');
+  div.className = 'mobile-msg';
+  div.innerHTML = '<div class="mobile-msg-av">🌿</div>' +
+    '<div style="display:flex;flex-direction:column;gap:.5rem">' +
+      '<a href="contact.html" style="display:inline-block;background:var(--em-glow);color:#060908;padding:.6rem 1.2rem;border-radius:20px;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;text-align:center">Contact Saravana →</a>' +
+      '<a href="'+SITE.contact.calendly+'" target="_blank" rel="noopener" style="display:inline-block;background:transparent;color:var(--em-glow);padding:.6rem 1.2rem;border-radius:20px;border:1px solid rgba(46,204,113,.3);font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;text-align:center">📅 Book a Free Call</a>' +
+    '</div>';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function sendMobileQuick(question){
+  var inp = document.getElementById('mobileChatInput');
+  if(inp){ inp.value = question; sendMobileMessage(); }
+}
+
+/* ═══ LIVE MARKET DATA (ticker refresh) ═══ */
 function refreshMarketTicker(){
   fetch('/market-data').then(function(r){return r.json();}).then(function(d){
     if(d && d.success && d.ticks){
@@ -700,4 +772,13 @@ function fetchSectorData(){
     if(d && d.success && d.sectors) return d.sectors;
     return [];
   }).catch(function(){return [];});
+}
+
+/* ═══ SETTINGS HELPERS ═══ */
+function getSetting(key, def){
+  var v = localStorage.getItem('vwc_'+key);
+  return (v !== null) ? v : def;
+}
+function setSetting(key, val){
+  localStorage.setItem('vwc_'+key, val);
 }
