@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verdant Wealth Co. — Personal financial advisory with P. Saravana Kumar. 20+ years of expertise in Indian retirement planning.">
+<title>Verdant Wealth Co. — Your wealth, intelligently cultivated.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg: #080808;
+  --bg2: #0d0d0d;
+  --surface: #111111;
+  --surface2: #161616;
+  --border: rgba(255,255,255,.08);
+  --border-bright: rgba(255,255,255,.14);
+  --white: #ffffff;
+  --muted: rgba(255,255,255,.45);
+  --muted2: rgba(255,255,255,.28);
+  --accent: #22c55e;
+  --accent-dim: rgba(34,197,94,.15);
+  --accent-glow: rgba(34,197,94,.3);
+  --gold: #f59e0b;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+  --sans: 'Geist', -apple-system, sans-serif;
+  --mono: 'Geist Mono', monospace;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{background:var(--bg);color:var(--white);font-family:var(--sans);font-weight:400;overflow-x:hidden;line-height:1.5}
+a{text-decoration:none;color:inherit}
+button{font-family:var(--sans);cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+
+/* ═══════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes floatR{0%,100%{transform:translateY(0) rotate(6deg)}50%{transform:translateY(-10px) rotate(6deg)}}
+@keyframes floatL{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(-6deg)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes marqueeR{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes orb-drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-20px,20px) scale(.96)}}
+
+/* ═══════════════════════════════════════════
+   NAV — floating pill
+═══════════════════════════════════════════ */
+.nav{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  z-index:1000;
+  width:calc(100% - 48px);
+  max-width:900px;
+  background:rgba(10,10,10,.82);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--border-bright);
+  border-radius:var(--radius-xl);
+  padding:.6rem 1rem .6rem 1.2rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  transition:background .3s;
+}
+.nav-logo{display:flex;align-items:center;gap:.65rem;font-weight:700;font-size:.95rem;letter-spacing:-.02em}
+.nav-logo-gem{width:28px;height:28px;flex-shrink:0}
+.nav-logo-text{white-space:nowrap}
+.nav-logo-text span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:.2rem}
+.nav-link{font-size:.83rem;font-weight:500;color:var(--muted);padding:.45rem .85rem;border-radius:var(--radius-xl);transition:all .2s}
+.nav-link:hover{color:var(--white);background:rgba(255,255,255,.07)}
+.nav-link.active{color:var(--white)}
+.nav-cta{background:var(--white);color:#080808;font-size:.83rem;font-weight:600;padding:.5rem 1.1rem;border-radius:var(--radius-xl);transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:rgba(255,255,255,.88);transform:translateY(-1px)}
+.nav-hamburger{display:none;width:32px;height:32px;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:rgba(255,255,255,.07);border-radius:8px}
+.nav-hamburger span{width:16px;height:1.5px;background:var(--white);transition:all .3s;display:block}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  position:relative;overflow:hidden;
+}
+/* Background orbs */
+.hero-orb{
+  position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;
+}
+.hero-orb-1{width:600px;height:600px;background:rgba(34,197,94,.12);top:10%;left:50%;transform:translateX(-50%);animation:orb-drift 12s ease-in-out infinite}
+.hero-orb-2{width:400px;height:400px;background:rgba(245,158,11,.06);top:40%;right:-10%;animation:orb-drift 16s ease-in-out infinite reverse}
+.hero-orb-3{width:350px;height:350px;background:rgba(34,197,94,.07);bottom:0;left:-5%;animation:orb-drift 18s ease-in-out infinite 4s}
+/* Grid overlay */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 20%,transparent 100%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);
+  color:var(--accent);font-size:.75rem;font-weight:500;letter-spacing:.04em;
+  padding:.35rem .9rem;border-radius:var(--radius-xl);
+  margin-bottom:2rem;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+.hero-title{
+  font-size:clamp(3.2rem,8vw,6.5rem);
+  font-weight:800;
+  line-height:1.02;
+  letter-spacing:-.04em;
+  max-width:820px;
+  margin:0 auto 1.5rem;
+  animation:fadeUp .9s .2s ease both;
+}
+.hero-title .accent{
+  background:linear-gradient(135deg,var(--accent) 0%,#86efac 50%,var(--accent) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 4s linear infinite;
+}
+.hero-sub{
+  font-size:1.1rem;font-weight:400;color:var(--muted);
+  max-width:480px;margin:0 auto 2.5rem;line-height:1.7;
+  animation:fadeUp .8s .35s ease both;
+}
+.hero-actions{
+  display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;justify-content:center;
+  animation:fadeUp .8s .5s ease both;
+  margin-bottom:4rem;
+}
+.btn-primary{
+  background:var(--white);color:#080808;
+  font-size:.9rem;font-weight:600;
+  padding:.75rem 1.8rem;border-radius:var(--radius-xl);
+  transition:all .25s;
+  display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-primary:hover{background:rgba(255,255,255,.88);transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,.15)}
+.btn-ghost{
+  color:var(--white);font-size:.9rem;font-weight:500;
+  padding:.75rem 1.8rem;border-radius:var(--radius-xl);
+  border:1px solid var(--border-bright);
+  transition:all .25s;
+  display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.25);transform:translateY(-2px)}
+/* Hero phone mockups */
+.hero-phones{
+  display:flex;align-items:flex-end;justify-content:center;gap:20px;
+  width:100%;max-width:700px;margin:0 auto;
+  position:relative;
+  animation:fadeUp .9s .65s ease both;
+}
+.hero-phone{
+  width:200px;flex-shrink:0;
+  background:linear-gradient(160deg,#1a1a1a,#0d0d0d);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:32px;
+  overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06);
+}
+.hero-phone.left{
+  width:175px;
+  transform:rotate(-6deg) translateY(30px);
+  animation:floatL 6s ease-in-out infinite;
+}
+.hero-phone.right{
+  width:175px;
+  transform:rotate(6deg) translateY(30px);
+  animation:floatR 7s ease-in-out infinite;
+}
+.hero-phone.center{animation:float 5s ease-in-out infinite}
+.hp-screen{width:100%;aspect-ratio:9/19.5;background:var(--bg2);display:flex;flex-direction:column;padding:16px 14px;gap:10px}
+.hp-header{display:flex;align-items:center;justify-content:space-between}
+.hp-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.hp-label{font-size:.52rem;color:var(--muted2);font-family:var(--mono)}
+.hp-balance{margin-top:4px}
+.hp-bal-lbl{font-size:.52rem;color:var(--muted2);font-family:var(--mono);letter-spacing:.08em}
+.hp-bal-val{font-size:1.4rem;font-weight:700;letter-spacing:-.04em;line-height:1.1}
+.hp-bal-sub{font-size:.5rem;color:var(--accent);font-family:var(--mono)}
+.hp-chart{margin-top:6px;height:50px;position:relative}
+.hp-chart-line{position:absolute;bottom:0;left:0;right:0}
+.hp-chart svg{width:100%;height:50px}
+.hp-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.hp-tag{font-size:.44rem;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:6px;padding:.2rem .4rem;color:var(--muted2);font-family:var(--mono);white-space:nowrap}
+.hp-tag.green{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.2);color:var(--accent)}
+.hp-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.hp-row:last-child{border-bottom:none}
+.hp-row-lbl{font-size:.46rem;color:var(--muted);font-family:var(--mono)}
+.hp-row-val{font-size:.46rem;color:var(--white);font-family:var(--mono)}
+.hp-row-val.up{color:var(--accent)}.hp-row-val.dn{color:#f87171}
+
+/* ═══════════════════════════════════════════
+   LOGO MARQUEE STRIP
+═══════════════════════════════════════════ */
+.marquee-section{
+  padding:0 0 80px;overflow:hidden;
+  mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent);
+}
+.marquee-label{
+  text-align:center;font-size:.72rem;color:var(--muted2);
+  font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.marquee-track{display:flex;width:max-content;gap:32px;align-items:center}
+.marquee-track.fwd{animation:marquee 30s linear infinite}
+.marquee-track.rev{animation:marqueeR 35s linear infinite}
+.mq-item{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:.6rem 1.2rem;
+  white-space:nowrap;flex-shrink:0;
+}
+.mq-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.mq-label{font-size:.78rem;font-weight:500;color:var(--muted);letter-spacing:-.01em}
+.mq-val{font-size:.78rem;font-weight:600;font-family:var(--mono)}
+.mq-val.up{color:var(--accent)}.mq-val.dn{color:#f87171}
+
+/* ═══════════════════════════════════════════
+   SECTION HEADERS
+═══════════════════════════════════════════ */
+.section{padding:100px 24px;position:relative}
+.section-inner{max-width:1100px;margin:0 auto}
+.sec-eyebrow{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.72rem;font-weight:500;color:var(--muted2);
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:1rem;font-family:var(--mono);
+}
+.sec-eyebrow::before{content:'//';color:var(--accent);font-size:.65rem}
+.sec-title{
+  font-size:clamp(2rem,5vw,3.8rem);font-weight:800;
+  letter-spacing:-.04em;line-height:1.08;
+  margin-bottom:1.2rem;
+}
+.sec-sub{font-size:1rem;color:var(--muted);max-width:520px;line-height:1.75}
+.sec-sub.centered{text-align:center;margin:0 auto 60px}
+.sec-title.centered{text-align:center}
+.sec-eyebrow.centered{display:flex;justify-content:center;margin-bottom:1rem}
+
+/* ═══════════════════════════════════════════
+   BENTO FEATURES GRID
+═══════════════════════════════════════════ */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto;
+  gap:14px;
+  margin-top:60px;
+}
+.bento-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;
+}
+.bento-card:hover{border-color:var(--border-bright);transform:translateY(-3px)}
+.bento-card.span2{grid-column:span 2}
+.bento-card.tall{grid-row:span 2}
+.bento-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:20px;flex-shrink:0;
+}
+.bento-title{font-size:1.15rem;font-weight:700;letter-spacing:-.025em;margin-bottom:.5rem}
+.bento-sub{font-size:.85rem;color:var(--muted);line-height:1.7}
+/* decorative glow on hover */
+.bento-card::after{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;
+  background:linear-gradient(135deg,rgba(34,197,94,.08),transparent 60%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.bento-card:hover::after{opacity:1}
+/* Bento card internal mockups */
+.bento-mockup{
+  margin-top:20px;background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:16px;overflow:hidden;
+}
+.bm-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.bm-row:last-child{border-bottom:none}
+.bm-left{display:flex;align-items:center;gap:8px}
+.bm-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0}
+.bm-name{font-size:.78rem;font-weight:500}
+.bm-sub{font-size:.62rem;color:var(--muted2);font-family:var(--mono)}
+.bm-val{font-size:.78rem;font-weight:600;font-family:var(--mono)}
+.bm-pct{font-size:.6rem;font-family:var(--mono)}
+.bm-pct.up{color:var(--accent)}.bm-pct.dn{color:#f87171}
+/* Chart sparkline */
+.bm-chart{margin-top:16px}
+.bm-chart svg{width:100%;overflow:visible}
+/* Big stat inside bento */
+.bento-stat{margin-top:16px}
+.bento-stat-num{font-size:3rem;font-weight:800;letter-spacing:-.05em;color:var(--accent);line-height:1}
+.bento-stat-lbl{font-size:.75rem;color:var(--muted2);font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-top:.3rem}
+/* Tag pills inside bento */
+.bento-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.bento-tag{
+  font-size:.7rem;font-weight:500;
+  padding:.3rem .75rem;border-radius:var(--radius-xl);
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  color:var(--muted);
+}
+.bento-tag.active{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.28);color:var(--accent)}
+
+/* ═══════════════════════════════════════════
+   SCROLLING FEATURE CARDS (horizontal)
+═══════════════════════════════════════════ */
+.hscroll-section{padding:80px 0;overflow:hidden}
+.hscroll-header{padding:0 24px;max-width:1100px;margin:0 auto 40px}
+.hscroll-track-wrap{
+  overflow:hidden;
+  mask-image:linear-gradient(90deg,transparent,black 5%,black 95%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,black 5%,black 95%,transparent);
+}
+.hscroll-track{display:flex;gap:16px;width:max-content;animation:marquee 40s linear infinite}
+.hscroll-track:hover{animation-play-state:paused}
+.hscroll-card{
+  width:280px;flex-shrink:0;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.hscroll-card-icon{font-size:1.5rem}
+.hscroll-card-title{font-size:.95rem;font-weight:700;letter-spacing:-.02em}
+.hscroll-card-body{font-size:.82rem;color:var(--muted);line-height:1.65;flex:1}
+.hscroll-card-tag{display:inline-block;font-size:.65rem;font-family:var(--mono);color:var(--accent);background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);padding:.22rem .6rem;border-radius:6px}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS — staggered cards
+═══════════════════════════════════════════ */
+.testimonials-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  margin-top:56px;
+}
+.t-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:24px;
+  position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;
+}
+.t-card:hover{border-color:var(--border-bright);transform:translateY(-3px)}
+.t-card:nth-child(2){margin-top:24px}
+.t-card:nth-child(3){margin-top:48px}
+.t-quote-mark{font-family:Georgia,serif;font-size:4rem;color:rgba(34,197,94,.15);line-height:.8;margin-bottom:12px;display:block}
+.t-quote{font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.72;margin-bottom:20px;font-style:italic}
+.t-person{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid var(--border)}
+.t-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,rgba(34,197,94,.3),rgba(34,197,94,.1));border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.72rem;color:var(--accent);flex-shrink:0}
+.t-name{font-size:.84rem;font-weight:600}
+.t-role{font-size:.72rem;color:var(--muted2);font-family:var(--mono);margin-top:.1rem}
+.t-stars{color:var(--gold);font-size:.75rem;margin-bottom:10px;letter-spacing:.04em}
+
+/* ═══════════════════════════════════════════
+   SECURITY / FEATURES — tabbed section
+═══════════════════════════════════════════ */
+.feature-tabs-section{
+  padding:100px 24px;background:var(--bg2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.feature-tabs-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.feature-tab-list{display:flex;flex-direction:column;gap:4px;margin-top:40px}
+.feature-tab{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px;border-radius:var(--radius-md);
+  border:1px solid transparent;cursor:pointer;
+  transition:all .25s;
+}
+.feature-tab.active{background:var(--surface);border-color:var(--border)}
+.feature-tab-icon{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.feature-tab.active .feature-tab-icon{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.25)}
+.feature-tab-text{}
+.feature-tab-name{font-size:.95rem;font-weight:600;letter-spacing:-.01em;margin-bottom:.2rem}
+.feature-tab-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+.feature-visual{position:relative}
+.feature-screen{
+  background:var(--surface);border:1px solid var(--border-bright);
+  border-radius:var(--radius-xl);overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,.5);
+  aspect-ratio:4/3.2;
+  display:flex;flex-direction:column;padding:24px;gap:14px;
+}
+.fs-title{font-size:.65rem;font-family:var(--mono);color:var(--muted2);letter-spacing:.1em;text-transform:uppercase}
+.fs-chart-area{flex:1;background:var(--bg2);border-radius:var(--radius-md);overflow:hidden;position:relative;padding:20px}
+.fs-line{position:absolute;bottom:0;left:0;right:0;pointer-events:none}
+.fs-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.fs-stat{background:var(--bg2);border-radius:var(--radius-sm);padding:12px}
+.fs-stat-num{font-size:1.1rem;font-weight:700;letter-spacing:-.03em}
+.fs-stat-lbl{font-size:.58rem;color:var(--muted2);font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-top:.2rem}
+
+/* ═══════════════════════════════════════════
+   PARTNERS / LOGOS MARQUEE
+═══════════════════════════════════════════ */
+.partners-section{padding:60px 24px;border-top:1px solid var(--border)}
+.partners-inner{max-width:1100px;margin:0 auto}
+.partners-label{font-size:.72rem;font-family:var(--mono);color:var(--muted2);letter-spacing:.12em;text-transform:uppercase;text-align:center;margin-bottom:32px}
+.partners-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.partner-chip{
+  display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:.55rem 1.1rem;
+  font-size:.8rem;font-weight:500;color:var(--muted);
+  transition:border-color .2s,color .2s;
+}
+.partner-chip:hover{border-color:var(--border-bright);color:var(--white)}
+.partner-chip span{font-size:1rem}
+
+/* ═══════════════════════════════════════════
+   PRICING SECTION
+═══════════════════════════════════════════ */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px}
+.pricing-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-xl);padding:32px;
+  position:relative;display:flex;flex-direction:column;gap:0;
+  transition:border-color .3s,transform .3s;
+}
+.pricing-card:hover{border-color:var(--border-bright);transform:translateY(-4px)}
+.pricing-card.featured{
+  border-color:rgba(34,197,94,.35);
+  background:linear-gradient(160deg,rgba(34,197,94,.06),var(--surface));
+}
+.pricing-badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#080808;
+  font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:.25rem .9rem;border-radius:var(--radius-xl);white-space:nowrap;
+}
+.pricing-tier{font-size:.72rem;font-family:var(--mono);color:var(--muted2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.pricing-price{font-size:2.8rem;font-weight:800;letter-spacing:-.05em;line-height:1}
+.pricing-price sup{font-size:1.2rem;vertical-align:top;margin-top:.5rem;display:inline-block;font-weight:600}
+.pricing-cycle{font-size:.78rem;color:var(--muted2);font-family:var(--mono);margin-bottom:24px;margin-top:4px}
+.pricing-divider{height:1px;background:var(--border);margin:20px 0}
+.pricing-features{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;margin-bottom:28px}
+.pricing-features li{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.5}
+.pricing-features li::before{content:'✓';color:var(--accent);font-size:.75rem;flex-shrink:0;margin-top:.15rem;font-weight:700}
+.pricing-btn{
+  display:block;text-align:center;font-size:.85rem;font-weight:600;
+  padding:.8rem;border-radius:var(--radius-xl);transition:all .25s;
+  border:1px solid var(--border-bright);color:var(--white);
+  background:rgba(255,255,255,.06);
+}
+.pricing-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.28)}
+.pricing-btn.filled{background:var(--accent);color:#080808;border-color:transparent}
+.pricing-btn.filled:hover{background:rgba(34,197,94,.88);transform:translateY(-1px);box-shadow:0 6px 24px rgba(34,197,94,.3)}
+
+/* ═══════════════════════════════════════════
+   BOTTOM CTA
+═══════════════════════════════════════════ */
+.final-cta{
+  padding:120px 24px;text-align:center;
+  background:var(--bg2);border-top:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.final-cta-orb{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:700px;height:400px;
+  background:radial-gradient(ellipse,rgba(34,197,94,.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.final-cta-inner{position:relative;max-width:680px;margin:0 auto}
+.final-cta-title{font-size:clamp(2.2rem,6vw,4.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:1.2rem}
+.final-cta-sub{font-size:1rem;color:var(--muted);line-height:1.75;margin-bottom:2.5rem;max-width:440px;margin-left:auto;margin-right:auto}
+.final-cta-trust{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:2rem}
+.trust-item{font-size:.78rem;color:var(--muted2);display:flex;align-items:center;gap:.4rem;font-family:var(--mono)}
+.trust-item::before{content:'✓';color:var(--accent);font-weight:700}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer{
+  padding:60px 24px 32px;border-top:1px solid var(--border);
+  background:var(--bg);
+}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:48px}
+.footer-brand{max-width:280px}
+.footer-logo{display:flex;align-items:center;gap:.65rem;font-weight:700;font-size:.98rem;letter-spacing:-.02em;margin-bottom:12px}
+.footer-logo span{color:var(--accent)}
+.footer-tagline{font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.footer-social{display:flex;gap:8px}
+.foot-soc{width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--muted);transition:all .2s}
+.foot-soc:hover{border-color:var(--border-bright);color:var(--white)}
+.footer-cols{display:flex;gap:48px;flex-wrap:wrap}
+.footer-col{}
+.footer-col-title{font-size:.7rem;font-family:var(--mono);color:var(--muted2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.footer-col-links{display:flex;flex-direction:column;gap:10px;list-style:none}
+.footer-col-links a{font-size:.85rem;color:var(--muted);transition:color .2s}
+.footer-col-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:.75rem;color:var(--muted2);font-family:var(--mono)}
+.footer-status{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:rgba(34,197,94,.6);font-family:var(--mono)}
+.status-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+
+/* ═══════════════════════════════════════════
+   MOBILE NAV OVERLAY
+═══════════════════════════════════════════ */
+.mobile-menu{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(8,8,8,.97);backdrop-filter:blur(24px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;color:var(--muted);transition:color .2s}
+.mobile-menu a:hover{color:var(--white)}
+.mobile-menu-close{position:absolute;top:24px;right:24px;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.2rem}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ═══════════════════════════════════════════
+   WHATSAPP FAB
+═══════════════════════════════════════════ */
+.wa-fab{
+  position:fixed;bottom:28px;right:24px;z-index:500;
+  width:50px;height:50px;border-radius:50%;
+  background:#25D366;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);
+  transition:transform .2s,box-shadow .2s;
+  text-decoration:none;
+  animation:float 4s ease-in-out infinite;
+}
+.wa-fab:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.55);animation:none}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:1024px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bento-card.span2{grid-column:span 1}
+  .feature-tabs-inner{grid-template-columns:1fr;gap:40px}
+  .testimonials-grid{grid-template-columns:1fr 1fr}
+  .testimonials-grid .t-card:nth-child(3){display:none}
+  .pricing-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .pricing-grid .pricing-card:nth-child(3){grid-column:span 2}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .nav-hamburger{display:flex}
+  .hero-title{font-size:clamp(2.6rem,11vw,4.5rem)}
+  .hero-phones{gap:12px}
+  .hero-phone.left,.hero-phone.right{width:130px}
+  .hero-phone.center{width:165px}
+  .bento{grid-template-columns:1fr;gap:10px}
+  .bento-card.tall{grid-row:span 1}
+  .testimonials-grid{grid-template-columns:1fr}
+  .testimonials-grid .t-card:nth-child(2),.testimonials-grid .t-card:nth-child(3){margin-top:0;display:flex}
+  .pricing-grid{grid-template-columns:1fr}
+  .pricing-grid .pricing-card:nth-child(3){grid-column:span 1}
+  .footer-top{flex-direction:column}
+  .footer-cols{gap:32px}
+  .t-card:nth-child(2){margin-top:0}
+  .t-card:nth-child(3){margin-top:0;display:flex}
+  .section{padding:70px 20px}
+  .nav{width:calc(100% - 32px);top:16px}
+}
+@media(max-width:480px){
+  .hero-phones .hero-phone.left,.hero-phones .hero-phone.right{display:none}
+  .hero-phone.center{width:220px}
+  .hero-actions{flex-direction:column;width:100%}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center}
+  .pricing-grid{grid-template-columns:1fr}
+  .pricing-grid .pricing-card:nth-child(3){grid-column:span 1}
+  .footer-cols{flex-direction:column;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav class="nav" id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-gem" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#22c55e" stroke-width="2"/>
+      <polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/>
+      <polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/>
+      <polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/>
+      <polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/>
+      <polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#22c55e" stroke-width="1" opacity=".8"/>
+    </svg>
+    <span class="nav-logo-text">Verdant <span>Wealth</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="about.html" class="nav-link">About</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="market.html" class="nav-link">Markets</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+  </div>
+  <a href="contact.html" class="nav-cta">Book a Call →</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="market.html" onclick="toggleMenu()">Markets</a>
+  <a href="pricing.html" onclick="toggleMenu()">Pricing</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:#22c55e">Book a Call →</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-eyebrow">
+    <span></span>
+    Retirement &amp; Long-Term Planning · India
+  </div>
+
+  <h1 class="hero-title">
+    Smarter wealth.<br>
+    <span class="accent">Clearer future.</span>
+  </h1>
+
+  <p class="hero-sub">
+    Personal 1:1 advisory from P. Saravana Kumar — 20+ years guiding Indian families to lasting financial security.
+  </p>
+
+  <div class="hero-actions">
+    <a href="contact.html" class="btn-primary">
+      Get Personalized Advice
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="market.html" class="btn-ghost">
+      Live Market Updates
+    </a>
+  </div>
+
+  <!-- Floating phone mockups -->
+  <div class="hero-phones">
+    <div class="hero-phone left">
+      <div class="hp-screen">
+        <div class="hp-header">
+          <div class="hp-logo-dot"></div>
+          <div class="hp-label">PORTFOLIO</div>
+        </div>
+        <div class="hp-balance">
+          <div class="hp-bal-lbl">NIFTY 50</div>
+          <div class="hp-bal-val">22,450</div>
+          <div class="hp-bal-sub">▲ +1.12% TODAY</div>
+        </div>
+        <div class="hp-chart">
+          <svg viewBox="0 0 160 50" preserveAspectRatio="none">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22c55e" stop-opacity=".3"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,40 C20,35 40,20 60,22 S100,10 130,8 L160,5 L160,50 L0,50 Z" fill="url(#g1)"/>
+            <path d="M0,40 C20,35 40,20 60,22 S100,10 130,8 L160,5" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="hp-tags">
+          <div class="hp-tag green">IT +2.1%</div>
+          <div class="hp-tag green">Auto +1.9%</div>
+          <div class="hp-tag">Metal -1.4%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-phone center">
+      <div class="hp-screen">
+        <div class="hp-header">
+          <div class="hp-logo-dot"></div>
+          <div class="hp-label">VERDANT</div>
+        </div>
+        <div class="hp-balance" style="margin-top:4px">
+          <div class="hp-bal-lbl">CORPUS VALUE</div>
+          <div class="hp-bal-val" style="font-size:1.6rem">₹1.24 Cr</div>
+          <div class="hp-bal-sub">▲ +18.4% YTD</div>
+        </div>
+        <div class="hp-chart" style="height:60px;margin-top:8px">
+          <svg viewBox="0 0 160 60" preserveAspectRatio="none">
+            <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22c55e" stop-opacity=".35"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,50 C10,45 25,40 40,35 S70,15 90,12 C110,9 130,6 160,4 L160,60 L0,60 Z" fill="url(#g2)"/>
+            <path d="M0,50 C10,45 25,40 40,35 S70,15 90,12 C110,9 130,6 160,4" fill="none" stroke="#22c55e" stroke-width="2"/>
+          </svg>
+        </div>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:3px">
+          <div class="hp-row"><span class="hp-row-lbl">Equity</span><span class="hp-row-val up">65%</span></div>
+          <div class="hp-row"><span class="hp-row-lbl">Debt</span><span class="hp-row-val">30%</span></div>
+          <div class="hp-row"><span class="hp-row-lbl">Gold</span><span class="hp-row-val">5%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-phone right">
+      <div class="hp-screen">
+        <div class="hp-header">
+          <div class="hp-logo-dot"></div>
+          <div class="hp-label">MARKET</div>
+        </div>
+        <div class="hp-balance">
+          <div class="hp-bal-lbl">GOLD MCX</div>
+          <div class="hp-bal-val">₹72,400</div>
+          <div class="hp-bal-sub">▲ +0.65% TODAY</div>
+        </div>
+        <div class="hp-tags" style="margin-top:6px">
+          <div class="hp-tag">USD/INR 83.45</div>
+          <div class="hp-tag green">FII +₹2,840cr</div>
+        </div>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:3px">
+          <div class="hp-row"><span class="hp-row-lbl">BANK NIFTY</span><span class="hp-row-val up">48,210</span></div>
+          <div class="hp-row"><span class="hp-row-lbl">VIX</span><span class="hp-row-val dn">13.42</span></div>
+          <div class="hp-row"><span class="hp-row-lbl">10Y GSEC</span><span class="hp-row-val">6.82%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MARQUEE — live tickers
+══════════════════════════════════════ -->
+<div class="marquee-section">
+  <p class="marquee-label">Live market snapshot</p>
+  <div style="margin-bottom:10px">
+    <div class="marquee-track fwd" id="mq1"></div>
+  </div>
+  <div>
+    <div class="marquee-track rev" id="mq2"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     BENTO FEATURES
+══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="sec-eyebrow">What we offer</div>
+      <h2 class="sec-title">Everything you need<br>for retirement clarity.</h2>
+      <p class="sec-sub">From portfolio construction to tax-efficient wealth transfer — Saravana covers every dimension of your financial life.</p>
+    </div>
+
+    <div class="bento">
+      <!-- Card 1 — wide, portfolio tracker mockup -->
+      <div class="bento-card span2 reveal">
+        <div class="bento-icon">📊</div>
+        <div class="bento-title">Portfolio Review &amp; Analysis</div>
+        <div class="bento-sub">Deep analysis of your investments covering NIFTY exposure, sector momentum, macro factors, and FII/DII flows — with clear, plain-language recommendations.</div>
+        <div class="bento-mockup">
+          <div class="bm-row">
+            <div class="bm-left"><div class="bm-dot" style="background:rgba(34,197,94,.15)">📈</div><div><div class="bm-name">NIFTY 50 Fund</div><div class="bm-sub">Large Cap Index</div></div></div>
+            <div style="text-align:right"><div class="bm-val">₹8,40,000</div><div class="bm-pct up">▲ +18.4%</div></div>
+          </div>
+          <div class="bm-row">
+            <div class="bm-left"><div class="bm-dot" style="background:rgba(245,158,11,.15)">🏦</div><div><div class="bm-name">Medium Duration Debt</div><div class="bm-sub">Debt Fund</div></div></div>
+            <div style="text-align:right"><div class="bm-val">₹3,72,000</div><div class="bm-pct up">▲ +7.2%</div></div>
+          </div>
+          <div class="bm-row">
+            <div class="bm-left"><div class="bm-dot" style="background:rgba(251,191,36,.15)">🥇</div><div><div class="bm-name">Sovereign Gold Bond</div><div class="bm-sub">SGB · Tranche 2024</div></div></div>
+            <div style="text-align:right"><div class="bm-val">₹62,000</div><div class="bm-pct up">▲ +11.8%</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 — stat -->
+      <div class="bento-card reveal reveal-delay-1">
+        <div class="bento-icon">🌱</div>
+        <div class="bento-title">Retirement Roadmap</div>
+        <div class="bento-sub">A comprehensive plan built around your retirement age, lifestyle goals, and current position.</div>
+        <div class="bento-stat">
+          <div class="bento-stat-num">20+</div>
+          <div class="bento-stat-lbl">Years of experience</div>
+        </div>
+        <div class="bento-tags">
+          <span class="bento-tag active">SIP Planning</span>
+          <span class="bento-tag active">Goal Mapping</span>
+          <span class="bento-tag">Tax Optimisation</span>
+          <span class="bento-tag">NRI Planning</span>
+        </div>
+      </div>
+
+      <!-- Card 3 — stat -->
+      <div class="bento-card reveal reveal-delay-2">
+        <div class="bento-icon">💰</div>
+        <div class="bento-title">Tax-Efficient Investing</div>
+        <div class="bento-sub">Structuring your portfolio to legally minimise tax exposure and maximise net returns over decades.</div>
+        <div class="bento-stat">
+          <div class="bento-stat-num">200+</div>
+          <div class="bento-stat-lbl">Families served</div>
+        </div>
+      </div>
+
+      <!-- Card 4 — wide -->
+      <div class="bento-card span2 reveal reveal-delay-1">
+        <div class="bento-icon">🛡️</div>
+        <div class="bento-title">Wealth Protection &amp; Estate Planning</div>
+        <div class="bento-sub">Strategies to safeguard your assets against inflation, volatility, and unforeseen events. Wills, nominations, HUF structures, and NRI-specific repatriation coverage.</div>
+        <div class="bento-tags" style="margin-top:18px">
+          <span class="bento-tag active">VaR Analysis</span>
+          <span class="bento-tag active">Drawdown Defense</span>
+          <span class="bento-tag">Estate Structuring</span>
+          <span class="bento-tag active">FEMA Compliance</span>
+          <span class="bento-tag">Will Drafting</span>
+          <span class="bento-tag">HUF Setup</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="bento-card reveal reveal-delay-3">
+        <div class="bento-icon">🤝</div>
+        <div class="bento-title">1:1 Direct Advisory</div>
+        <div class="bento-sub">Always Saravana. No junior advisors, no handoffs, no automated templates. Just direct, expert guidance.</div>
+        <div class="bento-stat">
+          <div class="bento-stat-num">1:1</div>
+          <div class="bento-stat-lbl">Always direct access</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     HORIZONTAL SCROLLING SERVICES
+══════════════════════════════════════ -->
+<div class="hscroll-section">
+  <div class="hscroll-header reveal">
+    <div class="sec-eyebrow">Services in detail</div>
+    <h2 class="sec-title" style="font-size:clamp(1.8rem,4vw,3rem)">Every aspect of your<br>financial life, covered.</h2>
+  </div>
+  <div class="hscroll-track-wrap">
+    <div class="hscroll-track" id="hscrollTrack"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FEATURE TABS — advisory process
+══════════════════════════════════════ -->
+<div class="feature-tabs-section">
+  <div class="feature-tabs-inner">
+    <div>
+      <div class="sec-eyebrow reveal">How it works</div>
+      <h2 class="sec-title reveal">A process built<br>for clarity.</h2>
+      <p class="sec-sub reveal">Every advisory relationship at Verdant Wealth Co. follows the same deliberate, human-first process — no templates, no automation.</p>
+      <div class="feature-tab-list" id="featureTabs">
+        <div class="feature-tab active" onclick="switchTab(0,this)">
+          <div class="feature-tab-icon">📞</div>
+          <div class="feature-tab-text">
+            <div class="feature-tab-name">Discovery Call</div>
+            <div class="feature-tab-desc">A free 15-minute conversation about your financial situation, goals, and timeline.</div>
+          </div>
+        </div>
+        <div class="feature-tab" onclick="switchTab(1,this)">
+          <div class="feature-tab-icon">📋</div>
+          <div class="feature-tab-text">
+            <div class="feature-tab-name">Financial Assessment</div>
+            <div class="feature-tab-desc">Saravana reviews your portfolio, income, obligations, and retirement horizon in depth.</div>
+          </div>
+        </div>
+        <div class="feature-tab" onclick="switchTab(2,this)">
+          <div class="feature-tab-icon">🗺️</div>
+          <div class="feature-tab-text">
+            <div class="feature-tab-name">Custom Strategy</div>
+            <div class="feature-tab-desc">A tailored plan — not a template — covering equity, debt, gold, and tax efficiency.</div>
+          </div>
+        </div>
+        <div class="feature-tab" onclick="switchTab(3,this)">
+          <div class="feature-tab-icon">🔄</div>
+          <div class="feature-tab-text">
+            <div class="feature-tab-name">Ongoing Partnership</div>
+            <div class="feature-tab-desc">Regular reviews and strategy adjustments as your life, goals, and markets evolve.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-visual reveal">
+      <div class="feature-screen" id="featureScreen">
+        <div class="fs-title">PORTFOLIO OVERVIEW · Q1 2026</div>
+        <div class="fs-chart-area">
+          <svg viewBox="0 0 300 120" preserveAspectRatio="none" style="width:100%;height:100%">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#22c55e" stop-opacity=".25"/>
+                <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,100 C30,90 50,70 80,65 C110,60 130,40 160,35 C190,30 210,20 240,15 C265,10 285,8 300,6 L300,120 L0,120 Z" fill="url(#chartGrad)"/>
+            <path d="M0,100 C30,90 50,70 80,65 C110,60 130,40 160,35 C190,30 210,20 240,15 C265,10 285,8 300,6" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="300" cy="6" r="4" fill="#22c55e"/>
+          </svg>
+          <div style="position:absolute;top:12px;right:12px;text-align:right">
+            <div style="font-size:1.2rem;font-weight:700;letter-spacing:-.03em">₹1.24 Cr</div>
+            <div style="font-size:.6rem;color:var(--accent);font-family:var(--mono)">▲ +18.4% YTD</div>
+          </div>
+        </div>
+        <div class="fs-stats">
+          <div class="fs-stat"><div class="fs-stat-num" style="color:var(--accent)">65%</div><div class="fs-stat-lbl">Equity</div></div>
+          <div class="fs-stat"><div class="fs-stat-num">30%</div><div class="fs-stat-lbl">Debt</div></div>
+          <div class="fs-stat"><div class="fs-stat-num" style="color:var(--gold)">5%</div><div class="fs-stat-lbl">Gold</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <div class="sec-eyebrow centered">Client stories</div>
+      <h2 class="sec-title centered">Trusted by families<br>across India.</h2>
+      <p class="sec-sub centered">Real outcomes — portfolio clarity, retirement confidence, and tax-smart decisions that compound for decades.</p>
+    </div>
+    <div class="testimonials-grid" id="testimonialsGrid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PARTNERS / INSTITUTIONS
+══════════════════════════════════════ -->
+<div class="partners-section">
+  <div class="partners-inner reveal">
+    <p class="partners-label">Instruments &amp; markets covered</p>
+    <div class="partners-row">
+      <div class="partner-chip"><span>📈</span> NIFTY 50</div>
+      <div class="partner-chip"><span>🏦</span> NSE / BSE</div>
+      <div class="partner-chip"><span>📜</span> G-Sec Bonds</div>
+      <div class="partner-chip"><span>🥇</span> Sovereign Gold Bond</div>
+      <div class="partner-chip"><span>🌍</span> NRI / FEMA</div>
+      <div class="partner-chip"><span>💼</span> ELSS / 80C</div>
+      <div class="partner-chip"><span>🏠</span> Real Estate Advisory</div>
+      <div class="partner-chip"><span>📊</span> Mutual Funds</div>
+      <div class="partner-chip"><span>🏛️</span> RBI Policy</div>
+      <div class="partner-chip"><span>🌱</span> SIP / SWP</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PRICING
+══════════════════════════════════════ -->
+<section class="section" style="background:var(--bg2);border-top:1px solid var(--border)">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <div class="sec-eyebrow centered">Transparent pricing</div>
+      <h2 class="sec-title centered">No hidden fees.<br>No surprises.</h2>
+      <p class="sec-sub centered">Three tiers designed for every stage of your wealth journey. All plans include direct 1:1 access to Saravana.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Basic</div>
+        <div class="pricing-price"><sup>₹</sup>4,000</div>
+        <div class="pricing-cycle">per hour</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>60-minute advisory session</li>
+          <li>Financial health assessment</li>
+          <li>Portfolio review &amp; feedback</li>
+          <li>Written recommendations</li>
+          <li>24hr response window</li>
+        </ul>
+        <a href="contact.html" class="pricing-btn">Get Started →</a>
+      </div>
+
+      <div class="pricing-card featured reveal reveal-delay-1">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-price"><sup>₹</sup>4,999</div>
+        <div class="pricing-cycle">per hour</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Everything in Basic</li>
+          <li>Custom scenario modeling</li>
+          <li>Tax-aware structuring</li>
+          <li>Sector &amp; macro calibration</li>
+          <li>Priority response window</li>
+          <li>Follow-up framework</li>
+        </ul>
+        <a href="contact.html" class="pricing-btn filled">Get Started →</a>
+      </div>
+
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-tier">Elite</div>
+        <div class="pricing-price"><sup>₹</sup>7,999</div>
+        <div class="pricing-cycle">per hour</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Everything in Pro</li>
+          <li>Complete wealth architecture</li>
+          <li>Legacy &amp; estate planning</li>
+          <li>Advanced drawdown defense</li>
+          <li>4hr response (incl. weekends)</li>
+          <li>Annual financial audit</li>
+        </ul>
+        <a href="contact.html" class="pricing-btn">Get Started →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FINAL CTA
+══════════════════════════════════════ -->
+<div class="final-cta">
+  <div class="final-cta-orb"></div>
+  <div class="final-cta-inner reveal">
+    <h2 class="final-cta-title">Experience wealth<br>like never before.</h2>
+    <p class="final-cta-sub">Start with a free 15-minute discovery call. No commitment — just a clear picture of where you stand and what's possible.</p>
+    <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+      <a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank" rel="noopener" class="btn-primary">
+        📅 Book a Free Call
+      </a>
+      <a href="contact.html" class="btn-ghost">Contact Saravana</a>
+    </div>
+    <div class="final-cta-trust">
+      <span class="trust-item">No hidden fees</span>
+      <span class="trust-item">Cancel anytime</span>
+      <span class="trust-item">Always Saravana directly</span>
+      <span class="trust-item">200+ families served</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="24" height="28" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#22c55e" stroke-width="2"/>
+            <polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/>
+            <polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/>
+            <polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/>
+            <polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/>
+            <polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#22c55e" stroke-width="1" opacity=".8"/>
+          </svg>
+          Verdant <span>Wealth Co.</span>
+        </div>
+        <p class="footer-tagline">Your wealth, intelligently cultivated. Personal 1:1 advisory from P. Saravana Kumar — built for every Indian investor.</p>
+        <div class="footer-social">
+          <a href="#" class="foot-soc">𝕏</a>
+          <a href="#" class="foot-soc">in</a>
+          <a href="#" class="foot-soc">▶</a>
+          <a href="#" class="foot-soc">◎</a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">Advisory</div>
+          <ul class="footer-col-links">
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About Saravana</a></li>
+            <li><a href="market.html">Market Updates</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Resources</div>
+          <ul class="footer-col-links">
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank">Book a Call</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-col-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Verdant Wealth Co. · P. Saravana Kumar. All rights reserved.</span>
+      <div class="footer-status"><span class="status-dot"></span> NSE · BSE · MCX Live</div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="wa-fab" title="Chat on WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* ── MOBILE MENU ── */
+function toggleMenu(){
+  var m = document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+}
+
+/* ── SCROLL REVEAL ── */
+var revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(el){ revealObs.observe(el); });
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll', function(){
+  document.getElementById('mainNav').style.background =
+    window.scrollY > 60 ? 'rgba(8,8,8,.96)' : 'rgba(10,10,10,.82)';
+});
+
+/* ── MARQUEE DATA ── */
+var MQ_INDIA = [
+  {label:'NIFTY 50',val:'22,450',chg:'+1.12%',up:true},
+  {label:'BANK NIFTY',val:'48,210',chg:'+0.85%',up:true},
+  {label:'SENSEX',val:'73,980',chg:'+0.92%',up:true},
+  {label:'NIFTY IT',val:'36,200',chg:'+2.10%',up:true},
+  {label:'NIFTY AUTO',val:'24,100',chg:'+1.90%',up:true},
+  {label:'NIFTY REALTY',val:'1,020',chg:'+2.40%',up:true},
+  {label:'NIFTY FMCG',val:'53,200',chg:'-0.22%',up:false},
+  {label:'NIFTY METAL',val:'9,840',chg:'-0.65%',up:false},
+  {label:'RELIANCE',val:'2,910',chg:'+1.45%',up:true},
+  {label:'TCS',val:'3,820',chg:'+0.25%',up:true},
+  {label:'HDFC BANK',val:'1,620',chg:'-0.42%',up:false},
+  {label:'FII FLOW',val:'+₹2,840cr',chg:'Net Buy',up:true},
+];
+var MQ_GLOBAL = [
+  {label:'USD/INR',val:'83.45',chg:'+0.04%',up:true},
+  {label:'GOLD MCX',val:'₹72,400',chg:'+0.65%',up:true},
+  {label:'BRENT',val:'$84.15',chg:'-0.35%',up:false},
+  {label:'BITCOIN',val:'$68,200',chg:'+3.10%',up:true},
+  {label:'10YR GSEC',val:'6.82%',chg:'-2bps',up:false},
+  {label:'RBI REPO',val:'6.50%',chg:'Steady',up:true},
+  {label:'DXY',val:'104.2',chg:'-0.18%',up:false},
+  {label:'VIX',val:'13.42',chg:'-0.88%',up:false},
+  {label:'S&P 500',val:'5,218',chg:'+0.32%',up:true},
+  {label:'SILVER',val:'₹87,200',chg:'+1.20%',up:true},
+];
+
+function buildMQ(data, id){
+  var loop = data.concat(data);
+  var html = loop.map(function(t){
+    return '<div class="mq-item">' +
+      '<div class="mq-dot" style="background:' + (t.up ? 'rgba(34,197,94,.6)' : 'rgba(248,113,113,.6)') + '"></div>' +
+      '<span class="mq-label">' + t.label + '</span>' +
+      '<span class="mq-val ' + (t.up?'up':'dn') + '">' + t.val + '</span>' +
+      '<span style="font-size:.65rem;color:' + (t.up?'rgba(34,197,94,.6)':'rgba(248,113,113,.6)') + ';font-family:var(--mono)">' + t.chg + '</span>' +
+    '</div>';
+  }).join('');
+  document.getElementById(id).innerHTML = html;
+}
+buildMQ(MQ_INDIA, 'mq1');
+buildMQ(MQ_GLOBAL, 'mq2');
+
+/* ── HSCROLL SERVICES ── */
+var SERVICES = [
+  {icon:'🌱',title:'Retirement Roadmap',body:'A comprehensive plan built around your retirement date, lifestyle goals, and current position. Backed by 20 years of NSE/BSE market knowledge.',tag:'Retirement'},
+  {icon:'📊',title:'Portfolio Review',body:'Deep analysis of your investments — NIFTY exposure, sector momentum, macro factors, and FII/DII interpretation — with plain-language recommendations.',tag:'Portfolio'},
+  {icon:'🛡️',title:'Wealth Protection',body:'Strategies to defend your assets against inflation, volatility, and unforeseen events. VaR analysis, drawdown modeling, and hedging guidance.',tag:'Protection'},
+  {icon:'💰',title:'Tax-Efficient Investing',body:'Structuring your portfolio to legally minimise tax exposure across decades. Full 80C, 80D, LTCG, and DTAA (for NRIs) optimization.',tag:'Tax'},
+  {icon:'🏠',title:'Estate & Legacy Planning',body:'Wills, nominations, HUF structures, and NRI-specific repatriation planning. Ensuring your wealth transfers correctly to the right people.',tag:'Estate'},
+  {icon:'🌍',title:'NRI Advisory',body:'Specialized planning for Non-Resident Indians — FEMA compliance, NRE/NRO structures, dual-country tax optimization, and India portfolio management from abroad.',tag:'NRI'},
+  {icon:'🤝',title:'Ongoing Advisory',body:'Regular check-ins, strategy adjustments, and direct access to Saravana as your life and markets evolve. A true long-term partnership.',tag:'Ongoing'},
+  {icon:'📈',title:'Market Intelligence',body:'Live market briefings covering NIFTY, RBI policy, sector momentum, FII/DII flows, and global macro — contextualised for your retirement strategy.',tag:'Markets'},
+];
+var track = document.getElementById('hscrollTrack');
+var allServices = SERVICES.concat(SERVICES);
+track.innerHTML = allServices.map(function(s){
+  return '<div class="hscroll-card">' +
+    '<div class="hscroll-card-icon">' + s.icon + '</div>' +
+    '<div class="hscroll-card-title">' + s.title + '</div>' +
+    '<div class="hscroll-card-body">' + s.body + '</div>' +
+    '<span class="hscroll-card-tag">' + s.tag + '</span>' +
+  '</div>';
+}).join('');
+
+/* ── FEATURE TABS ── */
+var tabScreens = [
+  '<div class="fs-title">STEP 1 · DISCOVERY CALL</div><div class="fs-chart-area" style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px"><div style="width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:1.8rem">📞</div><div style="text-align:center"><div style="font-size:.9rem;font-weight:600">Free 15-min Call</div><div style="font-size:.75rem;color:rgba(255,255,255,.4);margin-top:4px;font-family:var(--mono)">No commitment · No obligation</div></div></div><div class="fs-stats"><div class="fs-stat"><div class="fs-stat-num" style="color:var(--accent)">15</div><div class="fs-stat-lbl">Minutes</div></div><div class="fs-stat"><div class="fs-stat-num">Free</div><div class="fs-stat-lbl">No cost</div></div><div class="fs-stat"><div class="fs-stat-num" style="color:var(--accent)">24h</div><div class="fs-stat-lbl">Follow-up</div></div></div>',
+  '<div class="fs-title">STEP 2 · FINANCIAL ASSESSMENT</div><div class="fs-chart-area"><div style="display:flex;flex-direction:column;gap:10px"><div style="display:flex;justify-content:space-between;font-size:.75rem"><span style="color:rgba(255,255,255,.5)">Current Portfolio</span><span style="color:var(--accent);font-family:var(--mono)">₹45,00,000</span></div><div style="height:4px;background:rgba(255,255,255,.06);border-radius:4px"><div style="width:62%;height:100%;background:var(--accent);border-radius:4px"></div></div><div style="display:flex;justify-content:space-between;font-size:.75rem;margin-top:8px"><span style="color:rgba(255,255,255,.5)">Retirement Target</span><span style="color:#f59e0b;font-family:var(--mono)">₹3,00,00,000</span></div><div style="height:4px;background:rgba(255,255,255,.06);border-radius:4px"><div style="width:15%;height:100%;background:#f59e0b;border-radius:4px"></div></div><div style="font-size:.65rem;color:rgba(255,255,255,.3);margin-top:12px;font-family:var(--mono)">GAP ANALYSIS · 25 YEARS · RISK PROFILE: MODERATE</div></div></div><div class="fs-stats"><div class="fs-stat"><div class="fs-stat-num">55</div><div class="fs-stat-lbl">Target Age</div></div><div class="fs-stat"><div class="fs-stat-num" style="color:var(--accent)">25yr</div><div class="fs-stat-lbl">Horizon</div></div><div class="fs-stat"><div class="fs-stat-num">Mod</div><div class="fs-stat-lbl">Risk Profile</div></div></div>',
+  '<div class="fs-title">STEP 3 · CUSTOM STRATEGY</div><div class="fs-chart-area"><svg viewBox="0 0 260 100" style="width:100%;height:100%"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22c55e" stop-opacity=".3"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0"/></linearGradient></defs><path d="M0,90 C20,80 40,60 70,55 C100,50 120,30 150,25 C180,20 210,12 260,8 L260,100 L0,100Z" fill="url(#cg)"/><path d="M0,90 C20,80 40,60 70,55 C100,50 120,30 150,25 C180,20 210,12 260,8" fill="none" stroke="#22c55e" stroke-width="2"/><circle cx="260" cy="8" r="3" fill="#22c55e"/><text x="4" y="15" font-size="8" fill="rgba(255,255,255,.35)" font-family="var(--mono)">PROJECTED CORPUS GROWTH</text></svg></div><div class="fs-stats"><div class="fs-stat"><div class="fs-stat-num" style="color:var(--accent)">65%</div><div class="fs-stat-lbl">Equity</div></div><div class="fs-stat"><div class="fs-stat-num">30%</div><div class="fs-stat-lbl">Debt</div></div><div class="fs-stat"><div class="fs-stat-num" style="color:#f59e0b">5%</div><div class="fs-stat-lbl">Gold</div></div></div>',
+  '<div class="fs-title">STEP 4 · ONGOING PARTNERSHIP</div><div class="fs-chart-area" style="display:flex;flex-direction:column;gap:8px;justify-content:center"><div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15);border-radius:8px"><span style="font-size:1rem">📅</span><div><div style="font-size:.75rem;font-weight:600">Quarterly Review</div><div style="font-size:.62rem;color:rgba(255,255,255,.4);font-family:var(--mono)">Next: Apr 15, 2026</div></div></div><div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px"><span style="font-size:1rem">📊</span><div><div style="font-size:.75rem;font-weight:600">Portfolio Rebalancing</div><div style="font-size:.62rem;color:rgba(255,255,255,.4);font-family:var(--mono)">Completed Jan 2026</div></div></div><div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px"><span style="font-size:1rem">💬</span><div><div style="font-size:.75rem;font-weight:600">Direct Access to Saravana</div><div style="font-size:.62rem;color:rgba(255,255,255,.4);font-family:var(--mono)">Response within 24h</div></div></div></div><div class="fs-stats"><div class="fs-stat"><div class="fs-stat-num" style="color:var(--accent)">4×</div><div class="fs-stat-lbl">Year Reviews</div></div><div class="fs-stat"><div class="fs-stat-num">24h</div><div class="fs-stat-lbl">Response</div></div><div class="fs-stat"><div class="fs-stat-num" style="color:var(--accent)">1:1</div><div class="fs-stat-lbl">Always Direct</div></div></div>',
+];
+function switchTab(idx, el) {
+  document.querySelectorAll('.feature-tab').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+  var screen = document.getElementById('featureScreen');
+  screen.style.opacity = '0';
+  screen.style.transform = 'translateY(8px)';
+  setTimeout(function(){
+    screen.innerHTML = tabScreens[idx];
+    screen.style.transition = 'opacity .3s ease, transform .3s ease';
+    screen.style.opacity = '1';
+    screen.style.transform = 'translateY(0)';
+  }, 150);
+}
+
+/* ── TESTIMONIALS ── */
+var TESTIMONIALS = [
+  {initials:'RM',name:'Rajesh Menon',role:'Senior Engineer, TCS · Chennai',stars:5,quote:'Saravana completely changed how I think about money. Within 6 months I had a clear retirement plan, a rebalanced portfolio, and for the first time in years I actually sleep well.'},
+  {initials:'DS',name:'Deepak Subramaniam',role:'NRI · Dubai, UAE',stars:5,quote:'Managing wealth from abroad is complicated. Saravana understands the NRI situation deeply — FEMA, repatriation, dual-country planning. The Pro plan is worth every rupee.'},
+  {initials:'KR',name:'Kavitha Rajan',role:'Doctor · Bengaluru',stars:5,quote:'I was sceptical of financial advisors. Most just push products. Saravana is different. He listened first, then built a plan around my actual goals. I am on track to retire at 55.'},
+  {initials:'PN',name:'Priya & Arun Nair',role:'Business Owners · Coimbatore',stars:5,quote:'We came with no financial plan and a lot of anxiety. He was patient, direct, and never talked down to us. His knowledge of Indian markets gave us real confidence.'},
+  {initials:'VS',name:'Vikram Sharma',role:'Entrepreneur · Mumbai',stars:5,quote:'Bi-weekly calls, instant responses, and an advisor who knows my situation in depth. The Elite plan is genuinely elite.'},
+  {initials:'AK',name:'Anita Krishnamurthy',role:'School Principal · Madurai',stars:5,quote:'I never thought I earned enough to need a financial advisor. Saravana showed me that is exactly the wrong way to think. I am now building real wealth on a teacher\'s salary.'},
+];
+var tGrid = document.getElementById('testimonialsGrid');
+TESTIMONIALS.slice(0,3).forEach(function(t,i){
+  tGrid.innerHTML += '<div class="t-card reveal" style="transition-delay:' + (i*0.12) + 's">' +
+    '<span class="t-quote-mark">"</span>' +
+    '<div class="t-stars">' + '★'.repeat(t.stars) + '</div>' +
+    '<div class="t-quote">' + t.quote + '</div>' +
+    '<div class="t-person">' +
+      '<div class="t-av">' + t.initials + '</div>' +
+      '<div><div class="t-name">' + t.name + '</div><div class="t-role">' + t.role + '</div></div>' +
+    '</div>' +
+  '</div>';
+});
+/* Re-observe new reveals */
+document.querySelectorAll('.reveal').forEach(function(el){ revealObs.observe(el); });
+</script>
+</body>
+</html>
