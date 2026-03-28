@@ -3,30 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Live market updates for Indian investors — powered by Solari Prime AI. NIFTY analysis, RBI policy, sector momentum, and retirement-grade insights.">
+<meta name="description" content="Live market updates for Indian retirement investors — NIFTY analysis, RBI policy, sector momentum, and global macro insights from Verdant Wealth Co.">
 <title>Market Updates — Verdant Wealth Co.</title>
 <link rel="stylesheet" href="_shared.css">
 <style>
-/* ── PAGE SPECIFIC ── */
-.updates-layout{display:grid;grid-template-columns:1fr 340px;gap:2.5rem;align-items:start}
-.updates-main{}
+.updates-layout{display:grid;grid-template-columns:1fr 320px;gap:2.5rem;align-items:start}
 .updates-sidebar{position:sticky;top:7rem}
 
 /* Stats bar */
 .market-stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem}
 .mstat{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.1rem 1rem;position:relative;overflow:hidden;transition:border-color .3s}
-.mstat::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:0;transition:opacity .3s}
+.mstat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--em-glow);opacity:0;transition:opacity .3s}
 .mstat:hover{border-color:rgba(46,204,113,.25)}
-.mstat:hover::before{opacity:1;background:var(--em-glow)}
+.mstat:hover::after{opacity:1}
 .mstat-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem}
 .mstat-value{font-family:var(--serif);font-size:1.55rem;font-weight:300;line-height:1;margin-bottom:.25rem}
 .mstat-change{font-family:var(--mono);font-size:.62rem;display:flex;align-items:center;gap:.25rem}
-.mstat-change.up{color:var(--green)}
-.mstat-change.dn{color:var(--red)}
-.mstat-loading{background:linear-gradient(90deg,var(--card) 25%,rgba(46,204,113,.04) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.mstat-change.up{color:var(--green)}.mstat-change.dn{color:var(--red)}
 
-/* Filter row */
+/* Filter */
 .filter-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.8rem;flex-wrap:wrap}
 .filter-chips{display:flex;gap:.5rem;flex-wrap:wrap}
 .filter-chip{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.42rem 1rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .25s;white-space:nowrap}
@@ -34,12 +29,11 @@
 .refresh-btn{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.42rem 1.1rem;border-radius:2px;border:1px solid rgba(46,204,113,.25);background:transparent;color:var(--em-glow);transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
 .refresh-btn:hover{background:rgba(46,204,113,.08)}
 .refresh-btn.spinning .ri{display:inline-block;animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
 
 /* Update cards */
 .update-list{display:flex;flex-direction:column;gap:1rem}
-.update-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.6rem 1.8rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;cursor:default}
-.update-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;opacity:0;transition:opacity .3s;border-radius:0}
+.update-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.6rem 1.8rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.update-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;opacity:0;transition:opacity .3s}
 .update-card:hover{border-color:rgba(46,204,113,.3);transform:translateX(3px)}
 .update-card:hover::before{opacity:1}
 .update-card.bullish::before{background:#3d8f5a}
@@ -55,33 +49,32 @@
 .badge-info{background:rgba(120,152,255,.1);color:#7898ff;border:1px solid rgba(120,152,255,.2)}
 .update-body{font-size:.88rem;color:var(--muted);line-height:1.82;margin-bottom:.9rem}
 .update-body strong{color:var(--white);font-weight:500}
-.update-meta{display:flex;align-items:center;gap:1.2rem;padding-top:.8rem;border-top:1px solid var(--border)}
+.update-meta{display:flex;align-items:center;gap:1.2rem;padding-top:.8rem;border-top:1px solid var(--border);flex-wrap:wrap}
 .update-meta-pill{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(46,204,113,.5);display:flex;align-items:center;gap:.3rem}
 .update-expand{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:transparent;border:none;margin-left:auto;transition:color .2s;display:flex;align-items:center;gap:.3rem}
 .update-expand:hover{color:var(--em-glow)}
 .update-full{display:none;font-size:.86rem;color:var(--muted);line-height:1.82;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--border)}
 .update-full.open{display:block}
+
 /* Skeleton */
 .skel-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.6rem 1.8rem;margin-bottom:1rem}
 .skel-line{height:12px;border-radius:4px;margin-bottom:.7rem;background:linear-gradient(90deg,var(--card) 25%,rgba(46,204,113,.05) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
-.skel-line.w80{width:80%}
-.skel-line.w60{width:60%}
-.skel-line.w40{width:40%}
+.skel-line.w80{width:80%}.skel-line.w60{width:60%}.skel-line.w40{width:40%}
 
-/* AI query bar */
-.ai-query-bar{background:var(--card);border:1px solid rgba(46,204,113,.2);border-radius:6px;padding:1.4rem;margin-bottom:2rem;position:relative;overflow:hidden}
-.ai-query-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--em-glow),transparent 70%)}
-.ai-query-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--em-glow);margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem}
-.ai-query-row{display:flex;gap:.6rem}
-.ai-query-input{flex:1;background:rgba(240,244,240,.03);border:1px solid var(--border);border-radius:4px;padding:.7rem .9rem;color:var(--white);font-family:var(--sans);font-size:.88rem;outline:none;transition:border-color .3s}
-.ai-query-input:focus{border-color:rgba(46,204,113,.35);background:rgba(46,204,113,.02)}
-.ai-query-input::placeholder{color:var(--muted);opacity:.6}
-.ai-query-btn{background:var(--em-glow);color:#060908;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:4px;padding:.7rem 1.2rem;white-space:nowrap;transition:all .25s;display:flex;align-items:center;gap:.4rem}
-.ai-query-btn:hover{background:var(--em-mid)}
-.ai-query-btn:disabled{opacity:.4}
-.ai-response{margin-top:1rem;padding:1rem;background:rgba(46,204,113,.03);border:1px solid rgba(46,204,113,.1);border-radius:4px;font-size:.84rem;color:var(--muted);line-height:1.8;display:none}
-.ai-response.show{display:block}
-.ai-response strong{color:var(--white);font-weight:500}
+/* Query bar */
+.query-bar{background:var(--card);border:1px solid rgba(46,204,113,.2);border-radius:6px;padding:1.4rem;margin-bottom:2rem;position:relative;overflow:hidden}
+.query-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--em-glow),transparent 70%)}
+.query-bar-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--em-glow);margin-bottom:.8rem}
+.query-row{display:flex;gap:.6rem}
+.query-input{flex:1;background:rgba(240,244,240,.03);border:1px solid var(--border);border-radius:4px;padding:.7rem .9rem;color:var(--white);font-family:var(--sans);font-size:.88rem;outline:none;transition:border-color .3s}
+.query-input:focus{border-color:rgba(46,204,113,.35);background:rgba(46,204,113,.02)}
+.query-input::placeholder{color:var(--muted);opacity:.6}
+.query-btn{background:var(--em-glow);color:#060908;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:4px;padding:.7rem 1.2rem;white-space:nowrap;transition:all .25s}
+.query-btn:hover{background:var(--em-mid)}
+.query-btn:disabled{opacity:.4}
+.query-response{margin-top:1rem;padding:1rem;background:rgba(46,204,113,.03);border:1px solid rgba(46,204,113,.1);border-radius:4px;font-size:.84rem;color:var(--muted);line-height:1.8;display:none}
+.query-response.show{display:block}
+.query-response strong{color:var(--white);font-weight:500}
 
 /* Sidebar */
 .sidebar-section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.4rem;margin-bottom:1.2rem}
@@ -93,8 +86,7 @@
 .sector-bar-wrap{width:60px;height:3px;background:rgba(240,244,240,.06);border-radius:2px;overflow:hidden}
 .sector-bar{height:100%;border-radius:2px;transition:width .8s ease}
 .sector-val{font-family:var(--mono);font-size:.65rem;min-width:48px;text-align:right}
-.sector-val.up{color:var(--green)}
-.sector-val.dn{color:var(--red)}
+.sector-val.up{color:var(--green)}.sector-val.dn{color:var(--red)}
 .glossary-item{display:flex;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
 .glossary-item:last-child{border-bottom:none}
 .glossary-term{font-family:var(--mono);font-size:.62rem;color:var(--em-glow);font-weight:500;min-width:60px;flex-shrink:0;margin-top:.1rem}
@@ -109,8 +101,10 @@
 .updates-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--em-glow),transparent)}
 .updates-cta-title{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--white);margin-bottom:.8rem}
 .updates-cta-title em{font-style:italic;color:var(--em-glow)}
-.updates-cta-sub{font-size:.92rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+.updates-cta-sub{font-size:.92rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto}
 .updates-cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* Typing indicator */
 .ai-typing{display:flex;align-items:center;gap:4px;padding:.3rem 0}
 .ai-typing span{width:6px;height:6px;border-radius:50%;background:var(--em-glow);animation:typing-b 1.2s infinite ease-in-out;display:inline-block}
 .ai-typing span:nth-child(2){animation-delay:.2s}
@@ -127,6 +121,7 @@
   .filter-bar{flex-direction:column;align-items:flex-start}
   .updates-cta{padding:2rem 1.5rem}
   .updates-cta-title{font-size:1.6rem}
+  .query-row{flex-direction:column}
 }
 @media(max-width:420px){
   .market-stats-bar{grid-template-columns:1fr}
@@ -145,18 +140,17 @@
 
 <div class="page-wrap">
 
-  <!-- HERO -->
   <div class="page-hero">
     <div class="page-hero-bg"></div>
-    <div class="page-eyebrow">Live Intelligence · Solari Prime</div>
+    <div class="page-eyebrow">Live Intelligence · Indian Markets</div>
     <h1 class="page-title">Market <em>Updates</em></h1>
-    <p class="page-sub">AI-generated market briefings for Indian retirement investors — NIFTY, RBI policy, sector momentum, global macro. Updated live by Solari Prime.</p>
+    <p class="page-sub">Curated market briefings for Indian retirement investors — NIFTY, RBI policy, sector momentum, global macro. Reviewed by Saravana and updated regularly.</p>
     <div style="margin-top:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.62rem;color:rgba(46,204,113,.7)">
         <span style="width:6px;height:6px;border-radius:50%;background:var(--em-glow);animation:blink 1.5s infinite;display:inline-block"></span>
         <span id="lastUpdatedBadge">Fetching latest updates...</span>
       </div>
-      <a href="analyzer.html" class="btn-ghost" style="font-size:.65rem">Open Full Analyzer →</a>
+      <a href="contact.html" class="btn-ghost" style="font-size:.65rem">Get Personalised Advice →</a>
     </div>
   </div>
 
@@ -170,29 +164,25 @@
 
     <!-- MARKET STATS BAR -->
     <div class="market-stats-bar reveal" id="statsBar">
-      <div class="mstat mstat-loading"><div class="mstat-label">NIFTY 50</div><div class="mstat-value" style="color:var(--em-glow)">—</div><div class="mstat-change">—</div></div>
-      <div class="mstat mstat-loading"><div class="mstat-label">BANK NIFTY</div><div class="mstat-value" style="color:var(--em-glow)">—</div><div class="mstat-change">—</div></div>
-      <div class="mstat mstat-loading"><div class="mstat-label">USD/INR</div><div class="mstat-value" style="color:#7898ff">—</div><div class="mstat-change">—</div></div>
-      <div class="mstat mstat-loading"><div class="mstat-label">GOLD</div><div class="mstat-value" style="color:#c8a96e">—</div><div class="mstat-change">—</div></div>
+      <div class="mstat"><div class="mstat-label">NIFTY 50</div><div class="mstat-value" style="color:var(--em-glow)">—</div><div class="mstat-change">—</div></div>
+      <div class="mstat"><div class="mstat-label">BANK NIFTY</div><div class="mstat-value" style="color:var(--em-glow)">—</div><div class="mstat-change">—</div></div>
+      <div class="mstat"><div class="mstat-label">USD/INR</div><div class="mstat-value" style="color:#7898ff">—</div><div class="mstat-change">—</div></div>
+      <div class="mstat"><div class="mstat-label">GOLD</div><div class="mstat-value" style="color:#c8a96e">—</div><div class="mstat-change">—</div></div>
     </div>
 
-    <!-- LAYOUT -->
     <div class="updates-layout">
 
-      <!-- MAIN CONTENT -->
+      <!-- MAIN -->
       <div class="updates-main">
 
-        <!-- AI QUERY BAR -->
-        <div class="ai-query-bar reveal">
-          <div class="ai-query-label">🤖 Ask Solari Prime about today's market</div>
-          <div class="ai-query-row">
-            <input class="ai-query-input" id="marketQuery" type="text" placeholder="e.g. What does today's NIFTY move mean for my retirement portfolio?" onkeydown="if(event.key==='Enter')askMarket()">
-            <button class="ai-query-btn" id="marketQueryBtn" onclick="askMarket()">
-              <span>Analyze</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
+        <!-- QUERY BAR -->
+        <div class="query-bar reveal">
+          <div class="query-bar-label">Ask a market question</div>
+          <div class="query-row">
+            <input class="query-input" id="marketQuery" type="text" placeholder="e.g. What does the current RBI stance mean for my debt allocation?" onkeydown="if(event.key==='Enter')askMarket()">
+            <button class="query-btn" id="marketQueryBtn" onclick="askMarket()">Get Answer</button>
           </div>
-          <div class="ai-response" id="marketAiResponse"></div>
+          <div class="query-response" id="marketAiResponse"></div>
         </div>
 
         <!-- FILTER BAR -->
@@ -213,7 +203,6 @@
 
         <!-- UPDATE LIST -->
         <div class="update-list" id="updateList">
-          <!-- Skeletons shown while loading -->
           <div class="skel-card"><div class="skel-line w80"></div><div class="skel-line"></div><div class="skel-line w60"></div></div>
           <div class="skel-card"><div class="skel-line w80"></div><div class="skel-line"></div><div class="skel-line w60"></div></div>
           <div class="skel-card"><div class="skel-line w60"></div><div class="skel-line"></div><div class="skel-line w40"></div></div>
@@ -222,20 +211,19 @@
         <!-- CTA AT END -->
         <div class="updates-cta reveal">
           <div class="updates-cta-title">Turn insights into <em>action.</em></div>
-          <p class="updates-cta-sub">These market updates are the starting point. Get a personalised retirement strategy built around your goals — with Solari Prime's AI intelligence and Saravana's 20+ years of human expertise.</p>
+          <p class="updates-cta-sub">Market updates help you stay informed — but turning information into a personalised retirement strategy requires expert guidance. Book a session with Saravana to build your plan.</p>
           <div class="updates-cta-btns">
-            <a href="contact.html" class="btn-primary">Get Personalized Advice →</a>
-            <a href="analyzer.html" class="btn-outline">Open Full AI Analyzer</a>
-            <a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank" rel="noopener" class="btn-ghost">📅 Book a Free Call</a>
+            <a href="contact.html" class="btn-primary">Get Personalised Advice →</a>
+            <a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank" rel="noopener" class="btn-outline">📅 Book a Free Call</a>
+            <a href="pricing.html" class="btn-ghost">View Plans</a>
           </div>
         </div>
 
-      </div><!-- /main -->
+      </div>
 
       <!-- SIDEBAR -->
       <div class="updates-sidebar">
 
-        <!-- Sector Momentum -->
         <div class="sidebar-section reveal">
           <div class="sidebar-title">Sector Momentum</div>
           <div id="sidebarSectors">
@@ -245,17 +233,15 @@
           </div>
         </div>
 
-        <!-- Quick Links -->
         <div class="sidebar-section reveal">
           <div class="sidebar-title">Quick Access</div>
-          <a href="analyzer.html" class="quick-link">AI Analyzer <span class="quick-link-arrow">→</span></a>
+          <a href="services.html" class="quick-link">Advisory Services <span class="quick-link-arrow">→</span></a>
           <a href="pricing.html" class="quick-link">Advisory Plans <span class="quick-link-arrow">→</span></a>
           <a href="blog.html" class="quick-link">Research Blog <span class="quick-link-arrow">→</span></a>
-          <a href="models.html" class="quick-link">AI Models <span class="quick-link-arrow">→</span></a>
+          <a href="faq.html" class="quick-link">FAQ <span class="quick-link-arrow">→</span></a>
           <a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank" class="quick-link">Book a Session <span class="quick-link-arrow">→</span></a>
         </div>
 
-        <!-- Glossary -->
         <div class="sidebar-section reveal">
           <div class="sidebar-title">Key Terms</div>
           <div class="glossary-item"><div class="glossary-term">NIFTY</div><div class="glossary-def">NSE's benchmark index of 50 large-cap Indian stocks.</div></div>
@@ -266,307 +252,164 @@
           <div class="glossary-item"><div class="glossary-term">GSEC</div><div class="glossary-def">Government Securities — India's sovereign bonds, key for debt allocation.</div></div>
         </div>
 
-        <!-- Saravana CTA -->
         <div class="sidebar-section reveal" style="background:rgba(46,204,113,.04);border-color:rgba(46,204,113,.2);text-align:center">
           <img src="saravana.png" alt="Saravana" style="width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid rgba(46,204,113,.3);margin:0 auto .9rem;display:block" onerror="this.style.display='none'">
-          <div style="font-family:var(--serif);font-size:1rem;color:var(--white);margin-bottom:.4rem">Need human insight?</div>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">Saravana reviews these signals personally. Book a call to discuss your specific situation.</p>
+          <div style="font-family:var(--serif);font-size:1rem;color:var(--white);margin-bottom:.4rem">Need a personal view?</div>
+          <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">Saravana reviews these signals personally and can explain what they mean for your specific retirement plan.</p>
           <a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank" rel="noopener" class="btn-primary" style="padding:.7rem 1.2rem;font-size:.65rem;display:block">📅 Book Free Session</a>
         </div>
 
-      </div><!-- /sidebar -->
-    </div><!-- /layout -->
-  </div><!-- /page-content -->
-</div><!-- /page-wrap -->
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ─── CONFIG ─── */
-const GROQ_MARKET_PROMPT = `You are Solari Prime, an elite AI financial intelligence engine specialised in Indian retirement investing. 
-Today is ${new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}.
+/* ── CONFIG ── */
+var MARKET_PROMPT = 'You are a senior Indian financial analyst specialising in retirement investing. Today is '+new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'. Generate 6-8 concise, high-value market update cards for Indian retirement investors covering: NIFTY/SENSEX overview, RBI policy implications, 2-3 sector calls, FII/DII flows, global macro (Fed, oil, DXY), and a retirement-specific action point. Each card MUST include a headline (under 12 words), 2-3 sentence body with specific data points, tag (nifty|rbi|sectors|global|fii|retirement), sentiment (bullish|bearish|neutral|info), impact (HIGH|MEDIUM|LOW), and optional 1-2 sentence extended analysis. Respond ONLY with valid JSON, no markdown:\n{"generated_at":"<HH:MM IST>","nifty_level":"<e.g. 22,450>","nifty_change":"<e.g. +0.85%>","nifty_up":true,"vix":"<e.g. 13.2>","updates":[{"id":"u1","title":"<headline>","body":"<analysis>","extended":"<optional>","tag":"<tag>","sentiment":"<sentiment>","impact":"<impact>","ticker_ref":"<e.g. NIFTY 50>"}]}';
 
-Generate 6-8 concise, high-value market update cards for Indian retirement investors covering:
-1. NIFTY 50 / SENSEX technical and sentiment overview
-2. RBI policy / rate cycle implications  
-3. Top 2-3 sector calls (bullish or bearish) with reasoning
-4. FII/DII flow analysis and what it means
-5. Key global macro factor affecting India today (Fed, Oil, DXY, China)
-6. Retirement-specific actionable: what should a long-term investor do today?
-7. A risk alert or opportunity alert
+var _allUpdates=[];
+var _activeFilter='all';
+var _isLoading=false;
 
-Each card MUST include:
-- A compelling headline (under 12 words)
-- 2-3 sentence body with specific data points, percentages, and actionable insight
-- A tag: "nifty" | "rbi" | "sectors" | "global" | "fii" | "retirement"
-- A sentiment: "bullish" | "bearish" | "neutral" | "info"
-- An impact level: "HIGH" | "MEDIUM" | "LOW"
-- Optional: a 1-2 sentence extended analysis for "Read more"
-
-Respond ONLY with valid JSON — no markdown, no extra text:
-{
-  "generated_at": "<HH:MM IST>",
-  "market_sentiment": "bullish|bearish|neutral",
-  "nifty_level": "<estimated level like 22,450>",
-  "nifty_change": "<like +0.85%>",
-  "nifty_up": true|false,
-  "vix": "<like 13.2>",
-  "updates": [
-    {
-      "id": "u1",
-      "title": "<headline>",
-      "body": "<2-3 sentence analysis with data>",
-      "extended": "<optional deeper insight>",
-      "tag": "<nifty|rbi|sectors|global|fii|retirement>",
-      "sentiment": "<bullish|bearish|neutral|info>",
-      "impact": "<HIGH|MEDIUM|LOW>",
-      "ticker_ref": "<e.g. NIFTY 50 or HDFC Bank or USD/INR>"
-    }
-  ]
-}`;
-
-var _allUpdates = [];
-var _activeFilter = 'all';
-var _isLoading = false;
-
-/* ─── LOAD UPDATES FROM GROQ ─── */
-async function loadUpdates() {
-  if(_isLoading) return;
-  _isLoading = true;
-
-  var btn = document.getElementById('refreshBtn');
-  if(btn){ btn.classList.add('spinning'); btn.disabled = true; }
-
-  /* Show skeletons */
-  document.getElementById('updateList').innerHTML =
-    '<div class="skel-card"><div class="skel-line w80"></div><div class="skel-line"></div><div class="skel-line w60"></div></div>'.repeat(5);
-
-  try {
-    var res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        messages: [{role:'user', content: GROQ_MARKET_PROMPT}],
-        response_format: {type:'json_object'},
-        temperature: 0.45,
-        max_tokens: 3000
-      })
+async function loadUpdates(){
+  if(_isLoading)return;
+  _isLoading=true;
+  var btn=document.getElementById('refreshBtn');
+  if(btn){btn.classList.add('spinning');btn.disabled=true;}
+  document.getElementById('updateList').innerHTML='<div class="skel-card"><div class="skel-line w80"></div><div class="skel-line"></div><div class="skel-line w60"></div></div>'.repeat(4);
+  try{
+    var res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:MARKET_PROMPT}],response_format:{type:'json_object'},temperature:0.45,max_tokens:3000})
     });
-
-    if(!res.ok) throw new Error('Groq API error: ' + res.status);
-    var data = await res.json();
-    var raw = data.choices[0].message.content.trim();
-    var parsed = JSON.parse(raw);
-
-    _allUpdates = parsed.updates || [];
-
-    /* Update stats bar */
+    if(!res.ok)throw new Error('API error');
+    var data=await res.json();
+    var parsed=JSON.parse(data.choices[0].message.content.trim());
+    _allUpdates=parsed.updates||[];
     updateStatsBar(parsed);
-
-    /* Update timestamp */
-    var ts = document.getElementById('lastUpdatedBadge');
-    if(ts) ts.textContent = 'Updated ' + (parsed.generated_at || new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})) + ' IST';
-
+    var ts=document.getElementById('lastUpdatedBadge');
+    if(ts)ts.textContent='Updated '+(parsed.generated_at||new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}))+' IST';
     renderUpdates(_activeFilter);
     loadSectorData();
-
-  } catch(e) {
-    console.error('Market updates error:', e);
-    /* Fallback to curated static updates */
-    _allUpdates = getFallbackUpdates();
+  }catch(e){
+    _allUpdates=getFallbackUpdates();
     renderUpdates(_activeFilter);
-    var ts = document.getElementById('lastUpdatedBadge');
-    if(ts) ts.textContent = 'Showing cached analysis · ' + new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
-  } finally {
-    _isLoading = false;
-    if(btn){ btn.classList.remove('spinning'); btn.disabled = false; }
+    var ts=document.getElementById('lastUpdatedBadge');
+    if(ts)ts.textContent='Showing cached analysis · '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  }finally{
+    _isLoading=false;
+    if(btn){btn.classList.remove('spinning');btn.disabled=false;}
   }
 }
 
-/* ─── RENDER UPDATES ─── */
-function renderUpdates(filter) {
-  var list = document.getElementById('updateList');
-  var filtered = filter === 'all' ? _allUpdates : _allUpdates.filter(function(u){ return u.tag === filter; });
-
-  if(!filtered.length) {
-    list.innerHTML = '<div style="padding:3rem;text-align:center;color:var(--muted);font-size:.9rem">No updates in this category right now. Try refreshing or select <strong style="color:var(--white)">All</strong>.</div>';
-    return;
-  }
-
-  var sentimentClass = {bullish:'bullish',bearish:'bearish',neutral:'neutral',info:'info-type'};
-  var badgeClass     = {bullish:'badge-bullish',bearish:'badge-bearish',neutral:'badge-neutral',info:'badge-info'};
-  var impactIcon     = {HIGH:'🔴',MEDIUM:'🟡',LOW:'🟢'};
-
-  list.innerHTML = filtered.map(function(u, i){
-    var sc = sentimentClass[u.sentiment] || 'neutral';
-    var bc = badgeClass[u.sentiment] || 'badge-neutral';
-    var extended = u.extended
-      ? '<button class="update-expand" onclick="toggleExpand(\'exp'+i+'\')" id="expBtn'+i+'">Read more <span>▼</span></button><div class="update-full" id="exp'+i+'">'+u.extended+'</div>'
-      : '';
-    return '<div class="update-card '+sc+' reveal" data-tag="'+u.tag+'">'+
-      '<div class="update-card-head">'+
-        '<div class="update-card-title">'+u.title+'</div>'+
-        '<div class="update-badge '+bc+'">'+u.sentiment+'</div>'+
-      '</div>'+
+function renderUpdates(filter){
+  var list=document.getElementById('updateList');
+  var filtered=filter==='all'?_allUpdates:_allUpdates.filter(function(u){return u.tag===filter;});
+  if(!filtered.length){list.innerHTML='<div style="padding:3rem;text-align:center;color:var(--muted);font-size:.9rem">No updates in this category. Try <strong style="color:var(--white)">All</strong> or refresh.</div>';return;}
+  var sc={bullish:'bullish',bearish:'bearish',neutral:'neutral',info:'info-type'};
+  var bc={bullish:'badge-bullish',bearish:'badge-bearish',neutral:'badge-neutral',info:'badge-info'};
+  var ic={HIGH:'🔴',MEDIUM:'🟡',LOW:'🟢'};
+  list.innerHTML=filtered.map(function(u,i){
+    var ext=u.extended?'<button class="update-expand" onclick="toggleExpand(\'exp'+i+'\')" >Read more ▼</button><div class="update-full" id="exp'+i+'">'+u.extended+'</div>':'';
+    return '<div class="update-card '+(sc[u.sentiment]||'neutral')+' reveal" data-tag="'+u.tag+'">'+
+      '<div class="update-card-head"><div class="update-card-title">'+u.title+'</div><div class="update-badge '+(bc[u.sentiment]||'badge-neutral')+'">'+u.sentiment+'</div></div>'+
       '<div class="update-body">'+u.body+'</div>'+
       '<div class="update-meta">'+
-        '<div class="update-meta-pill">'+impactIcon[u.impact]+' '+u.impact+'</div>'+
-        (u.ticker_ref ? '<div class="update-meta-pill">📊 '+u.ticker_ref+'</div>' : '')+
+        '<div class="update-meta-pill">'+(ic[u.impact]||'🟡')+' '+u.impact+'</div>'+
+        (u.ticker_ref?'<div class="update-meta-pill">📊 '+u.ticker_ref+'</div>':'')+
         '<div class="update-meta-pill" style="margin-left:auto;color:rgba(120,152,255,.5)">'+tagLabel(u.tag)+'</div>'+
-        extended+
+        ext+
       '</div>'+
     '</div>';
   }).join('');
-
-  /* Re-run reveal observer for new elements */
   initReveal();
 }
 
-function toggleExpand(id) {
-  var el = document.getElementById(id);
-  if(!el) return;
-  el.classList.toggle('open');
-}
+function toggleExpand(id){var el=document.getElementById(id);if(el)el.classList.toggle('open');}
+function tagLabel(t){var m={nifty:'NIFTY',rbi:'RBI/Policy',sectors:'Sectors',global:'Global Macro',fii:'FII/DII',retirement:'Retirement'};return m[t]||t.toUpperCase();}
 
-function tagLabel(tag) {
-  var map = {nifty:'NIFTY',rbi:'RBI/Policy',sectors:'Sectors',global:'Global Macro',fii:'FII/DII',retirement:'Retirement'};
-  return map[tag] || tag.toUpperCase();
-}
-
-/* ─── FILTER ─── */
-function filterUpdates(tag, btn) {
-  _activeFilter = tag;
-  document.querySelectorAll('.filter-chip').forEach(function(c){ c.classList.remove('active'); });
-  if(btn) btn.classList.add('active');
+function filterUpdates(tag,btn){
+  _activeFilter=tag;
+  document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('active');});
+  if(btn)btn.classList.add('active');
   renderUpdates(tag);
 }
 
-/* ─── STATS BAR ─── */
-function updateStatsBar(data) {
-  var bar = document.getElementById('statsBar');
-  if(!bar) return;
-
-  /* Try to pull from SITE.ticker first, then use data from parsed response */
-  var nifty  = findTick('NIFTY 50') || {label:'NIFTY 50', val: data.nifty_level||'22,450', change: data.nifty_change||'+0.85%', up: data.nifty_up!==false};
-  var bank   = findTick('BANK NIFTY') || {label:'BANK NIFTY', val:'48,210', change:'+0.72%', up:true};
-  var usd    = findTick('USD/INR') || {label:'USD/INR', val:'83.45', change:'+0.04%', up:true};
-  var gold   = findTick('GOLD') || {label:'GOLD', val:'$2,345', change:'+0.65%', up:true};
-  var vix    = data.vix || '13.2';
-
-  var items = [
-    {label:'NIFTY 50',  val:nifty.val,  change:nifty.change,  up:nifty.up,  color:'var(--em-glow)'},
-    {label:'BANK NIFTY',val:bank.val,   change:bank.change,   up:bank.up,   color:'var(--em-glow)'},
-    {label:'USD/INR',   val:usd.val,    change:usd.change,    up:usd.up,    color:'#7898ff'},
-    {label:'GOLD',      val:gold.val,   change:gold.change,   up:gold.up,   color:'#c8a96e'},
+function updateStatsBar(data){
+  var bar=document.getElementById('statsBar');if(!bar)return;
+  function find(l){return SITE.ticker.find(function(t){return t.label===l;});}
+  var n=find('NIFTY 50')||{val:data.nifty_level||'22,450',change:data.nifty_change||'+0.85%',up:data.nifty_up!==false};
+  var b=find('BANK NIFTY')||{val:'48,210',change:'+0.72%',up:true};
+  var u=find('USD/INR')||{val:'83.45',change:'+0.04%',up:true};
+  var g=find('GOLD')||{val:'$2,345',change:'+0.65%',up:true};
+  var items=[
+    {label:'NIFTY 50',val:n.val,change:n.change,up:n.up,color:'var(--em-glow)'},
+    {label:'BANK NIFTY',val:b.val,change:b.change,up:b.up,color:'var(--em-glow)'},
+    {label:'USD/INR',val:u.val,change:u.change,up:u.up,color:'#7898ff'},
+    {label:'GOLD',val:g.val,change:g.change,up:g.up,color:'#c8a96e'},
   ];
+  bar.innerHTML=items.map(function(m){return '<div class="mstat"><div class="mstat-label">'+m.label+'</div><div class="mstat-value" style="color:'+m.color+'">'+m.val+'</div><div class="mstat-change '+(m.up?'up':'dn')+'">'+(m.up?'▲':'▼')+' '+m.change+'</div></div>';}).join('');
+}
 
-  bar.innerHTML = items.map(function(m){
-    return '<div class="mstat">'+
-      '<div class="mstat-label">'+m.label+'</div>'+
-      '<div class="mstat-value" style="color:'+m.color+'">'+m.val+'</div>'+
-      '<div class="mstat-change '+(m.up?'up':'dn')+'">'+(m.up?'▲':'▼')+' '+m.change+'</div>'+
-    '</div>';
+async function loadSectorData(){
+  try{var s=await fetchSectorData();if(!s||!s.length)throw 0;renderSectors(s);}
+  catch(e){renderSectors([{sector:'IT / Technology',value:2.4,direction:'up'},{sector:'Banking / BFSI',value:-0.6,direction:'down'},{sector:'Pharma & Health',value:1.1,direction:'up'},{sector:'FMCG',value:0.2,direction:'up'},{sector:'Auto & EV',value:3.2,direction:'up'},{sector:'Metals & Mining',value:-1.4,direction:'down'},{sector:'Infra & Cement',value:0.8,direction:'up'},{sector:'Energy / Oil & Gas',value:1.9,direction:'up'}]);}
+}
+function renderSectors(sectors){
+  var el=document.getElementById('sidebarSectors');if(!el)return;
+  var sorted=sectors.slice().sort(function(a,b){return Math.abs(b.value)-Math.abs(a.value);});
+  var max=Math.max.apply(null,sorted.map(function(s){return Math.abs(s.value);}))|| 1;
+  el.innerHTML=sorted.slice(0,8).map(function(s){
+    var pct=Math.round(Math.abs(s.value)/max*100),isUp=s.direction==='up'||s.value>0;
+    return '<div class="sector-row"><div class="sector-name">'+s.sector+'</div><div class="sector-bar-wrap"><div class="sector-bar" style="width:'+pct+'%;background:'+(isUp?'var(--green)':'var(--red)')+'"></div></div><div class="sector-val '+(isUp?'up':'dn')+'">'+(isUp?'+':'')+parseFloat(s.value).toFixed(1)+'%</div></div>';
   }).join('');
 }
 
-function findTick(label) {
-  return SITE.ticker.find(function(t){ return t.label === label; });
-}
-
-/* ─── SECTOR SIDEBAR ─── */
-async function loadSectorData() {
-  try {
-    var sectors = await fetchSectorData();
-    if(!sectors || !sectors.length) throw new Error('no data');
-    renderSidebarSectors(sectors);
-  } catch(e) {
-    renderSidebarSectors([
-      {sector:'IT / Technology',  value:2.4, direction:'up'},
-      {sector:'Banking / BFSI',   value:-0.6,direction:'down'},
-      {sector:'Pharma & Health',  value:1.1, direction:'up'},
-      {sector:'FMCG',             value:0.2, direction:'up'},
-      {sector:'Auto & EV',        value:3.2, direction:'up'},
-      {sector:'Metals & Mining',  value:-1.4,direction:'down'},
-      {sector:'Infra & Cement',   value:0.8, direction:'up'},
-      {sector:'Energy / Oil & Gas',value:1.9,direction:'up'},
-    ]);
-  }
-}
-
-function renderSidebarSectors(sectors) {
-  var el = document.getElementById('sidebarSectors');
-  if(!el) return;
-  var sorted = sectors.slice().sort(function(a,b){ return Math.abs(b.value) - Math.abs(a.value); });
-  var max = Math.max.apply(null, sorted.map(function(s){ return Math.abs(s.value); })) || 1;
-  el.innerHTML = sorted.slice(0,8).map(function(s){
-    var pct = Math.round(Math.abs(s.value)/max*100);
-    var isUp = s.direction === 'up' || s.value > 0;
-    return '<div class="sector-row">'+
-      '<div class="sector-name">'+s.sector+'</div>'+
-      '<div class="sector-bar-wrap"><div class="sector-bar" style="width:'+pct+'%;background:'+(isUp?'var(--green)':'var(--red)')+'"></div></div>'+
-      '<div class="sector-val '+(isUp?'up':'dn')+'">'+(isUp?'+':'')+parseFloat(s.value).toFixed(1)+'%</div>'+
-    '</div>';
-  }).join('');
-}
-
-/* ─── AI MARKET QUERY ─── */
-async function askMarket() {
-  var input = document.getElementById('marketQuery');
-  var btn   = document.getElementById('marketQueryBtn');
-  var resp  = document.getElementById('marketAiResponse');
-  var q = input ? input.value.trim() : '';
-  if(!q) { if(input) input.focus(); return; }
-
-  btn.disabled = true;
-  resp.className = 'ai-response show';
-  resp.innerHTML = '<div class="ai-typing"><span></span><span></span><span></span></div>';
-
-  try {
-    var res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+async function askMarket(){
+  var input=document.getElementById('marketQuery'),btn=document.getElementById('marketQueryBtn'),resp=document.getElementById('marketAiResponse');
+  var q=input?input.value.trim():'';if(!q){if(input)input.focus();return;}
+  btn.disabled=true;
+  resp.className='query-response show';
+  resp.innerHTML='<div class="ai-typing"><span></span><span></span><span></span></div>';
+  try{
+    var res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model:'llama-3.3-70b-versatile',
-        messages:[
-          {role:'system', content:'You are Solari Prime, an AI advisor specialised in Indian retirement investing. Give a concise, specific, actionable answer (max 120 words). Use numbers and percentages. No markdown headers.'},
-          {role:'user', content: q}
-        ],
-        temperature: 0.4,
-        max_tokens: 200
-      })
+      body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[
+        {role:'system',content:'You are a senior Indian financial analyst specialising in retirement investing. Give a concise, specific, actionable answer (max 120 words). Use numbers and percentages where relevant. No markdown headers or bullet points.'},
+        {role:'user',content:q}
+      ],temperature:0.4,max_tokens:200})
     });
-    var data = await res.json();
-    var text = data.choices[0].message.content.trim();
-    resp.innerHTML = '<strong style="color:var(--em-glow);font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.5rem">Solari Prime</strong>' + text.replace(/\n/g,'<br>');
-  } catch(e) {
-    resp.innerHTML = '<span style="color:#e05a3a">Unable to reach analysis engine. Please try the <a href="analyzer.html" style="color:var(--em-glow)">full analyzer</a>.</span>';
-  } finally {
-    btn.disabled = false;
-    input.value = '';
-  }
+    var data=await res.json();
+    var text=data.choices[0].message.content.trim();
+    resp.innerHTML='<strong style="color:var(--em-glow);font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.5rem">Analysis</strong>'+text.replace(/\n/g,'<br>');
+  }catch(e){
+    resp.innerHTML='<span style="color:#e05a3a">Unable to process that query right now. Please try again shortly.</span>';
+  }finally{btn.disabled=false;if(input)input.value='';}
 }
 
-/* ─── FALLBACK UPDATES ─── */
-function getFallbackUpdates() {
+function getFallbackUpdates(){
   return [
-    {id:'f1',title:'NIFTY 50 holds firm above 22,400 amid global uncertainty',body:'NIFTY 50 is trading around 22,450 (+0.85%), with strong buying at key support levels. IT and Auto sectors are leading the rally. RSI at 58 suggests room for further upside. Retirement investors holding large-cap equity funds should stay invested — corrections remain shallow.',tag:'nifty',sentiment:'bullish',impact:'HIGH',ticker_ref:'NIFTY 50',extended:'Technically, 22,200 is the critical support. A close above 22,600 would confirm breakout towards 23,000. For SIP investors, this is an accumulation zone.'},
-    {id:'f2',title:'RBI likely to cut rates by 25bps in June — debt allocation shifts',body:'Markets are pricing a 70% probability of a 25bps rate cut at the June MPC meeting, driven by falling CPI (now at 4.8%) and slowing global growth. For retirement portfolios, this is the time to extend duration in debt funds — medium-to-long duration bonds will benefit from rate cuts.',tag:'rbi',sentiment:'bullish',impact:'HIGH',ticker_ref:'10Y GSEC',extended:'Gilt funds and Dynamic Bond Funds are likely to outperform. Avoid ultra-short term funds if you have a 2-3 year horizon. Target allocation: 30-35% in medium duration funds.'},
-    {id:'f3',title:'IT sector surges 1.55% — TCS and Infosys lead quarterly earnings optimism',body:'NIFTY IT is up 1.55% as Q4 earnings expectations improve. TCS at ₹3,820 and Infosys at ₹1,585 show strong order book visibility. The US tech spending recovery and weak INR (83.45) make Indian IT exporters highly attractive for retirement equity allocation.',tag:'sectors',sentiment:'bullish',impact:'MEDIUM',ticker_ref:'NIFTY IT',extended:'Overweight IT funds in the 30-40% equity bucket. Watch for guidance from TCS management on FY27 revenue growth — this will set the tone for the sector.'},
-    {id:'f4',title:'FII buying resumes — ₹4,200 crore inflows in 3 sessions',body:'Foreign Institutional Investors have turned net buyers after 3 weeks of selling, injecting ₹4,200 crore across equity and debt. This reversal is driven by a stabilising US dollar (DXY at 103.5) and China\'s disappointing PMI data which is redirecting capital to India.',tag:'fii',sentiment:'bullish',impact:'HIGH',ticker_ref:'FII Flow',extended:'Sustained FII buying above ₹5,000 crore/week is typically associated with NIFTY gains of 3-5% in the following month. DIIs have also been steady buyers, providing a floor.'},
-    {id:'f5',title:'Brent crude at $84 — inflation risk for India, but manageable',body:'Brent crude at $84.15/barrel (-0.35%) is above RBI\'s comfort zone of $80. At this level, India\'s oil import bill rises by ~₹18,000 crore monthly, potentially adding 0.2-0.3% to CPI. This could delay the rate cut cycle by one quarter.',tag:'global',sentiment:'neutral',impact:'MEDIUM',ticker_ref:'Brent Crude',extended:'Watch the $87 level — if Brent breaks above this, expect RBI to push its rate cut guidance to Q3 FY27. Energy and downstream sectors face margin compression.'},
-    {id:'f6',title:'Retirement allocation playbook: rebalance to 65/30/5 in May',body:'With NIFTY near fair value, debt looking attractive ahead of rate cuts, and gold at all-time highs, Solari Prime recommends: 65% equity (large cap + IT heavy), 30% debt (medium duration + corporate bonds), 5% gold (ETF). Avoid direct property and small-cap until July.',tag:'retirement',sentiment:'neutral',impact:'HIGH',ticker_ref:'Portfolio',extended:'Specifically: 40% in NIFTY 50 index funds, 15% in IT sector funds, 10% in multi-asset funds, 30% in medium duration debt, 5% in Sovereign Gold Bond or Gold ETF.'},
+    {id:'f1',title:'NIFTY 50 consolidates above 22,400 support',body:'NIFTY 50 is trading around 22,450 (+0.85%), holding firm above the key 22,200 support level. IT and Auto sectors are leading gains. RSI at 58 suggests moderate momentum with room for further upside. Long-term investors should maintain equity exposure.',tag:'nifty',sentiment:'bullish',impact:'HIGH',ticker_ref:'NIFTY 50',extended:'A sustained close above 22,600 would signal a move toward 23,000. For SIP investors, this remains a reasonable accumulation zone — avoid chasing momentum.'},
+    {id:'f2',title:'RBI rate cut probability rises — debt allocation opportunity',body:'Markets are pricing a 70% probability of a 25bps rate cut at the next MPC meeting, driven by CPI falling to 4.8% and slowing global growth. For retirement portfolios, extending duration in debt funds now captures potential capital appreciation when rates fall.',tag:'rbi',sentiment:'bullish',impact:'HIGH',ticker_ref:'10Y GSEC',extended:'Medium-duration bond funds and dynamic bond funds are positioned to outperform. Avoid ultra-short term funds if you have a 2-3 year horizon. Consider 30-35% allocation to medium duration debt.'},
+    {id:'f3',title:'IT sector leads — strong order book visibility for FY27',body:'NIFTY IT is up 1.55% as Q4 earnings optimism builds. TCS at ₹3,820 and Infosys at ₹1,585 reflect improving visibility into FY27 demand. A weak INR at 83.45 provides additional tailwind for export-oriented IT firms.',tag:'sectors',sentiment:'bullish',impact:'MEDIUM',ticker_ref:'NIFTY IT',extended:'Overweight large-cap IT funds in the equity bucket. Monitor TCS management guidance for FY27 revenue growth projections — this will set the sector tone for the quarter.'},
+    {id:'f4',title:'FII flows turn positive — ₹4,200 crore net buying resumes',body:'Foreign Institutional Investors have turned net buyers after three weeks of selling, with ₹4,200 crore in net equity inflows across three sessions. A stabilising US dollar (DXY 103.5) and China\'s weak PMI data are redirecting global capital toward India.',tag:'fii',sentiment:'bullish',impact:'HIGH',ticker_ref:'FII/DII',extended:'Sustained FII buying above ₹5,000 crore per week historically correlates with NIFTY gains of 3-5% in the following month. DIIs continue steady accumulation, providing market support.'},
+    {id:'f5',title:'Brent at $84 — manageable inflation risk for RBI',body:'Brent crude at $84.15/barrel sits above RBI\'s comfort zone of $80. At this level, India\'s oil import bill increases by approximately ₹18,000 crore monthly, potentially adding 0.2-0.3% to CPI and complicating the rate cut timeline.',tag:'global',sentiment:'neutral',impact:'MEDIUM',ticker_ref:'Brent Crude',extended:'Watch the $87 Brent level — a sustained break above this would likely push RBI rate cut guidance to Q3 FY27. Energy and downstream companies face near-term margin pressure.'},
+    {id:'f6',title:'Retirement portfolio playbook: 65/30/5 allocation for current conditions',body:'With NIFTY near fair value, debt attractive ahead of potential rate cuts, and gold elevated at all-time highs, the current recommended allocation is: 65% equity (large-cap and IT weighted), 30% debt (medium duration), 5% gold (ETF or Sovereign Gold Bond). Avoid direct property and small-cap until clarity improves.',tag:'retirement',sentiment:'neutral',impact:'HIGH',ticker_ref:'Portfolio',extended:'Specifically: 40% NIFTY 50 index funds, 15% IT sector funds, 10% multi-asset funds, 30% medium duration debt, 5% Sovereign Gold Bond. Review allocation quarterly as macro conditions evolve.'},
   ];
 }
 
-/* ─── INIT ─── */
+/* ── KEY PRESS FOR QUERY ── */
 document.getElementById('marketQuery').addEventListener('keydown',function(e){if(e.key==='Enter')askMarket();});
 
+/* ── INIT ── */
 renderTicker('tickerInner');
 refreshMarketTicker();
 loadUpdates();
 loadSectorData();
-
-/* Auto-refresh every 5 minutes */
-setInterval(loadUpdates, 5 * 60 * 1000);
+setInterval(loadUpdates,5*60*1000);
 </script>
 
 <script>
