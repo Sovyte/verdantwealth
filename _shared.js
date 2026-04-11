@@ -127,24 +127,27 @@ function logoSVG(w,h){
   return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="var(--logo-bg)" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polygon points="22,32 46,32 45,46 23,46" fill="#2ecc71" opacity="0.22"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.8"/><line x1="34" y1="16" x2="34" y2="29" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="22" y2="32" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="46" y2="32" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="34" y2="58" stroke="#2ecc71" stroke-width="0.5" opacity="0.3"/></svg>';
 }
 
-/* ═══ NAV — no analyzer, no AI models, no NEW badge ═══ */
+/* ═══ NAV — pill style ═══ */
 function renderNav(activePage){
   activePage=activePage||'';var p=SITE.pages;
   document.write(
     '<nav id="mainNav">'+
-      '<a href="'+p.home+'" class="nav-logo-link">'+logoSVG(30,34)+'<span class="nav-brand">Verdant <span>Wealth</span> Co.</span></a>'+
+      '<a href="'+p.home+'" class="nav-logo-link">'+
+        '<svg class="nav-logo-svg" width="26" height="30" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="var(--logo-bg)" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.8"/></svg>'+
+        '<span class="nav-brand">Verdant <span>Wealth</span> Co.</span>'+
+      '</a>'+
       '<ul class="nav-links" id="navLinks">'+
         '<li><a href="'+p.home+'"     class="'+(activePage==='home'?'nav-active':'')+'">Home</a></li>'+
         '<li><a href="'+p.about+'"    class="'+(activePage==='about'?'nav-active':'')+'">About</a></li>'+
         '<li><a href="'+p.services+'" class="'+(activePage==='services'?'nav-active':'')+'">Services</a></li>'+
-        '<li><a href="'+p.updates+'"  class="'+(activePage==='updates'?'nav-active':'')+'">Market Updates</a></li>'+
+        '<li><a href="'+p.updates+'"  class="'+(activePage==='updates'?'nav-active':'')+'">Markets</a></li>'+
         '<li><a href="'+p.pricing+'"  class="'+(activePage==='pricing'?'nav-active':'')+'">Pricing</a></li>'+
         '<li><a href="'+p.blog+'"     class="'+(activePage==='blog'?'nav-active':'')+'">Blog</a></li>'+
         '<li><a href="'+p.faq+'"      class="'+(activePage==='faq'?'nav-active':'')+'">FAQ</a></li>'+
       '</ul>'+
       '<div class="nav-right">'+
         '<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">☀</button>'+
-        '<a href="'+p.contact+'" class="nav-cta">Get Personalized Advice</a>'+
+        '<a href="'+p.contact+'" class="nav-cta">Book a Call →</a>'+
         '<button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Open menu"><span></span><span></span><span></span></button>'+
       '</div>'+
     '</nav>'+
@@ -153,11 +156,11 @@ function renderNav(activePage){
         '<li><a href="'+p.home+'"     onclick="toggleMobileNav()">Home</a></li>'+
         '<li><a href="'+p.about+'"    onclick="toggleMobileNav()">About</a></li>'+
         '<li><a href="'+p.services+'" onclick="toggleMobileNav()">Services</a></li>'+
-        '<li><a href="'+p.updates+'"  onclick="toggleMobileNav()">Market Updates</a></li>'+
+        '<li><a href="'+p.updates+'"  onclick="toggleMobileNav()">Markets</a></li>'+
         '<li><a href="'+p.pricing+'"  onclick="toggleMobileNav()">Pricing</a></li>'+
         '<li><a href="'+p.blog+'"     onclick="toggleMobileNav()">Blog</a></li>'+
         '<li><a href="'+p.faq+'"      onclick="toggleMobileNav()">FAQ</a></li>'+
-        '<li><a href="'+p.contact+'"  onclick="toggleMobileNav()">Contact</a></li>'+
+        '<li><a href="'+p.contact+'"  onclick="toggleMobileNav()" style="color:var(--em-glow)">Book a Call →</a></li>'+
       '</ul>'+
     '</div>'
   );
@@ -257,18 +260,38 @@ function initCursor(){
     var ring=document.createElement('div');ring.id='vwc-cursor-ring';ring.className='cursor-ring';
     document.body.appendChild(dot);document.body.appendChild(ring);
   }
+  /* Scroll progress bar */
+  if(!document.getElementById('vwc-spb')){
+    var spb=document.createElement('div');spb.id='vwc-spb';
+    spb.style.cssText='position:fixed;top:0;left:0;height:1.5px;z-index:9999;background:var(--em-glow);width:0%;transition:width .04s linear;transform-origin:left;pointer-events:none';
+    document.body.appendChild(spb);
+    window.addEventListener('scroll',function(){
+      var pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+      spb.style.width=pct+'%';
+    },{passive:true});
+  }
   var dot=document.getElementById('vwc-cursor'),ring=document.getElementById('vwc-cursor-ring');
   var mx=-200,my=-200,rx=-200,ry=-200;
   function lerp(a,b,t){return a+(b-a)*t;}
-  (function loop(){rx=lerp(rx,mx,.14);ry=lerp(ry,my,.14);ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  (function loop(){rx=lerp(rx,mx,.13);ry=lerp(ry,my,.13);ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
   document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
   document.addEventListener('mouseenter',function(){dot.style.opacity='1';ring.style.opacity='1';});
   document.addEventListener('mouseleave',function(){dot.style.opacity='0';ring.style.opacity='0';});
-  var hs='a,button,[role="button"],.tmarq-card,.plan-card,.card-base,.update-card';
+  var hs='a,button,[role="button"],.tmarq-card,.plan-card,.card-base,.update-card,.hs-card';
   document.addEventListener('mouseover',function(e){if(e.target.closest(hs))document.body.classList.add('cursor-hover');});
   document.addEventListener('mouseout',function(e){if(e.target.closest(hs))document.body.classList.remove('cursor-hover');});
   document.addEventListener('mousedown',function(){document.body.classList.add('cursor-click');});
   document.addEventListener('mouseup',function(){document.body.classList.remove('cursor-click');});
+  /* Magnetic effect on primary buttons */
+  document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){
+      var r=btn.getBoundingClientRect();
+      var dx=(e.clientX-r.left-r.width/2)*.15;
+      var dy=(e.clientY-r.top-r.height/2)*.15;
+      btn.style.transform='translate('+dx+'px,'+dy+'px) translateY(-2px)';
+    });
+    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+  });
 }
 
 /* ═══ MOBILE CHAT ═══ */
