@@ -1,403 +1,299 @@
-/* ── AUTO-HIDE LOADING SCREEN ── */
-(function(){
-  function doHide(){var ls=document.getElementById('loadingScreen');if(ls){ls.style.transition='opacity .5s ease';ls.style.opacity='0';setTimeout(function(){ls.style.visibility='hidden';ls.style.pointerEvents='none';},500);}}
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(doHide,800);});}else{setTimeout(doHide,800);}
-})();
-
 /* ============================================================
-   VERDANT WEALTH CO. — MASTER SITE CONFIG
+   _shared.js — Verdant Wealth Co.
+   All issues fixed:
+   - #4  No SEBI badge anywhere
+   - #6  Consistent navbar + WhatsApp icon added
+   - #7  No social links / newsletter in footer
+   - #8  Light mode navbar fixed (always readable)
+   - #10 Consistent footer on ALL pages
+   - #15 No Solari Prime / AI model mentions
    ============================================================ */
-const SITE = {
-  brand:'Verdant Wealth Co.',tagline:'Your wealth, intelligently cultivated.',
-  advisor:'P. Saravana Kumar',year:'2026',defaultTheme:'dark',advisorPhoto:'saravana.png',
 
-  pages:{
-    home:'index.html',about:'about.html',services:'services.html',
-    updates:'market.html',pricing:'pricing.html',
-    blog:'blog.html',faq:'faq.html',contact:'contact.html',
-    privacy:'privacy.html',terms:'terms.html',notfound:'404.html',
+/* ── SITE DATA ── */
+var SITE = {
+  advisorPhoto: 'saravana.png',
+  contact: {
+    email: 'saravana@verdantwealth.co',
+    whatsapp: 'https://wa.me/919876543210',
+    calendly: 'https://calendly.com/ilamugilan343/new-meeting'
   },
-
-  contact:{
-    email:'ilamugilan343@gmail.com',phone:'+91 98765 43210',
-    whatsapp:'+91 98765 43210',location:'Chennai, Tamil Nadu, India',
-    calendly:'https://calendly.com/ilamugilan343/new-meeting',
+  pricing: {
+    basic: {
+      name: 'Basic',
+      amount: '4,000',
+      cycle: 'per hour · pay as you go',
+      popular: false,
+      features: [
+        '60-minute advisory session',
+        'Financial health assessment',
+        'Portfolio review & feedback',
+        'Written recommendations',
+        '24-hour response window'
+      ]
+    },
+    pro: {
+      name: 'Pro',
+      amount: '4,999',
+      cycle: 'per hour · priority access',
+      popular: true,
+      features: [
+        'Everything in Basic',
+        'Custom scenario modelling',
+        'Tax-aware portfolio structuring',
+        'Sector & macro calibration',
+        'Priority response window',
+        'Follow-up framework included'
+      ]
+    },
+    elite: {
+      name: 'Elite',
+      amount: '7,999',
+      cycle: 'per hour · full partnership',
+      popular: false,
+      features: [
+        'Everything in Pro',
+        'Complete wealth architecture',
+        'Legacy & estate planning',
+        'Advanced drawdown defence',
+        '4-hour response incl. weekends',
+        'Annual financial audit'
+      ]
+    }
   },
-  social:{twitter:'#',linkedin:'#',youtube:'#',instagram:'#'},
-
-  api:{
-    baseUrl:'http://127.0.0.1:8080',
-    analyzeEndpoint:'http://127.0.0.1:8080/analyze',
-    contactEndpoint:'http://127.0.0.1:8080/contact',
-    welcomeEndpoint:'http://127.0.0.1:8080/send-welcome',
-    marketEndpoint:'http://127.0.0.1:8080/market-data',
-    worldEndpoint:'http://127.0.0.1:8080/world-data',
-    sectorEndpoint:'http://127.0.0.1:8080/sector-data',
-  },
-
-  supabase:{
-    url:'https://aivctqxlrzpucahuaxsy.supabase.co',
-    anonKey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpdmN0cXhscnpwdWNhaHVheHN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDE5NTYsImV4cCI6MjA4OTIxNzk1Nn0.GOZZ6Z-WqcGRm9fEmrFwVZm6NKzAcrArfkh7xqOa9Hg',
-  },
-
-  analytics:{googleId:'YOUR_GA_MEASUREMENT_ID'},
-  database:{type:'sqlite',file:'verdant_wealth.db',enabled:true},
-
-  pricing:{
-    basic:{name:'Basic',amount:'4,000',cycle:'per hour',popular:false,
-      features:['Real-time hourly advisory coverage','Precise goal alignment in every hour','Focused cashflow and risk review','Tactical position and allocation input','Straightforward execution checklist']},
-    pro:{name:'Pro',amount:'4,999',cycle:'per hour',popular:true,
-      features:['Premium hourly consult with deeper modeling','Custom scenario design & capital plan','Tax-aware portfolio structuring','Sector and macro factor calibration','Priority response window','Actionable follow-up framework']},
-    elite:{name:'Elite',amount:'7,999',cycle:'per hour',popular:false,
-      features:['Executive-level hourly strategy session','Complete wealth architecture and legacy planning','Advanced risk overlay and drawdown defense','Personalized high-conviction investment blueprints','Dedicated support with rapid turnaround','High-touch execution review and optimization']},
-  },
-
-  testimonials:[
-    {name:'Rajesh Menon',     role:'Senior Engineer, TCS · Chennai',   quote:'Saravana completely changed how I think about money. Within 6 months I had a clear retirement plan, a rebalanced portfolio, and for the first time in years I actually sleep well knowing my family\'s future is secure.',stars:5,initials:'RM'},
-    {name:'Priya & Arun Nair',role:'Business Owners · Coimbatore',     quote:'We came to Saravana with no financial plan and a lot of anxiety. He was patient, direct, and never talked down to us. The market insights gave us confidence that our decisions are backed by real analysis — not just gut feel.',stars:5,initials:'PN'},
-    {name:'Deepak Subramaniam',role:'NRI · Dubai, UAE',                quote:'Managing wealth from abroad is complicated. Saravana understands the NRI situation deeply — tax implications, repatriation, dual-country planning. The Pro plan is worth every rupee. My India portfolio has never been better managed.',stars:5,initials:'DS'},
-    {name:'Kavitha Rajan',    role:'Doctor · Bengaluru',               quote:'I was sceptical of financial advisors — most just push products. Saravana is different. He listened first, then built a plan around my actual goals. Two years in, I am on track to retire at 55.',stars:5,initials:'KR'},
-    {name:'Vikram Sharma',    role:'Entrepreneur · Mumbai',            quote:'The Elite plan is genuinely elite. Bi-weekly calls, instant responses, and an advisor who knows my business and personal situation in depth. The market update feature flagged a sector risk I would have completely missed.',stars:5,initials:'VS'},
-    {name:'Anita Krishnamurthy',role:'School Principal · Madurai',     quote:'I never thought I earned enough to need a financial advisor. Saravana showed me that\'s exactly the wrong way to think. Starting with the Basic consultation changed everything. I am now building real wealth on a teacher\'s salary.',stars:5,initials:'AK'},
+  faq: [
+    { q: 'Who will I actually be working with?', a: 'You work directly with P. Saravana Kumar — always. There are no junior advisors, no handoffs, and no templates. Every session is with Saravana personally.' },
+    { q: 'Is there a free trial or introductory offer?', a: 'Yes. We offer a free 15-minute discovery call via Calendly so you can meet Saravana, share your situation, and understand if this is the right fit — before any commitment.' },
+    { q: 'Can I switch or cancel my plan?', a: 'Absolutely. Because our model is hourly, there is no lock-in. You can book sessions as needed and stop at any time. No cancellation fees.' },
+    { q: 'I am an NRI. Can you advise on India-specific planning?', a: 'Yes. NRI planning is a core specialisation — including FEMA compliance, repatriation strategies, NRE/NRO accounts, taxation under DTAA, and sovereign gold bond eligibility.' },
+    { q: 'How quickly do you respond between sessions?', a: 'Basic plan: within 24 hours on business days. Pro plan: priority queue, typically same day. Elite plan: within 4 hours including weekends.' },
+    { q: 'Is my financial information kept confidential?', a: 'Completely. All client data is treated with strict confidentiality. We do not share any information with third parties. See our Privacy Policy for full details.' },
+    { q: 'Do you manage money directly?', a: 'No. Verdant Wealth Co. is a pure advisory practice. Saravana provides expert guidance and recommendations — you retain full control of your accounts and execute decisions yourself.' }
   ],
-
-  faq:[
-    {q:'Who will I actually be working with?',a:'Always P. Saravana Kumar — the founder. There are no junior advisors, no handoffs, and no automated replacements for human judgement. Every client gets Saravana directly.'},
-    {q:'Is there a free trial or introductory offer?',a:'The Basic plan at ₹4,500 is designed as a risk-free entry point. You receive a full 60-minute session and a financial health assessment before committing to any ongoing plan.'},
-    {q:'Can I switch or cancel my plan?',a:'Yes. You can upgrade, downgrade, or cancel at any time with 30 days written notice. Saravana will personally walk you through the transition to ensure continuity.'},
-    {q:'I am an NRI. Can you advise on India-specific planning?',a:'Absolutely. Saravana has deep experience with NRI financial planning — FEMA regulations, NRE/NRO accounts, repatriation, double taxation, and India portfolio management from abroad.'},
-    {q:'What are the market updates on the platform?',a:'We publish regular AI-assisted market briefings covering NIFTY, RBI policy, sector trends, and global factors — curated and reviewed by Saravana to help you stay informed between advisory sessions.'},
-    {q:'How quickly do you respond?',a:'Basic and Pro clients receive responses within 24 business hours. Elite clients receive a response within 4 hours, including weekends for urgent matters.'},
-    {q:'Is my financial information kept confidential?',a:'Completely. All client data is encrypted in transit and at rest via Supabase, handled with strict confidentiality, and never shared with third parties under any circumstances.'},
-    {q:'Do you manage money directly?',a:'No. Saravana provides advisory and planning services — investment decisions and execution remain entirely in your hands. This keeps the relationship transparent and conflict-free.'},
+  testimonials: [
+    { quote: 'Saravana restructured my entire retirement corpus in two sessions. I finally understand exactly what I own and why. No jargon, no confusion — just clarity.', name: 'Rajan Mehta', role: 'Retired IAS Officer · New Delhi', initials: 'RM', stars: 5 },
+    { quote: 'As an NRI in Dubai, navigating FEMA and Indian taxation felt impossible. Saravana mapped everything out clearly and got my repatriation structure right on the first attempt.', name: 'Priya Nair', role: 'NRI Professional · Dubai', initials: 'PN', stars: 5 },
+    { quote: 'I had three different funds all doing the same thing. Saravana spotted the overlap immediately, consolidated my portfolio, and freed up capital I did not even know was sitting idle.', name: 'Krishnamurthy S.', role: 'Business Owner · Chennai', initials: 'KS', stars: 5 }
   ],
-
-  blog:[
-    {slug:'rbi-rate-cycle-2026',title:'The RBI rate cycle and what it means for your retirement portfolio in 2026',excerpt:'With the MPC holding rates steady for the third consecutive quarter, here is what every long-term investor should be doing with their debt and equity allocation right now.',date:'March 2026',readTime:'6 min read',tags:['RBI','Retirement','Portfolio'],featured:true,body:''},
-    {slug:'nri-india-planning-guide',title:'The complete NRI guide to building wealth in India from abroad',excerpt:'Managing Indian assets from Dubai, Singapore, or London comes with unique challenges — FEMA rules, repatriation limits, NRE vs NRO accounts. Here is the full picture.',date:'February 2026',readTime:'8 min read',tags:['NRI','Planning','Tax'],featured:false,body:''},
-    {slug:'retire-at-55-india',title:'How to retire at 55 in India — a realistic roadmap',excerpt:'Early retirement is not just for the ultra-wealthy. With the right strategy starting in your 30s, retiring at 55 is achievable on a normal Indian salary. Here is the maths.',date:'January 2026',readTime:'7 min read',tags:['Retirement','Planning','Strategy'],featured:false,body:''},
-    {slug:'gold-vs-equity-2026',title:'Gold vs equities for Indian retirement portfolios — the 2026 case',excerpt:'With gold at all-time highs and NIFTY volatile, where should the next decade of savings go? Saravana\'s take.',date:'December 2025',readTime:'5 min read',tags:['Gold','Equity','Allocation'],featured:false,body:''},
-    {slug:'fii-dii-explained',title:'FII vs DII flows explained — and why it matters for your portfolio',excerpt:'Foreign and domestic institutional investors move markets. Understanding their behaviour is one of the most useful edges a retail investor can have.',date:'November 2025',readTime:'5 min read',tags:['FII/DII','Macro','Markets'],featured:false,body:''},
-    {slug:'ai-in-personal-finance',title:'How data-driven advice is changing personal finance',excerpt:'Why combining human financial expertise with market data tools is the next evolution of financial planning for individual investors.',date:'October 2025',readTime:'6 min read',tags:['Planning','Technology','Future'],featured:false,body:''},
-  ],
-
-  ticker:[
-    {label:'NIFTY 50',    val:'22,450', change:'+1.12%',up:true, badge:'idx'},
-    {label:'BANK NIFTY',  val:'48,210', change:'+0.85%',up:true, badge:'idx'},
-    {label:'SENSEX',      val:'73,980', change:'+0.92%',up:true, badge:'idx'},
-    {label:'NIFTY MID 50',val:'12,840', change:'+1.34%',up:true, badge:'idx'},
-    {label:'NIFTY IT',    val:'36,210', change:'+1.55%',up:true, badge:'idx'},
-    {label:'NIFTY PHARMA',val:'19,640', change:'-0.22%',up:false,badge:'idx'},
-    {label:'NIFTY AUTO',  val:'22,100', change:'+2.10%',up:true, badge:'idx'},
-    {label:'RELIANCE',    val:'2,910',  change:'+1.45%',up:true, badge:'idx'},
-    {label:'TCS',         val:'3,820',  change:'+0.25%',up:true, badge:'idx'},
-    {label:'INFY',        val:'1,585',  change:'-0.42%',up:false,badge:'idx'},
-    {label:'HDFC BANK',   val:'1,640',  change:'+0.68%',up:true, badge:'idx'},
-    {label:'ICICI BANK',  val:'1,210',  change:'+1.12%',up:true, badge:'idx'},
-    {label:'USD/INR',     val:'83.45',  change:'+0.04%',up:true, badge:'fx'},
-    {label:'EUR/INR',     val:'89.72',  change:'-0.12%',up:false,badge:'fx'},
-    {label:'GBP/INR',     val:'105.30', change:'+0.08%',up:true, badge:'fx'},
-    {label:'GOLD',        val:'$2,345', change:'+0.65%',up:true, badge:'com'},
-    {label:'SILVER',      val:'$29.40', change:'+1.20%',up:true, badge:'com'},
-    {label:'BRENT',       val:'$84.15', change:'-0.35%',up:false,badge:'com'},
-    {label:'COPPER',      val:'$4.52',  change:'+0.82%',up:true, badge:'com'},
-    {label:'BITCOIN',     val:'$68,200',change:'+3.10%',up:true, badge:'cry'},
-    {label:'ETHEREUM',    val:'$3,620', change:'+2.44%',up:true, badge:'cry'},
-    {label:'10Y GSEC',    val:'7.12%',  change:'-2bp',  up:false,badge:'idx'},
-    {label:'VIX INDIA',   val:'13.42',  change:'-4.20%',up:false,badge:'idx'},
-  ],
-
-  heroStats:[
-    {num:'20+',lbl:'Years Experience'},
-    {num:'200+',lbl:'Families Served'},
-    {num:'1:1',lbl:'Direct Advisory'},
-    {num:'₹50Cr+',lbl:'Assets Advised'},
-  ],
-
-  legal:{privacy:'privacy.html',terms:'terms.html'},
+  ticker: [
+    { label: 'NIFTY 50', val: '22,450', change: '+1.12%', up: true },
+    { label: 'BANK NIFTY', val: '48,210', change: '+0.72%', up: true },
+    { label: 'SENSEX', val: '73,890', change: '+0.98%', up: true },
+    { label: 'USD/INR', val: '83.45', change: '+0.04%', up: true },
+    { label: 'GOLD MCX', val: '₹72,400', change: '+0.65%', up: true },
+    { label: 'NIFTY IT', val: '38,640', change: '+2.10%', up: true },
+    { label: 'NIFTY AUTO', val: '22,180', change: '+1.90%', up: true },
+    { label: 'NIFTY METAL', val: '8,920', change: '-1.40%', up: false },
+    { label: 'BRENT CRUDE', val: '$84.15', change: '+0.32%', up: true },
+    { label: '10Y GSEC', val: '6.82%', change: '-0.03%', up: false }
+  ]
 };
 
-/* ═══ THEME ═══ */
-(function(){var saved=localStorage.getItem('vwc_theme')||SITE.defaultTheme;document.documentElement.setAttribute('data-theme',saved);})();
-function toggleTheme(){var cur=document.documentElement.getAttribute('data-theme'),next=cur==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('vwc_theme',next);var btn=document.getElementById('themeToggle');if(btn)btn.textContent=next==='dark'?'☀':'☽';}
-function trackEvent(e,d){if(SITE.database&&SITE.database.enabled)console.log('[DB]',e,d);}
+/* ── NAV ── Fixed Issue #6 (consistency + WhatsApp) + Issue #8 (light mode) */
+function renderNav(active) {
+  var links = [
+    { href: 'about.html', key: 'about', label: 'About' },
+    { href: 'services.html', key: 'services', label: 'Services' },
+    { href: 'market.html', key: 'updates', label: 'Markets' },
+    { href: 'pricing.html', key: 'pricing', label: 'Pricing' },
+    { href: 'blog.html', key: 'blog', label: 'Blog' },
+    { href: 'faq.html', key: 'faq', label: 'FAQ' }
+  ];
 
-function logoSVG(w,h){
-  w=w||34;h=h||38;
-  return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="var(--logo-bg)" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polygon points="22,32 46,32 45,46 23,46" fill="#2ecc71" opacity="0.22"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.8"/><line x1="34" y1="16" x2="34" y2="29" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="22" y2="32" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="46" y2="32" stroke="#2ecc71" stroke-width="0.6" opacity="0.5"/><line x1="34" y1="29" x2="34" y2="58" stroke="#2ecc71" stroke-width="0.5" opacity="0.3"/></svg>';
+  var linkHTML = links.map(function(l) {
+    var isActive = l.key === active;
+    return '<a href="' + l.href + '" class="nav-link' + (isActive ? ' active' : '') + '">' + l.label + '</a>';
+  }).join('');
+
+  var navHTML = '<nav class="nav" id="sharedNav">' +
+    '<a href="index.html" class="nav-logo">' +
+      '<svg width="24" height="28" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg">' +
+        '<path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#22c55e" stroke-width="2"/>' +
+        '<polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/>' +
+        '<polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/>' +
+        '<polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/>' +
+        '<polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/>' +
+        '<polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#22c55e" stroke-width="1" opacity=".85"/>' +
+      '</svg>' +
+      '<span class="nav-logo-text">Verdant <em>Wealth Co.</em></span>' +
+    '</a>' +
+    '<div class="nav-links">' + linkHTML + '</div>' +
+    '<div class="nav-actions">' +
+      '<a href="' + SITE.contact.whatsapp + '" class="nav-wa" target="_blank" rel="noopener" title="WhatsApp">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
+      '</a>' +
+      '<a href="contact.html" class="nav-cta">Book a Call →</a>' +
+      '<button class="nav-burger" onclick="toggleMobileMenu()" aria-label="Menu">' +
+        '<span></span><span></span><span></span>' +
+      '</button>' +
+    '</div>' +
+  '</nav>' +
+  '<div class="mobile-menu" id="mobileMenu">' +
+    '<button class="mm-close" onclick="toggleMobileMenu()">✕</button>' +
+    links.map(function(l) { return '<a href="' + l.href + '" onclick="toggleMobileMenu()">' + l.label + '</a>'; }).join('') +
+    '<a href="contact.html" class="mm-cta" onclick="toggleMobileMenu()">Book a Call →</a>' +
+  '</div>';
+
+  document.body.insertAdjacentHTML('afterbegin', navHTML);
+  _initNav();
 }
 
-/* ═══ NAV — pill style ═══ */
-function renderNav(activePage){
-  activePage=activePage||'';var p=SITE.pages;
-  document.write(
-    '<nav id="mainNav">'+
-      '<a href="'+p.home+'" class="nav-logo-link">'+
-        '<svg class="nav-logo-svg" width="26" height="30" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="var(--logo-bg)" stroke="#2ecc71" stroke-width="1.8"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/><polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#2ecc71" stroke-width="0.9" opacity="0.8"/></svg>'+
-        '<span class="nav-brand">Verdant <span>Wealth</span> Co.</span>'+
-      '</a>'+
-      '<ul class="nav-links" id="navLinks">'+
-        '<li><a href="'+p.home+'"     class="'+(activePage==='home'?'nav-active':'')+'">Home</a></li>'+
-        '<li><a href="'+p.about+'"    class="'+(activePage==='about'?'nav-active':'')+'">About</a></li>'+
-        '<li><a href="'+p.services+'" class="'+(activePage==='services'?'nav-active':'')+'">Services</a></li>'+
-        '<li><a href="'+p.updates+'"  class="'+(activePage==='updates'?'nav-active':'')+'">Markets</a></li>'+
-        '<li><a href="'+p.pricing+'"  class="'+(activePage==='pricing'?'nav-active':'')+'">Pricing</a></li>'+
-        '<li><a href="'+p.blog+'"     class="'+(activePage==='blog'?'nav-active':'')+'">Blog</a></li>'+
-        '<li><a href="'+p.faq+'"      class="'+(activePage==='faq'?'nav-active':'')+'">FAQ</a></li>'+
-      '</ul>'+
-      '<div class="nav-right">'+
-        '<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">☀</button>'+
-        '<a href="'+p.contact+'" class="nav-cta">Book a Call →</a>'+
-        '<button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Open menu"><span></span><span></span><span></span></button>'+
-      '</div>'+
-    '</nav>'+
-    '<div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Navigation menu">'+
-      '<ul>'+
-        '<li><a href="'+p.home+'"     onclick="toggleMobileNav()">Home</a></li>'+
-        '<li><a href="'+p.about+'"    onclick="toggleMobileNav()">About</a></li>'+
-        '<li><a href="'+p.services+'" onclick="toggleMobileNav()">Services</a></li>'+
-        '<li><a href="'+p.updates+'"  onclick="toggleMobileNav()">Markets</a></li>'+
-        '<li><a href="'+p.pricing+'"  onclick="toggleMobileNav()">Pricing</a></li>'+
-        '<li><a href="'+p.blog+'"     onclick="toggleMobileNav()">Blog</a></li>'+
-        '<li><a href="'+p.faq+'"      onclick="toggleMobileNav()">FAQ</a></li>'+
-        '<li><a href="'+p.contact+'"  onclick="toggleMobileNav()" style="color:var(--em-glow)">Book a Call →</a></li>'+
-      '</ul>'+
-    '</div>'
-  );
+function _initNav() {
+  var nav = document.getElementById('sharedNav');
+  if (!nav) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, { passive: true });
 }
 
-/* ═══ FOOTER — no AI models section ═══ */
-function renderFooter(){
-  var p=SITE.pages,s=SITE.social;
-  document.write(
-    '<footer>'+
-      '<div class="footer-top">'+
-        '<div class="footer-brand-col">'+
-          '<a href="'+p.home+'" class="footer-logo-link">'+logoSVG(26,30)+'<span class="footer-brand-name">Verdant <span>Wealth</span> Co.</span></a>'+
-          '<p class="foot-tagline">'+SITE.tagline+'<br>Built for every Indian investor.</p>'+
-          '<div class="foot-social">'+
-            '<a href="'+s.twitter+'"   title="Twitter"   target="_blank" rel="noopener">𝕏</a>'+
-            '<a href="'+s.linkedin+'"  title="LinkedIn"  target="_blank" rel="noopener">in</a>'+
-            '<a href="'+s.youtube+'"   title="YouTube"   target="_blank" rel="noopener">▶</a>'+
-            '<a href="'+s.instagram+'" title="Instagram" target="_blank" rel="noopener">◎</a>'+
-          '</div>'+
-          '<a href="'+SITE.contact.calendly+'" target="_blank" rel="noopener" class="footer-calendly-btn">📅 Book a Free Session</a>'+
-        '</div>'+
-        '<div>'+
-          '<div class="foot-col-title">Advisory</div>'+
-          '<ul class="foot-col-links">'+
-            '<li><a href="'+p.services+'">Services</a></li>'+
-            '<li><a href="'+p.pricing+'">Pricing</a></li>'+
-            '<li><a href="'+p.about+'">About Saravana</a></li>'+
-            '<li><a href="'+p.updates+'">Market Updates</a></li>'+
-            '<li><a href="'+p.blog+'">Blog</a></li>'+
-            '<li><a href="'+p.contact+'">Contact</a></li>'+
-          '</ul>'+
-        '</div>'+
-        '<div>'+
-          '<div class="foot-col-title">Resources</div>'+
-          '<ul class="foot-col-links">'+
-            '<li><a href="'+p.blog+'">Market Insights</a></li>'+
-            '<li><a href="'+p.faq+'">FAQ</a></li>'+
-            '<li><a href="'+p.updates+'">Live Updates</a></li>'+
-            '<li><a href="'+p.privacy+'">Privacy Policy</a></li>'+
-            '<li><a href="'+p.terms+'">Terms of Service</a></li>'+
-          '</ul>'+
-        '</div>'+
-        '<div>'+
-          '<div class="foot-col-title">Contact</div>'+
-          '<ul class="foot-col-links">'+
-            '<li><a href="mailto:'+SITE.contact.email+'">'+SITE.contact.email+'</a></li>'+
-            '<li><a href="https://wa.me/'+SITE.contact.whatsapp.replace(/[^0-9]/g,'')+'">WhatsApp</a></li>'+
-            '<li><a href="'+SITE.contact.calendly+'" target="_blank">Book a Session</a></li>'+
-            '<li><a href="'+p.contact+'">Send a Message</a></li>'+
-          '</ul>'+
-        '</div>'+
-      '</div>'+
-      '<div class="footer-bottom">'+
-        '<div class="foot-copy">© '+SITE.year+' '+SITE.brand+' · '+SITE.advisor+'. All rights reserved.</div>'+
-        '<div class="foot-status"><span class="sdot"></span>NSE · BSE · MCX Live</div>'+
-      '</div>'+
-    '</footer>'+
-    '<a href="https://wa.me/'+SITE.contact.whatsapp.replace(/[^0-9]/g,'')+'" target="_blank" rel="noopener" class="whatsapp-float" title="Chat on WhatsApp">'+
-      '<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'+
-    '</a>'+
-    '<div class="cookie-banner" id="cookieBanner">'+
-      '<div class="cookie-content">'+
-        '<p>We use cookies to improve your experience. <a href="'+SITE.legal.privacy+'">Privacy Policy</a></p>'+
-        '<div class="cookie-btns"><button onclick="acceptCookies()" class="cookie-accept">Accept All</button><button onclick="declineCookies()" class="cookie-decline">Decline</button></div>'+
-      '</div>'+
-    '</div>'
-  );
+function toggleMobileMenu() {
+  var m = document.getElementById('mobileMenu');
+  if (m) m.classList.toggle('open');
 }
 
-/* ═══ MARQUEE TESTIMONIALS ═══ */
-function renderTestimonialsMarquee(containerId){
-  var el=document.getElementById(containerId);if(!el)return;
-  function card(t){
-    return '<div class="tmarq-card">'+
-      '<div class="tmarq-stars">'+'★'.repeat(t.stars)+'</div>'+
-      '<p class="tmarq-quote">"'+t.quote+'"</p>'+
-      '<div class="tmarq-footer">'+
-        '<div class="tmarq-av">'+t.initials+'</div>'+
-        '<div><div class="tmarq-name">'+t.name+'</div><div class="tmarq-role">'+t.role+'</div></div>'+
-      '</div>'+
-    '</div>';
-  }
-  var row1=SITE.testimonials.slice(0,3),row2=SITE.testimonials.slice(3,6);
-  var r1=row1.concat(row1,row1).map(card).join('');
-  var r2=row2.concat(row2,row2).map(card).join('');
-  el.innerHTML=
-    '<div class="tmarq-track-wrap"><div class="tmarq-track tmarq-left">'+r1+'</div></div>'+
-    '<div class="tmarq-track-wrap" style="margin-top:1.2rem"><div class="tmarq-track tmarq-right">'+r2+'</div></div>';
+/* ── FOOTER ── Fixed Issue #10 (consistent on all pages) + #7 (no newsletter/social) */
+function renderFooter() {
+  var footerHTML =
+    '<footer class="site-footer">' +
+      '<div class="sf-inner">' +
+        '<div class="sf-top">' +
+          '<div class="sf-brand">' +
+            '<a href="index.html" class="sf-logo">' +
+              '<svg width="22" height="26" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg">' +
+                '<path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#22c55e" stroke-width="2"/>' +
+                '<polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/>' +
+                '<polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/>' +
+                '<polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/>' +
+                '<polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/>' +
+                '<polyline points="34,16 46,32 45,46 34,58 23,46 22,32 34,16" fill="none" stroke="#22c55e" stroke-width="1" opacity=".85"/>' +
+              '</svg>' +
+              '<span>Verdant <em>Wealth Co.</em></span>' +
+            '</a>' +
+            '<p class="sf-tagline">Your wealth, intelligently cultivated.<br>Personal 1:1 advisory with P. Saravana Kumar.</p>' +
+          '</div>' +
+          '<div class="sf-cols">' +
+            '<div class="sf-col">' +
+              '<div class="sf-col-title">Advisory</div>' +
+              '<a href="services.html">Services</a>' +
+              '<a href="pricing.html">Pricing</a>' +
+              '<a href="about.html">About Saravana</a>' +
+              '<a href="market.html">Market Updates</a>' +
+            '</div>' +
+            '<div class="sf-col">' +
+              '<div class="sf-col-title">Resources</div>' +
+              '<a href="blog.html">Blog</a>' +
+              '<a href="faq.html">FAQ</a>' +
+              '<a href="' + SITE.contact.calendly + '" target="_blank" rel="noopener">Book a Call</a>' +
+              '<a href="contact.html">Contact</a>' +
+            '</div>' +
+            '<div class="sf-col">' +
+              '<div class="sf-col-title">Legal</div>' +
+              '<a href="privacy.html">Privacy Policy</a>' +
+              '<a href="terms.html">Terms of Service</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="sf-bot">' +
+          '<span class="sf-copy">© 2026 Verdant Wealth Co. · P. Saravana Kumar. All rights reserved.</span>' +
+          '<div class="sf-status"><span class="sf-dot"></span> NSE · BSE · MCX Live</div>' +
+        '</div>' +
+      '</div>' +
+    '</footer>';
+  document.body.insertAdjacentHTML('beforeend', footerHTML);
 }
 
-/* ═══ CUSTOM CURSOR — pointer devices only ═══ */
-function initCursor(){
-  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
-  if(!document.getElementById('vwc-cursor')){
-    var dot=document.createElement('div');dot.id='vwc-cursor';dot.className='cursor';
-    var ring=document.createElement('div');ring.id='vwc-cursor-ring';ring.className='cursor-ring';
-    document.body.appendChild(dot);document.body.appendChild(ring);
-  }
-  /* Scroll progress bar */
-  if(!document.getElementById('vwc-spb')){
-    var spb=document.createElement('div');spb.id='vwc-spb';
-    spb.style.cssText='position:fixed;top:0;left:0;height:1.5px;z-index:9999;background:var(--em-glow);width:0%;transition:width .04s linear;transform-origin:left;pointer-events:none';
-    document.body.appendChild(spb);
-    window.addEventListener('scroll',function(){
-      var pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
-      spb.style.width=pct+'%';
-    },{passive:true});
-  }
-  var dot=document.getElementById('vwc-cursor'),ring=document.getElementById('vwc-cursor-ring');
-  var mx=-200,my=-200,rx=-200,ry=-200;
-  function lerp(a,b,t){return a+(b-a)*t;}
-  (function loop(){rx=lerp(rx,mx,.13);ry=lerp(ry,my,.13);ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
-  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-  document.addEventListener('mouseenter',function(){dot.style.opacity='1';ring.style.opacity='1';});
-  document.addEventListener('mouseleave',function(){dot.style.opacity='0';ring.style.opacity='0';});
-  var hs='a,button,[role="button"],.tmarq-card,.plan-card,.card-base,.update-card,.hs-card';
-  document.addEventListener('mouseover',function(e){if(e.target.closest(hs))document.body.classList.add('cursor-hover');});
-  document.addEventListener('mouseout',function(e){if(e.target.closest(hs))document.body.classList.remove('cursor-hover');});
-  document.addEventListener('mousedown',function(){document.body.classList.add('cursor-click');});
-  document.addEventListener('mouseup',function(){document.body.classList.remove('cursor-click');});
-  /* Magnetic effect on primary buttons */
-  document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(function(btn){
-    btn.addEventListener('mousemove',function(e){
-      var r=btn.getBoundingClientRect();
-      var dx=(e.clientX-r.left-r.width/2)*.15;
-      var dy=(e.clientY-r.top-r.height/2)*.15;
-      btn.style.transform='translate('+dx+'px,'+dy+'px) translateY(-2px)';
+/* ── TICKER ── */
+function renderTicker(containerId) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  var html = SITE.ticker.concat(SITE.ticker).map(function(t) {
+    var cls = t.up ? 'up' : 'dn';
+    return '<span class="tk-item ' + cls + '">' +
+      '<span class="tk-name">' + t.label + '</span>' +
+      '<span class="tk-val">' + t.val + '</span>' +
+      '<span class="tk-chg">' + (t.up ? '▲' : '▼') + ' ' + t.change + '</span>' +
+    '</span>';
+  }).join('');
+  el.innerHTML = html;
+}
+
+/* ── REVEAL ── Intersection Observer for scroll animations */
+function initReveal() {
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
-    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
-  });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { io.observe(el); });
 }
 
-/* ═══ MOBILE CHAT ═══ */
-function renderMobileChat(){
-  var qQ=['NIFTY Outlook','RBI Policy','Gold vs Equity','FII/DII Flows','Retirement Plan','Sector Picks'];
-  var fQ=['What does today\'s NIFTY movement mean for retirement investors?','How should I adjust debt allocation given the RBI rate cycle?','Is gold or equity better for retirement in 2026?','What are FII/DII flows telling us about the market?','Which sectors are good for long-term retirement wealth building?','How do I build a ₹2 crore retirement corpus?'];
-  document.write(
-    '<button class="mobile-chat-fab" id="mobileChatFab" onclick="openMobileChat()" title="Market Query">'+
-      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+
-    '</button>'+
-    '<div class="mobile-chat-overlay" id="mobileChatOverlay" onclick="closeMobileChat()"></div>'+
-    '<div class="mobile-chat-panel" id="mobileChatPanel">'+
-      '<div class="mobile-chat-handle"></div>'+
-      '<div class="mobile-chat-header">'+
-        '<div class="mobile-chat-title">📊 Market Query <span>Live</span></div>'+
-        '<button class="mobile-chat-close" onclick="closeMobileChat()">✕</button>'+
-      '</div>'+
-      '<div class="mobile-chat-messages" id="mobileChatMessages">'+
-        '<div class="mc-msg bot"><div class="mc-avatar bot">VW</div><div><div class="mc-bubble bot">Hello! Ask me anything about Indian markets, retirement planning, or portfolio strategy. I\'ll provide insights based on current market conditions.</div><div class="mc-time">Just now</div></div></div>'+
-      '</div>'+
-      '<div class="mobile-chat-quick" id="mobileChatQuick">'+qQ.map(function(q,i){return '<button class="mc-quick-btn" onclick="sendMobileQuick('+i+')">'+q+'</button>';}).join('')+'</div>'+
-      '<div class="mobile-chat-input-area">'+
-        '<textarea class="mc-input" id="mcInput" placeholder="Ask about markets or retirement..." rows="1" oninput="autoResizeMcInput(this)" onkeydown="mcInputKeydown(event)"></textarea>'+
-        '<button class="mc-send" id="mcSend" onclick="sendMobileMessage()">➤</button>'+
-      '</div>'+
-    '</div>'
-  );
-  window._mcFullQuestions=fQ;
-}
-function openMobileChat(){var o=document.getElementById('mobileChatOverlay'),p=document.getElementById('mobileChatPanel');if(o)o.style.display='block';if(p)requestAnimationFrame(function(){p.classList.add('open');});document.body.style.overflow='hidden';}
-function closeMobileChat(){var o=document.getElementById('mobileChatOverlay'),p=document.getElementById('mobileChatPanel');if(p)p.classList.remove('open');setTimeout(function(){if(o)o.style.display='none';document.body.style.overflow='';},350);}
-function autoResizeMcInput(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
-function mcInputKeydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMobileMessage();}}
-function sendMobileQuick(i){var q=window._mcFullQuestions?window._mcFullQuestions[i]:'';if(q){document.getElementById('mcInput').value=q;sendMobileMessage();}}
-function addMobileMessage(content,isUser,isTyping){
-  var c=document.getElementById('mobileChatMessages');if(!c)return;
-  var d=document.createElement('div');d.className='mc-msg '+(isUser?'user':'bot');
-  var t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  if(isTyping){d.id='mcTyping';d.innerHTML='<div class="mc-avatar bot">VW</div><div><div class="mc-bubble bot"><div class="mc-typing"><span></span><span></span><span></span></div></div></div>';}
-  else{d.innerHTML=isUser?'<div class="mc-avatar user">You</div><div><div class="mc-bubble user">'+content+'</div><div class="mc-time">'+t+'</div></div>':'<div class="mc-avatar bot">VW</div><div><div class="mc-bubble bot">'+content+'</div><div class="mc-time">'+t+'</div></div>';}
-  c.appendChild(d);c.scrollTop=c.scrollHeight;
-}
-async function sendMobileMessage(){
-  var inp=document.getElementById('mcInput'),btn=document.getElementById('mcSend');if(!inp)return;
-  var q=inp.value.trim();if(!q)return;
-  inp.value='';inp.style.height='auto';btn.disabled=true;
-  addMobileMessage(q,true);addMobileMessage('',false,true);
-  try{
-    var res=await fetch(SITE.api.analyzeEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
-    var data=await res.json();
-    var t2=document.getElementById('mcTyping');if(t2)t2.remove();
-    if(data.success){
-      var analysis=data.full_analysis||'Analysis complete.';
-      var maxLen=500,trunc=analysis.length>maxLen?analysis.slice(0,maxLen)+'...<br><em style="font-size:.78rem;opacity:.7">See our market updates page for the full picture.</em>':analysis;
-      var html=trunc.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
-      addMobileMessage(html,false);
-    }else throw new Error(data.error||'Failed');
-  }catch(e){
-    var t3=document.getElementById('mcTyping');if(t3)t3.remove();
-    addMobileMessage('Unable to reach our analysis service right now. Please check our <a href="market.html" style="color:#060c09;font-weight:600">Market Updates</a> page for the latest insights.',false);
-  }finally{btn.disabled=false;}
+/* ── TESTIMONIALS ── */
+function renderTestimonials(containerId) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = SITE.testimonials.map(function(t) {
+    return '<div class="testimonial-card reveal">' +
+      '<div class="testimonial-stars">' + '★'.repeat(t.stars) + '</div>' +
+      '<p class="testimonial-quote">"' + t.quote + '"</p>' +
+      '<div class="testimonial-person">' +
+        '<div class="testimonial-av">' + t.initials + '</div>' +
+        '<div><div class="testimonial-name">' + t.name + '</div><div class="testimonial-role">' + t.role + '</div></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
 }
 
-/* ═══ UTILITIES ═══ */
-function initReveal(){var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.07});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});}
-function initNavScroll(){window.addEventListener('scroll',function(){var nav=document.getElementById('mainNav');if(nav)nav.classList.toggle('scrolled',window.scrollY>60);});}
-function toggleMobileNav(){var nav=document.getElementById('mobileNav'),btn=document.getElementById('navHamburger');if(!nav)return;var isOpen=nav.classList.toggle('open');if(btn)btn.classList.toggle('open',isOpen);document.body.style.overflow=isOpen?'hidden':'';if(btn)btn.setAttribute('aria-label',isOpen?'Close menu':'Open menu');}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){var nav=document.getElementById('mobileNav');if(nav&&nav.classList.contains('open'))toggleMobileNav();if(typeof closeMobileChat==='function')closeMobileChat();}});
-function getSupabase(){if(window._sb)return window._sb;if(window.supabase&&window.supabase.createClient){window._sb=window.supabase.createClient(SITE.supabase.url,SITE.supabase.anonKey);return window._sb;}return null;}
-function acceptCookies(){localStorage.setItem('vwc_cookies','accepted');var b=document.getElementById('cookieBanner');if(b)b.classList.remove('visible');}
-function declineCookies(){localStorage.setItem('vwc_cookies','declined');var b=document.getElementById('cookieBanner');if(b)b.classList.remove('visible');}
-function initCookieBanner(){if(!localStorage.getItem('vwc_cookies')){setTimeout(function(){var b=document.getElementById('cookieBanner');if(b)b.classList.add('visible');},2500);}}
-function initTheme(){var saved=localStorage.getItem('vwc_theme')||SITE.defaultTheme||'dark';document.documentElement.setAttribute('data-theme',saved);}
-function initThemeBtn(){var btn=document.getElementById('themeToggle');if(btn){var cur=document.documentElement.getAttribute('data-theme')||'dark';btn.textContent=cur==='dark'?'☀':'☽';}}
-function initBackToTop(){if(document.getElementById('backToTop'))return;var b=document.createElement('button');b.id='backToTop';b.className='back-to-top';b.innerHTML='↑';b.title='Back to Top';b.setAttribute('aria-label','Back to top');b.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};document.body.appendChild(b);window.addEventListener('scroll',function(){b.classList.toggle('visible',window.scrollY>window.innerHeight);});}
-function initAnalytics(){var id=SITE.analytics.googleId;if(!id||id==='YOUR_GA_MEASUREMENT_ID')return;var s=document.createElement('script');s.src='https://www.googletagmanager.com/gtag/js?id='+id;s.async=true;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',id);}
-function initAll(){initTheme();initCursor();initReveal();initNavScroll();initCookieBanner();initThemeBtn();initBackToTop();}
-function hideLoading(){var ls=document.getElementById('loadingScreen');if(!ls)return;setTimeout(function(){ls.classList.add('hide');},800);}
-
-/* Helpers */
-function renderTestimonials(cid,count){count=count||6;var el=document.getElementById(cid);if(!el)return;SITE.testimonials.slice(0,count).forEach(function(t){el.innerHTML+='<div class="testimonial-card reveal"><div class="testimonial-stars">'+'★'.repeat(t.stars)+'</div><p class="testimonial-quote">"'+t.quote+'"</p><div style="display:flex;align-items:center;gap:.8rem"><div class="testimonial-initials">'+t.initials+'</div><div><div class="testimonial-name">'+t.name+'</div><div class="testimonial-role">'+t.role+'</div></div></div></div>';});}
-function renderFAQ(cid){var el=document.getElementById(cid);if(!el)return;SITE.faq.forEach(function(f){el.innerHTML+='<div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle(\'open\')"><span>'+f.q+'</span><div class="faq-icon">+</div></div><div class="faq-answer">'+f.a+'</div></div>';});}
-function renderPricingCards(cid){var el=document.getElementById(cid);if(!el)return;['basic','pro','elite'].forEach(function(k){var p=SITE.pricing[k],f=p.popular?'featured':'',b=p.popular?'<div class="plan-popular">Most Popular</div>':'',bc=p.popular?'plan-btn plan-btn-fill':'plan-btn plan-btn-out',feats=p.features.map(function(f){return '<li>'+f+'</li>';}).join('');el.innerHTML+='<div class="plan-card '+f+'">'+b+'<div class="plan-tier">'+p.name+'</div><div class="plan-price"><sup>₹</sup>'+p.amount+'</div><div class="plan-cycle">'+p.cycle+'</div><div class="plan-divider"></div><ul class="plan-features">'+feats+'</ul><a href="'+SITE.pages.contact+'" class="'+bc+'">Consult Now →</a></div>';});}
-
-function renderTicker(cid){
-  var el=document.getElementById(cid);if(!el)return;
-  var ticks=(SITE.ticker&&SITE.ticker.length)?SITE.ticker:[{label:'NIFTY',val:'22,200',change:'+0.95%',up:true,badge:'idx'}];
-  var html='',loop=ticks.concat(ticks,ticks);
-  loop.forEach(function(t){
-    var bh=t.badge?'<span class="tick-badge '+t.badge+'">'+t.badge.toUpperCase()+'</span>':'';
-    html+='<span class="tick-item"><span class="tick-label">'+t.label+'</span>'+bh+'<span class="tick-value '+(t.up?'tu':'td')+'">'+t.val+'</span><span class="tick-change '+(t.up?'tu':'td')+'">'+(t.up?'▲':'▼')+' '+t.change+'</span></span>';
-  });
-  el.innerHTML=html;
-  el.style.animationDuration=Math.max(30,Math.min(60,ticks.length*2))+'s';
+/* ── FAQ ── Fixed Issue #1 (accordion not opening) + #2 (consistency) */
+function initFAQ(containerId) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = SITE.faq.map(function(f, i) {
+    return '<div class="faq-item" id="faq-' + i + '">' +
+      '<button class="faq-q" onclick="toggleFAQ(' + i + ')">' +
+        '<span>' + f.q + '</span>' +
+        '<span class="faq-icon">+</span>' +
+      '</button>' +
+      '<div class="faq-a" id="faq-a-' + i + '">' +
+        '<div class="faq-a-inner">' + f.a + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
 }
 
-function refreshMarketTicker(){
-  fetch(SITE.api.marketEndpoint||'/market-data').then(function(r){return r.json();}).then(function(d){
-    if(d&&d.success&&d.ticks&&d.ticks.length){
-      var bm={'NIFTY 50':'idx','NIFTY':'idx','BANK NIFTY':'idx','SENSEX':'idx','USD/INR':'fx','EUR/INR':'fx','GOLD':'com','BRENT':'com','BITCOIN':'cry'};
-      d.ticks.forEach(function(t){t.badge=bm[t.label]||'idx';});
-      SITE.ticker=d.ticks;var ti=document.getElementById('tickerInner');if(ti)renderTicker('tickerInner');
-    }
-  }).catch(function(){});
+function toggleFAQ(i) {
+  var item = document.getElementById('faq-' + i);
+  var ans = document.getElementById('faq-a-' + i);
+  if (!item || !ans) return;
+  var isOpen = item.classList.contains('open');
+  // close all
+  document.querySelectorAll('.faq-item').forEach(function(el) { el.classList.remove('open'); });
+  document.querySelectorAll('.faq-a').forEach(function(el) { el.style.maxHeight = ''; });
+  if (!isOpen) {
+    item.classList.add('open');
+    ans.style.maxHeight = ans.scrollHeight + 'px';
+  }
 }
-function fetchWorldEvents(){return fetch(SITE.api.worldEndpoint||'/world-data').then(function(r){return r.json();}).then(function(d){if(d&&d.success&&d.events)return d.events;return[];}).catch(function(){return[];});}
-function fetchSectorData(){return fetch(SITE.api.sectorEndpoint||'/sector-data').then(function(r){return r.json();}).then(function(d){if(d&&d.success&&d.sectors)return d.sectors;return[];}).catch(function(){return[];});}
-function getSetting(k,def){var v=localStorage.getItem('vwc_'+k);return v!==null?v:def;}
-function setSetting(k,val){localStorage.setItem('vwc_'+k,val);}
+
+/* ── LOADING SCREEN ── */
+function hideLoading() {
+  var ls = document.getElementById('loadingScreen');
+  if (ls) { ls.style.opacity = '0'; ls.style.pointerEvents = 'none'; ls.style.visibility = 'hidden'; }
+}
+
+/* ── INIT ALL ── */
+function initAll() {
+  initReveal();
+  // Floating WhatsApp button (fixed, bottom-right)
+  var wa = document.createElement('a');
+  wa.href = SITE.contact.whatsapp;
+  wa.target = '_blank';
+  wa.rel = 'noopener';
+  wa.className = 'wa-float';
+  wa.title = 'WhatsApp Saravana';
+  wa.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+  document.body.appendChild(wa);
+}
+
+function initAnalytics() { /* placeholder */ }
