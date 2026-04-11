@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="P. Saravana Kumar — Personal financial advisor with 20+ years guiding Indian families to retirement security.">
+<title>Verdant Wealth Co. — Retirement Advisory by P. Saravana Kumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060708;--bg2:#0b0d0f;--surface:#111416;--surface2:#171a1d;
+  --border:rgba(255,255,255,.07);--border-hi:rgba(255,255,255,.13);
+  --white:#f4f3ef;--muted:rgba(244,243,239,.48);--muted2:rgba(244,243,239,.28);
+  --accent:#2dd87a;--accent-dim:rgba(45,216,122,.18);--accent-glow:rgba(45,216,122,.28);
+  --gold:#d4a847;--red:#e06060;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',-apple-system,sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --ease-in-out:cubic-bezier(.76,0,.24,1);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;font-size:16px}
+body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden;line-height:1.6;cursor:none}
+a{text-decoration:none;color:inherit}
+button{font-family:var(--sans);cursor:none;border:none;background:none}
+img{display:block;max-width:100%}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:normal;transition:width .2s,height .2s,opacity .2s;will-change:transform}
+#cur-trail{position:fixed;width:40px;height:40px;border-radius:50%;border:1px solid rgba(45,216,122,.4);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s var(--ease-out),height .3s var(--ease-out),border-color .2s;will-change:transform}
+.cur-hover #cur{width:6px;height:6px;background:#fff;mix-blend-mode:difference}
+.cur-hover #cur-trail{width:64px;height:64px;border-color:rgba(255,255,255,.25)}
+@media(pointer:coarse){#cur,#cur-trail{display:none}body,button{cursor:auto}}
+
+/* ── SCROLL PROGRESS ── */
+#spb{position:fixed;top:0;left:0;height:1.5px;z-index:9999;background:var(--accent);width:0%;transition:width .04s linear;transform-origin:left}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes revealClip{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0% 0 0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes floatSlow{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
+@keyframes floatSlowR{0%,100%{transform:translateY(0) rotate(5deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes marqueeR{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+@keyframes orb{0%,100%{transform:translate(0,0)}33%{transform:translate(40px,-30px)}66%{transform:translate(-25px,20px)}}
+@keyframes scan{0%{top:-4%}100%{top:104%}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes tickG{0%,100%{background:transparent}30%{background:rgba(45,216,122,.15)}}
+@keyframes tickR{0%,100%{background:transparent}30%{background:rgba(224,96,96,.12)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes ripple{0%{transform:scale(0);opacity:.4}100%{transform:scale(3);opacity:0}}
+@keyframes borderPulse{0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 8px transparent}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes lineGrow{from{width:0}to{width:100%}}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  z-index:1000;width:calc(100% - 40px);max-width:960px;
+  background:rgba(6,7,8,.75);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
+  border:1px solid var(--border-hi);border-radius:100px;
+  padding:.6rem 1rem .6rem 1.4rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  animation:fadeUp .6s var(--ease-out) both;
+  transition:background .4s,padding .3s;
+}
+.nav.scrolled{background:rgba(6,7,8,.95);padding:.5rem 1rem .5rem 1.4rem}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.05rem;letter-spacing:-.01em;transition:opacity .2s}
+.nav-logo:hover{opacity:.7}
+.nav-logo-mark{width:28px;height:28px;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:.1rem}
+.nav-link{font-size:.82rem;font-weight:400;color:var(--muted);padding:.4rem .85rem;border-radius:100px;transition:color .2s,background .2s}
+.nav-link:hover{color:var(--white);background:rgba(255,255,255,.06)}
+.nav-cta{
+  background:var(--white);color:#060708;font-size:.82rem;font-weight:600;
+  padding:.5rem 1.2rem;border-radius:100px;transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.nav-cta:hover{background:rgba(244,243,239,.88);transform:translateY(-1px);box-shadow:0 4px 20px rgba(244,243,239,.2)}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;background:rgba(255,255,255,.06);border-radius:8px;padding:0 9px;cursor:pointer}
+.nav-burger span{width:100%;height:1.5px;background:var(--white);transition:all .3s;display:block}
+
+/* ── MOBILE MENU ── */
+.mob{position:fixed;inset:0;z-index:999;background:rgba(6,7,8,.97);backdrop-filter:blur(28px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mob.open{opacity:1;pointer-events:all}
+.mob a{font-family:var(--serif);font-size:2.4rem;color:var(--muted);transition:color .2s}
+.mob a:hover{color:var(--white)}
+.mob-close{position:absolute;top:24px;right:24px;width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1rem;transition:all .2s}
+.mob-close:hover{color:var(--white)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:0;padding:140px 0 80px;
+  max-width:1200px;margin:0 auto;position:relative;padding-left:48px;padding-right:48px;
+}
+.hero-left{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  color:var(--accent);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:1.5rem;animation:fadeUp .7s .1s var(--ease-out) both;
+}
+.hero-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+.hero-title{
+  font-family:var(--serif);font-size:clamp(3rem,5.5vw,5.2rem);
+  line-height:1.05;letter-spacing:-.02em;
+  margin-bottom:1.6rem;
+}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line-inner{
+  display:block;
+  animation:fadeUp .8s var(--ease-out) both;
+}
+.hero-title .line:nth-child(1) .line-inner{animation-delay:.2s}
+.hero-title .line:nth-child(2) .line-inner{animation-delay:.32s}
+.hero-title .line:nth-child(3) .line-inner{animation-delay:.44s}
+.hero-title em{font-style:italic;color:var(--accent)}
+.hero-rule{width:0;height:1px;background:var(--border-hi);margin-bottom:1.8rem;animation:lineGrow .8s .6s var(--ease-out) forwards}
+.hero-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:400px;margin-bottom:2.2rem;animation:fadeUp .8s .55s var(--ease-out) both}
+.hero-actions{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;animation:fadeUp .8s .7s var(--ease-out) both}
+.hero-meta{
+  margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);
+  display:flex;gap:2.5rem;animation:fadeUp .8s .85s var(--ease-out) both;
+}
+.hero-stat-n{font-family:var(--serif);font-size:2rem;color:var(--white);line-height:1}
+.hero-stat-l{font-size:.72rem;color:var(--muted2);margin-top:.15rem;letter-spacing:.04em}
+
+/* ── HERO RIGHT — stacked phones ── */
+.hero-right{
+  position:relative;height:580px;
+  animation:fadeUp .9s .4s var(--ease-out) both;
+}
+.hphone{
+  position:absolute;background:linear-gradient(160deg,#1a1d20,#0d0f11);
+  border:1px solid rgba(255,255,255,.12);border-radius:32px;overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.05),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hphone-a{width:195px;top:40px;right:80px;animation:float 6s ease-in-out infinite}
+.hphone-b{width:168px;top:160px;right:10px;transform:rotate(5deg);animation:floatSlowR 7s ease-in-out infinite}
+.hphone-c{width:155px;top:280px;right:150px;transform:rotate(-4deg);animation:floatSlow 8s ease-in-out infinite 1s}
+.hp-s{width:100%;aspect-ratio:9/19;background:#09090b;display:flex;flex-direction:column;padding:14px 12px;gap:8px}
+.hp-bar{display:flex;align-items:center;justify-content:space-between}
+.hp-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+.hp-label{font-size:.45rem;color:var(--muted2);letter-spacing:.1em;text-transform:uppercase}
+.hp-val{font-size:1.3rem;font-weight:600;letter-spacing:-.04em;line-height:1.1;margin:.2rem 0 .05rem}
+.hp-chg{font-size:.48rem;color:var(--accent)}
+.hp-chart{height:48px;margin:.25rem 0}
+.hp-chart svg{width:100%;height:48px;overflow:visible}
+.hp-rows{display:flex;flex-direction:column;gap:2px}
+.hp-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.hp-row:last-child{border:none}
+.hp-rl,.hp-rv{font-size:.42rem}
+.hp-rl{color:var(--muted2)}
+.hp-rv.u{color:var(--accent)}.hp-rv.d{color:var(--red)}
+.hp-tags{display:flex;gap:3px;flex-wrap:wrap}
+.hp-tag{font-size:.4rem;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:4px;padding:.15rem .35rem;color:var(--muted2)}
+.hp-tag.g{background:rgba(45,216,122,.1);border-color:rgba(45,216,122,.2);color:var(--accent)}
+.hp-tag.r{background:rgba(224,96,96,.08);border-color:rgba(224,96,96,.18);color:var(--red)}
+
+/* ── HERO BG ── */
+.hero-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.032) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.032) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 75% 60% at 50% 20%,black,transparent);
+}
+.hero-grid-bg::after{content:'';position:absolute;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,rgba(45,216,122,.2),transparent);animation:scan 6s linear infinite;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
+.orb-1{width:600px;height:600px;background:rgba(45,216,122,.09);top:-10%;left:40%;animation:orb 16s ease-in-out infinite}
+.orb-2{width:400px;height:400px;background:rgba(212,168,71,.06);top:55%;right:-5%;animation:orb 20s ease-in-out infinite reverse}
+.orb-3{width:350px;height:350px;background:rgba(45,216,122,.06);bottom:-5%;left:-5%;animation:orb 22s ease-in-out infinite 6s}
+
+/* ── MARQUEE ── */
+.mq-wrap{padding:0 0 80px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent)}
+.mq-label{text-align:center;font-size:.65rem;color:var(--muted2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:24px}
+.mq-row{display:flex;gap:10px;width:max-content;align-items:center;margin-bottom:10px}
+.mq-row.fwd{animation:marquee 30s linear infinite}
+.mq-row.rev{animation:marqueeR 36s linear infinite}
+.mq-row:hover{animation-play-state:paused}
+.mq-chip{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.5rem 1rem;white-space:nowrap;transition:border-color .3s}
+.mq-chip:hover{border-color:var(--border-hi)}
+.mq-chip.fg{animation:tickG .5s ease}
+.mq-chip.fr{animation:tickR .5s ease}
+.mq-led{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.mq-name{font-size:.74rem;font-weight:500;color:var(--muted)}
+.mq-val{font-size:.74rem;font-weight:600}
+.mq-chg{font-size:.6rem}
+.mq-val.u,.mq-chg.u{color:var(--accent)}
+.mq-val.d,.mq-chg.d{color:var(--red)}
+
+/* ── SECTION SHELL ── */
+.section{padding:110px 48px;position:relative}
+.sec-inner{max-width:1120px;margin:0 auto}
+.eyebrow{font-size:.68rem;font-weight:500;color:var(--muted2);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;margin-bottom:1.1rem}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);flex-shrink:0}
+.sec-title{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem}
+.sec-sub{font-size:.96rem;color:var(--muted);line-height:1.8;max-width:500px}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
+
+/* ── BUTTONS ── */
+.btn-p{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--white);color:#060708;
+  font-size:.88rem;font-weight:600;
+  padding:.75rem 1.8rem;border-radius:100px;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.btn-p:hover{background:rgba(244,243,239,.9);transform:translateY(-2px);box-shadow:0 8px 28px rgba(244,243,239,.2)}
+.btn-p svg{transition:transform .25s}
+.btn-p:hover svg{transform:translateX(3px)}
+.btn-g{
+  display:inline-flex;align-items:center;gap:.5rem;
+  color:var(--white);font-size:.88rem;font-weight:500;
+  padding:.75rem 1.8rem;border-radius:100px;
+  border:1px solid var(--border-hi);transition:all .3s;
+}
+.btn-g:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.25);transform:translateY(-2px)}
+
+/* ── ABOUT / ADVISOR SECTION — asymmetric ── */
+.advisor-section{padding:80px 48px 110px;position:relative}
+.advisor-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:420px 1fr;gap:80px;align-items:center}
+.advisor-img-wrap{position:relative}
+.advisor-img{
+  width:100%;aspect-ratio:3/4;border-radius:24px;overflow:hidden;
+  background:linear-gradient(160deg,var(--surface2),var(--surface));
+  border:1px solid var(--border-hi);position:relative;
+}
+.advisor-img img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.advisor-img-fallback{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(160deg,#131618,#0e1012);
+}
+.advisor-badge{
+  position:absolute;bottom:-18px;right:-18px;
+  background:var(--surface);border:1px solid var(--border-hi);border-radius:16px;
+  padding:14px 18px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 20px 48px rgba(0,0,0,.5);
+}
+.ab-icon{width:36px;height:36px;border-radius:10px;background:var(--accent-dim);border:1px solid var(--accent-glow);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ab-n{font-size:.8rem;font-weight:600;color:var(--white)}
+.ab-s{font-size:.68rem;color:var(--muted2);margin-top:.1rem}
+.advisor-text{display:flex;flex-direction:column;gap:0}
+.advisor-quote{
+  font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.4rem);
+  line-height:1.3;letter-spacing:-.02em;color:var(--white);
+  margin-bottom:1.8rem;position:relative;padding-left:28px;
+}
+.advisor-quote::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:2px;background:var(--accent)}
+.advisor-body{font-size:.94rem;color:var(--muted);line-height:1.8;margin-bottom:2rem}
+.advisor-tags{display:flex;flex-wrap:wrap;gap:8px}
+.advisor-tag{font-size:.72rem;font-weight:500;padding:.3rem .85rem;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);transition:all .2s}
+.advisor-tag:hover{border-color:var(--border-hi);color:var(--white)}
+.advisor-tag.on{background:rgba(45,216,122,.1);border-color:rgba(45,216,122,.28);color:var(--accent)}
+
+/* ── SERVICES — horizontal scroll ── */
+.hs-section{padding:0 0 100px;overflow:hidden}
+.hs-head{padding:0 48px;max-width:1120px;margin:0 auto 44px}
+.hs-mask{overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 5%,black 95%,transparent)}
+.hs-track{display:flex;gap:14px;width:max-content;animation:marquee 40s linear infinite}
+.hs-track:hover{animation-play-state:paused}
+.hs-card{
+  width:280px;flex-shrink:0;
+  background:var(--surface);border:1px solid var(--border);border-radius:22px;
+  padding:26px;display:flex;flex-direction:column;gap:12px;
+  transition:border-color .3s,transform .3s var(--ease-out),box-shadow .3s;
+}
+.hs-card:hover{border-color:var(--border-hi);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.hs-icon{width:42px;height:42px;border-radius:12px;background:rgba(45,216,122,.08);border:1px solid rgba(45,216,122,.18);display:flex;align-items:center;justify-content:center;transition:transform .3s var(--ease-spring)}
+.hs-card:hover .hs-icon{transform:scale(1.1) rotate(-5deg)}
+.hs-title{font-size:.9rem;font-weight:600;letter-spacing:-.02em}
+.hs-body{font-size:.78rem;color:var(--muted);line-height:1.65;flex:1}
+.hs-badge{display:inline-block;font-size:.62rem;color:var(--accent);background:rgba(45,216,122,.1);border:1px solid rgba(45,216,122,.2);padding:.18rem .6rem;border-radius:6px}
+
+/* ── PROCESS ── */
+.process-section{padding:110px 48px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.process-inner{max-width:1120px;margin:0 auto}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:60px;position:relative}
+.process-grid::before{content:'';position:absolute;top:28px;left:calc(12.5%);right:calc(12.5%);height:1px;background:linear-gradient(90deg,transparent,var(--border-hi),var(--border-hi),var(--border-hi),transparent);z-index:0}
+.p-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px;position:relative;z-index:1}
+.p-num{width:56px;height:56px;border-radius:50%;background:var(--surface);border:1px solid var(--border-hi);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.2rem;color:var(--white);margin-bottom:20px;transition:border-color .3s,box-shadow .3s;flex-shrink:0}
+.p-step:hover .p-num{border-color:var(--accent);box-shadow:0 0 0 6px var(--accent-dim)}
+.p-step-title{font-size:.9rem;font-weight:600;letter-spacing:-.01em;margin-bottom:.5rem}
+.p-step-body{font-size:.78rem;color:var(--muted);line-height:1.65}
+
+/* ── TESTIMONIALS ── */
+.test-section{padding:110px 48px}
+.test-inner{max-width:1120px;margin:0 auto}
+.test-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:60px;align-items:start}
+.test-col{display:flex;flex-direction:column;gap:20px}
+.test-col:last-child{padding-top:40px}
+.t-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:24px;transition:border-color .3s,transform .3s var(--ease-out);
+  position:relative;overflow:hidden;
+}
+.t-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(45,216,122,.38),transparent);opacity:0;transition:opacity .3s}
+.t-card:hover{border-color:var(--border-hi);transform:translateY(-3px)}
+.t-card:hover::before{opacity:1}
+.t-stars{color:var(--gold);font-size:.68rem;letter-spacing:.1em;margin-bottom:10px}
+.t-quote{font-size:.88rem;color:rgba(244,243,239,.72);line-height:1.74;margin-bottom:18px;font-style:italic}
+.t-person{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid var(--border)}
+.t-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,rgba(45,216,122,.25),rgba(45,216,122,.07));border:1px solid rgba(45,216,122,.25);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.7rem;color:var(--accent);flex-shrink:0}
+.t-name{font-size:.8rem;font-weight:600}
+.t-role{font-size:.68rem;color:var(--muted2);margin-top:.05rem}
+
+/* ── INSTRUMENTS ── */
+.inst-section{padding:60px 48px;border-top:1px solid var(--border)}
+.inst-inner{max-width:1120px;margin:0 auto}
+.inst-label{font-size:.65rem;color:var(--muted2);letter-spacing:.16em;text-transform:uppercase;text-align:center;margin-bottom:28px}
+.inst-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.inst-chip{
+  display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:.48rem .95rem;font-size:.76rem;font-weight:500;color:var(--muted);
+  transition:all .2s;
+}
+.inst-chip:hover{border-color:var(--border-hi);color:var(--white);transform:translateY(-2px)}
+
+/* ── PRICING ── */
+.pricing-section{padding:110px 48px;background:var(--bg2);border-top:1px solid var(--border)}
+.pricing-inner{max-width:1000px;margin:0 auto}
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:60px}
+.pc{
+  background:var(--surface);border:1px solid var(--border);border-radius:26px;
+  padding:32px;display:flex;flex-direction:column;
+  transition:border-color .35s,transform .35s var(--ease-out),box-shadow .35s;position:relative;
+}
+.pc:hover{border-color:var(--border-hi);transform:translateY(-5px);box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.pc.feat{border-color:rgba(45,216,122,.32);background:linear-gradient(160deg,rgba(45,216,122,.06),var(--surface))}
+.pc.feat:hover{border-color:rgba(45,216,122,.55);box-shadow:0 24px 64px rgba(0,0,0,.5),0 0 0 1px rgba(45,216,122,.18)}
+.p-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#060708;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .9rem;border-radius:100px;white-space:nowrap}
+.p-tier{font-size:.65rem;color:var(--muted2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.p-price{font-family:var(--serif);font-size:2.8rem;letter-spacing:-.04em;line-height:1}
+.p-price sup{font-size:1.1rem;vertical-align:top;margin-top:.4rem;display:inline-block;font-family:var(--sans);font-weight:400}
+.p-cycle{font-size:.72rem;color:var(--muted2);margin-top:4px;margin-bottom:22px}
+.p-div{height:1px;background:var(--border);margin:18px 0}
+.p-feats{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;margin-bottom:26px}
+.p-feats li{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:rgba(244,243,239,.74);line-height:1.5}
+.p-check{width:16px;height:16px;border-radius:50%;background:rgba(45,216,122,.12);border:1px solid rgba(45,216,122,.28);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.p-check svg{width:8px;height:8px;stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.p-btn{
+  display:block;text-align:center;font-size:.84rem;font-weight:600;
+  padding:.76rem;border-radius:100px;transition:all .3s;
+  border:1px solid var(--border-hi);color:var(--white);background:rgba(255,255,255,.05);
+}
+.p-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
+.p-btn.fill{background:var(--accent);color:#060708;border-color:transparent}
+.p-btn.fill:hover{background:rgba(45,216,122,.88);box-shadow:0 6px 24px rgba(45,216,122,.3);transform:translateY(-2px)}
+
+/* ── FINAL CTA ── */
+.cta-section{
+  padding:130px 48px;text-align:center;
+  background:var(--bg);border-top:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:320px;background:radial-gradient(ellipse,rgba(45,216,122,.1) 0%,transparent 70%);pointer-events:none;animation:pulse 5s ease-in-out infinite}
+.cta-line{position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--accent),rgba(45,216,122,.4),var(--accent),transparent);background-size:300% 100%;animation:gradShift 5s linear infinite}
+.cta-inner{position:relative;max-width:600px;margin:0 auto}
+.cta-title{font-family:var(--serif);font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:1.2rem}
+.cta-title em{font-style:italic;color:var(--accent)}
+.cta-sub{font-size:.96rem;color:var(--muted);line-height:1.8;margin-bottom:2.2rem;max-width:400px;margin-left:auto;margin-right:auto}
+.cta-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+.footer{padding:64px 48px 32px;border-top:1px solid var(--border);background:var(--bg)}
+.ft-inner{max-width:1120px;margin:0 auto}
+.ft-top{display:flex;align-items:flex-start;justify-content:space-between;gap:48px;flex-wrap:wrap;margin-bottom:48px}
+.ft-brand{max-width:260px}
+.ft-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1rem;margin-bottom:12px}
+.ft-tag{font-size:.78rem;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.ft-soc{display:flex;gap:8px}
+.ft-s{width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.78rem;color:var(--muted);transition:all .2s}
+.ft-s:hover{border-color:var(--border-hi);color:var(--white);transform:translateY(-2px)}
+.ft-cols{display:flex;gap:52px;flex-wrap:wrap}
+.ft-col-t{font-size:.65rem;color:var(--muted2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.ft-col-l{display:flex;flex-direction:column;gap:10px;list-style:none}
+.ft-col-l a{font-size:.82rem;color:var(--muted);transition:color .2s}
+.ft-col-l a:hover{color:var(--white)}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.ft-copy{font-size:.7rem;color:var(--muted2)}
+.ft-status{display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:rgba(45,216,122,.55)}
+.st-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+
+/* ── WHATSAPP ── */
+.wa{position:fixed;bottom:28px;right:24px;z-index:500;width:48px;height:48px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s;text-decoration:none;animation:float 5s ease-in-out infinite}
+.wa:hover{transform:scale(1.12);box-shadow:0 8px 28px rgba(37,211,102,.55);animation:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;padding-top:120px;text-align:center;max-width:700px}
+  .hero-left{align-items:center}
+  .hero-sub{text-align:center;margin-left:auto;margin-right:auto}
+  .hero-right{height:300px;width:100%}
+  .hphone-a{right:auto;left:50%;transform:translateX(-50%)}
+  .hphone-b{right:10%;top:100px}
+  .hphone-c{left:5%;top:120px}
+  .advisor-inner{grid-template-columns:1fr;max-width:600px}
+  .advisor-img{aspect-ratio:4/3}
+  .process-grid{grid-template-columns:repeat(2,1fr);gap:40px}
+  .process-grid::before{display:none}
+  .p-grid{grid-template-columns:1fr 1fr}
+  .p-grid .pc:last-child{grid-column:span 2}
+  .test-layout{grid-template-columns:1fr}
+  .test-col:last-child{padding-top:0}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .nav-burger{display:flex}
+  .section,.advisor-section,.process-section,.test-section,.inst-section,.pricing-section,.cta-section,.footer{padding-left:24px;padding-right:24px}
+  .hs-head{padding-left:24px;padding-right:24px}
+  .hero{padding-left:24px;padding-right:24px}
+  .p-grid{grid-template-columns:1fr}
+  .p-grid .pc:last-child{grid-column:span 1}
+  .ft-top{flex-direction:column}
+  .ft-cols{gap:28px}
+}
+@media(max-width:480px){
+  .hero-right{display:none}
+  .hero-actions{flex-direction:column;width:100%}
+  .btn-p,.btn-g{width:100%;justify-content:center}
+  .cta-actions{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cur"></div>
+<div id="cur-trail"></div>
+<div id="spb"></div>
+
+<!-- Hero background -->
+<div class="hero-bg">
+  <div class="hero-grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-mark" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2dd87a" stroke-width="2"/>
+      <polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/>
+      <polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/>
+      <polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/>
+      <polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/>
+    </svg>
+    Verdant Wealth
+  </a>
+  <div class="nav-links">
+    <a href="about.html" class="nav-link">About</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="market.html" class="nav-link">Markets</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+  </div>
+  <a href="contact.html" class="nav-cta">Book a Call →</a>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="market.html" onclick="toggleMenu()">Markets</a>
+  <a href="pricing.html" onclick="toggleMenu()">Pricing</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--accent)">Book a Call →</a>
+</div>
+
+<!-- HERO -->
+<div style="overflow:hidden">
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Personal retirement advisory · India
+    </div>
+    <h1 class="hero-title">
+      <span class="line"><span class="line-inner">Your money,</span></span>
+      <span class="line"><span class="line-inner"><em>working harder</em></span></span>
+      <span class="line"><span class="line-inner">than you.</span></span>
+    </h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">P. Saravana Kumar has spent 20 years helping Indian families retire without compromise. One advisor. Direct access. No handoffs.</p>
+    <div class="hero-actions">
+      <a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank" rel="noopener" class="btn-p" id="btnCta">
+        Book a free call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="market.html" class="btn-g">Live markets</a>
+    </div>
+    <div class="hero-meta">
+      <div>
+        <div class="hero-stat-n" data-count="20" data-suffix="+">0+</div>
+        <div class="hero-stat-l">Years experience</div>
+      </div>
+      <div>
+        <div class="hero-stat-n" data-count="200" data-suffix="+">0+</div>
+        <div class="hero-stat-l">Families advised</div>
+      </div>
+      <div>
+        <div class="hero-stat-n">1:1</div>
+        <div class="hero-stat-l">Always direct</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating phones -->
+  <div class="hero-right">
+    <div class="hphone hphone-a">
+      <div class="hp-s">
+        <div class="hp-bar"><div class="hp-dot"></div><div class="hp-label">Portfolio</div></div>
+        <div style="margin-top:4px">
+          <div class="hp-label">Corpus value</div>
+          <div class="hp-val" style="font-size:1.2rem">₹1.24 Cr</div>
+          <div class="hp-chg">▲ +18.4% YTD</div>
+        </div>
+        <div class="hp-chart">
+          <svg viewBox="0 0 160 48" preserveAspectRatio="none">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd87a" stop-opacity=".3"/><stop offset="100%" stop-color="#2dd87a" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,44 C12,40 28,34 46,28 C64,22 82,14 100,11 C120,8 140,5 160,3 L160,48 L0,48Z" fill="url(#g1)"/>
+            <path d="M0,44 C12,40 28,34 46,28 C64,22 82,14 100,11 C120,8 140,5 160,3" fill="none" stroke="#2dd87a" stroke-width="1.8"/>
+            <circle cx="160" cy="3" r="3" fill="#2dd87a"/>
+          </svg>
+        </div>
+        <div class="hp-rows">
+          <div class="hp-row"><span class="hp-rl">Equity</span><span class="hp-rv u">65% ▲</span></div>
+          <div class="hp-row"><span class="hp-rl">Debt</span><span class="hp-rv">30%</span></div>
+          <div class="hp-row"><span class="hp-rl">Gold SGB</span><span class="hp-rv u">5% ▲</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hphone hphone-b">
+      <div class="hp-s">
+        <div class="hp-bar"><div class="hp-dot"></div><div class="hp-label">NIFTY 50</div></div>
+        <div style="margin-top:4px">
+          <div class="hp-val">22,450</div>
+          <div class="hp-chg">▲ +1.12% today</div>
+        </div>
+        <div class="hp-tags" style="margin-top:6px">
+          <div class="hp-tag g">IT +2.1%</div>
+          <div class="hp-tag g">Auto +1.9%</div>
+          <div class="hp-tag r">Metal -1.4%</div>
+        </div>
+      </div>
+    </div>
+    <div class="hphone hphone-c">
+      <div class="hp-s">
+        <div class="hp-bar"><div class="hp-dot"></div><div class="hp-label">Gold MCX</div></div>
+        <div style="margin-top:4px">
+          <div class="hp-val">₹72,400</div>
+          <div class="hp-chg">▲ +0.65%</div>
+        </div>
+        <div class="hp-rows" style="margin-top:5px">
+          <div class="hp-row"><span class="hp-rl">USD/INR</span><span class="hp-rv">83.45</span></div>
+          <div class="hp-row"><span class="hp-rl">VIX</span><span class="hp-rv d">13.42</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <p class="mq-label">Live market snapshot</p>
+  <div class="mq-row fwd" id="mq1"></div>
+  <div style="height:10px"></div>
+  <div class="mq-row rev" id="mq2"></div>
+</div>
+
+<!-- ADVISOR SECTION -->
+<div class="advisor-section">
+  <div class="advisor-inner">
+    <div class="reveal">
+      <div class="advisor-img-wrap">
+        <div class="advisor-img">
+          <img src="saravana.png" alt="P. Saravana Kumar" onerror="this.parentElement.innerHTML='<div class=\'advisor-img-fallback\'><svg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(45,216,122,0.4)\' stroke-width=\'1\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\'/><circle cx=\'12\' cy=\'7\' r=\'4\'/></svg><span style=\'font-size:.7rem;color:var(--muted2)\'>P. Saravana Kumar</span></div>'">
+        </div>
+        <div class="advisor-badge">
+          <div class="ab-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <div class="ab-n">SEBI Registered</div>
+            <div class="ab-s">Investment Advisor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="eyebrow">The advisor</div>
+      <blockquote class="advisor-quote">
+        "Most advisors manage your money. I help you understand it."
+      </blockquote>
+      <p class="advisor-body">
+        Saravana has spent two decades in the trenches of Indian markets — through the 2008 crash, the 2020 pandemic selloff, and every rate cycle in between. He doesn't work with juniors or templates. Every client gets a direct line to him, every time.
+      </p>
+      <p class="advisor-body" style="margin-bottom:1.6rem">
+        He specialises in retirement planning for salaried professionals, NRIs navigating FEMA, and business owners structuring long-term wealth. Plain language. No jargon. No upselling.
+      </p>
+      <div class="advisor-tags">
+        <span class="advisor-tag on">NIFTY / SENSEX</span>
+        <span class="advisor-tag on">SIP Planning</span>
+        <span class="advisor-tag on">NRI / FEMA</span>
+        <span class="advisor-tag">Sovereign Gold Bond</span>
+        <span class="advisor-tag">HUF Structuring</span>
+        <span class="advisor-tag">Estate Planning</span>
+        <span class="advisor-tag">Tax Optimisation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES HSCROLL -->
+<div class="hs-section">
+  <div class="hs-head reveal">
+    <div class="eyebrow">What Saravana does</div>
+    <h2 class="sec-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem)">Every part of your financial<br>life, in one place.</h2>
+  </div>
+  <div class="hs-mask"><div class="hs-track" id="hsTrack"></div></div>
+</div>
+
+<!-- PROCESS -->
+<div class="process-section">
+  <div class="process-inner">
+    <div class="reveal centered" style="text-align:center">
+      <div class="eyebrow" style="justify-content:center">How it works</div>
+      <h2 class="sec-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem)">Four steps to financial clarity.</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">No forms to fill, no waiting rooms. Just a real conversation with someone who knows the Indian market inside-out.</p>
+    </div>
+    <div class="process-grid" id="processGrid"></div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="test-section">
+  <div class="test-inner">
+    <div class="reveal">
+      <div class="eyebrow">Client stories</div>
+      <h2 class="sec-title">What families say.</h2>
+      <p class="sec-sub">Real clients. Real outcomes. No polished PR quotes.</p>
+    </div>
+    <div class="test-layout" id="testGrid"></div>
+  </div>
+</div>
+
+<!-- INSTRUMENTS -->
+<div class="inst-section">
+  <div class="inst-inner reveal">
+    <p class="inst-label">Markets & instruments covered</p>
+    <div class="inst-row">
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> NIFTY 50</div>
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> NSE / BSE</div>
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> G-Sec Bonds</div>
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d4a847" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg> Sovereign Gold Bond</div>
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> NRI / FEMA</div>
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg> ELSS / 80C</div>
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Real Estate</div>
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Mutual Funds</div>
+      <div class="inst-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> SIP / SWP</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section">
+  <div class="pricing-inner">
+    <div class="reveal" style="text-align:center">
+      <div class="eyebrow" style="justify-content:center">Transparent pricing</div>
+      <h2 class="sec-title">Simple. No surprises.</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">Three tiers. All give you direct 1:1 access to Saravana — no assistants, no bots.</p>
+    </div>
+    <div class="p-grid" id="pGrid"></div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="cta-section">
+  <div class="cta-line"></div>
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <h2 class="cta-title reveal">Ready to start<br><em>growing?</em></h2>
+    <p class="cta-sub reveal d1">15 minutes. No commitment. Just a clear picture of where you stand.</p>
+    <div class="cta-actions reveal d2">
+      <a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank" rel="noopener" class="btn-p">
+        📅 Book a free discovery call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="contact.html" class="btn-g">Send a message</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="ft-logo">
+          <svg width="22" height="26" viewBox="0 0 68 76" xmlns="http://www.w3.org/2000/svg"><path d="M4,4 L64,4 L64,50 Q64,72 34,74 Q4,72 4,50 Z" fill="#0d1a0f" stroke="#2dd87a" stroke-width="2"/><polygon points="34,16 46,32 34,29 22,32" fill="#1a7a48"/><polygon points="22,32 34,29 34,58 23,46" fill="#155e38"/><polygon points="46,32 34,29 34,58 45,46" fill="#22a05a"/><polygon points="23,46 34,58 45,46 34,29" fill="#0f4a2a"/></svg>
+          Verdant Wealth Co.
+        </div>
+        <p class="ft-tag">Personal 1:1 retirement advisory from P. Saravana Kumar — built for every Indian investor.</p>
+        <div class="ft-soc">
+          <a href="#" class="ft-s">𝕏</a><a href="#" class="ft-s">in</a><a href="#" class="ft-s">▶</a>
+        </div>
+      </div>
+      <div class="ft-cols">
+        <div>
+          <div class="ft-col-t">Advisory</div>
+          <ul class="ft-col-l">
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About Saravana</a></li>
+            <li><a href="market.html">Market Updates</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="ft-col-t">Resources</div>
+          <ul class="ft-col-l">
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="https://calendly.com/ilamugilan343/new-meeting" target="_blank">Book a Call</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="ft-col-t">Legal</div>
+          <ul class="ft-col-l">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy">© 2026 Verdant Wealth Co. · P. Saravana Kumar. All rights reserved.</span>
+      <div class="ft-status"><span class="st-dot"></span> NSE · BSE · MCX Live</div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="wa" title="WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* ════ CURSOR ════ */
+var cur=document.getElementById('cur'),trail=document.getElementById('cur-trail');
+var mx=0,my=0,tx=0,ty=0;
+var isTouch=window.matchMedia('(pointer:coarse)').matches;
+if(!isTouch){
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+  (function loop(){tx+=(mx-tx)*.12;ty+=(my-ty)*.12;trail.style.left=tx+'px';trail.style.top=ty+'px';requestAnimationFrame(loop)})();
+  document.addEventListener('mouseleave',function(){cur.style.opacity='0';trail.style.opacity='0'});
+  document.addEventListener('mouseenter',function(){cur.style.opacity='1';trail.style.opacity='1'});
+  document.querySelectorAll('a,button,.hs-card,.t-card,.pc,.p-step').forEach(function(el){
+    el.addEventListener('mouseenter',function(){document.body.classList.add('cur-hover')});
+    el.addEventListener('mouseleave',function(){document.body.classList.remove('cur-hover')});
+  });
+}
+
+/* ════ SCROLL PROGRESS ════ */
+var spb=document.getElementById('spb');
+window.addEventListener('scroll',function(){
+  var pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  spb.style.width=pct+'%';
+},{ passive:true });
+
+/* ════ NAV SCROLL ════ */
+var nav=document.getElementById('mainNav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+
+/* ════ MOBILE MENU ════ */
+function toggleMenu(){document.getElementById('mob').classList.toggle('open')}
+
+/* ════ SCROLL REVEAL ════ */
+var reveals=document.querySelectorAll('.reveal');
+var ro=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}});
+},{threshold:.12});
+reveals.forEach(function(el){ro.observe(el)});
+
+/* ════ COUNTER ANIMATION ════ */
+function animCount(el){
+  var target=parseInt(el.dataset.count);
+  var suffix=el.dataset.suffix||'';
+  var start=0;
+  var dur=1600;
+  var startTime=null;
+  function step(ts){
+    if(!startTime)startTime=ts;
+    var prog=Math.min((ts-startTime)/dur,1);
+    var ease=1-Math.pow(1-prog,3);
+    el.textContent=Math.floor(ease*target)+suffix;
+    if(prog<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+var statEls=document.querySelectorAll('[data-count]');
+var sro=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){animCount(e.target);sro.unobserve(e.target)}});
+},{threshold:.5});
+statEls.forEach(function(el){sro.observe(el)});
+
+/* ════ MARQUEE DATA ════ */
+var tickers=[
+  {n:'NIFTY 50',v:'22,450',c:'+1.12%',u:true},
+  {n:'BANK NIFTY',v:'48,210',c:'+0.87%',u:true},
+  {n:'SENSEX',v:'73,890',c:'+0.94%',u:true},
+  {n:'GOLD MCX',v:'₹72,400',c:'+0.65%',u:true},
+  {n:'USD/INR',v:'83.45',c:'-0.08%',u:false},
+  {n:'SILVER',v:'₹88,200',c:'+0.42%',u:true},
+  {n:'VIX',v:'13.42',c:'-3.2%',u:false},
+  {n:'10Y GSEC',v:'6.82%',c:'+0.04',u:false},
+  {n:'BRENT',v:'$82.40',c:'+1.1%',u:true},
+  {n:'MIDCAP 150',v:'44,760',c:'+1.38%',u:true},
+];
+function buildMarquee(id,data,offset){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var html='';
+  var d=offset?data.slice(5).concat(data.slice(0,5)):data;
+  var dbl=d.concat(d);
+  dbl.forEach(function(t){
+    html+='<div class="mq-chip">';
+    html+='<div class="mq-led" style="background:'+(t.u?'var(--accent)':'var(--red)')+'"></div>';
+    html+='<span class="mq-name">'+t.n+'</span>';
+    html+='<span class="mq-val '+(t.u?'u':'d')+'">'+t.v+'</span>';
+    html+='<span class="mq-chg '+(t.u?'u':'d')+'">'+t.c+'</span>';
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+buildMarquee('mq1',tickers,false);
+buildMarquee('mq2',tickers,true);
+
+/* Live ticker updates */
+function flashTicker(){
+  var chips=document.querySelectorAll('.mq-chip');
+  if(!chips.length)return;
+  var idx=Math.floor(Math.random()*chips.length);
+  var up=Math.random()>.45;
+  chips[idx].classList.remove('fg','fr');
+  void chips[idx].offsetWidth;
+  chips[idx].classList.add(up?'fg':'fr');
+}
+setInterval(flashTicker,1800);
+
+/* ════ SERVICES ════ */
+var services=[
+  {icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M7 12l4 4 6-6"/></svg>',t:'Portfolio Review',b:'Deep analysis covering NIFTY exposure, sector momentum, macro factors, and FII/DII flows — in plain English.',badge:'Monthly'},
+  {icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>',t:'Retirement Roadmap',b:'A plan built around your actual retirement date, lifestyle expectations, and current financial position.',badge:'Core service'},
+  {icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',t:'Tax-Efficient Structuring',b:'Structuring your portfolio to legally minimise tax drag and maximise net returns across decades.',badge:'High ROI'},
+  {icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',t:'Wealth Protection',b:'VaR analysis, drawdown defense, and estate structuring so volatility never derails the plan.',badge:'Peace of mind'},
+  {icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',t:'NRI Advisory',b:'FEMA compliance, repatriation planning, and India-specific asset structuring for non-resident investors.',badge:'NRI specialist'},
+  {icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',t:'1:1 Direct Advisory',b:"Always Saravana — no junior advisors, no templated advice. You get the expert, every single session.",badge:'Always direct'},
+  {icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',t:'Estate Planning',b:'Wills, nominations, HUF structures, and succession planning so wealth transfers seamlessly.',badge:'Long-term'},
+  {icon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',t:'Market Monitoring',b:'Ongoing tracking of your portfolio against market conditions with proactive alerts when action is needed.',badge:'Ongoing'},
+];
+var ht=document.getElementById('hsTrack');
+if(ht){
+  var html='';
+  services.concat(services).forEach(function(s){
+    html+='<div class="hs-card"><div class="hs-icon">'+s.icon+'</div><div class="hs-title">'+s.t+'</div><div class="hs-body">'+s.b+'</div><span class="hs-badge">'+s.badge+'</span></div>';
+  });
+  ht.innerHTML=html;
+}
+
+/* ════ PROCESS ════ */
+var steps=[
+  {n:'1',t:'Discovery call',b:'A free 15-minute conversation. No forms, no prep needed. Just tell Saravana where you are and where you want to get to.'},
+  {n:'2',t:'Financial health check',b:"Saravana reviews your current portfolio, tax situation, and goals. You'll get a written assessment within 48 hours."},
+  {n:'3',t:'Custom strategy',b:'A tailored plan — not a template. Built around your retirement timeline, risk appetite, and family situation.'},
+  {n:'4',t:'Ongoing partnership',b:'Regular check-ins, market updates, and direct access to Saravana whenever markets move or life changes.'},
+];
+var pg=document.getElementById('processGrid');
+if(pg){
+  steps.forEach(function(s,i){
+    var div=document.createElement('div');
+    div.className='p-step reveal d'+i;
+    div.innerHTML='<div class="p-num">'+s.n+'</div><div class="p-step-title">'+s.t+'</div><div class="p-step-body">'+s.b+'</div>';
+    pg.appendChild(div);
+    ro.observe(div);
+  });
+}
+
+/* ════ TESTIMONIALS ════ */
+var tests=[
+  {q:"Saravana told me things my CA never mentioned. We restructured into SGB and ELSS — saved about ₹3.2 lakh in tax that year alone.",n:'Rajesh M.',r:'Retired engineer, Bengaluru',s:'★★★★★'},
+  {q:"I was an NRI coming back to India and had no idea how to handle my overseas funds. He sorted everything — FEMA, repatriation, the works.",n:'Priya S.',r:'NRI returnee, Chennai',s:'★★★★★'},
+  {q:"Other advisors kept trying to sell me ULIPs. Saravana told me to avoid them and explained exactly why. That honesty was worth the advisory fee a hundred times over.",n:'Karthik N.',r:'Business owner, Coimbatore',s:'★★★★★'},
+  {q:"I started late — 48 years old with barely any savings. He made a plan that didn't make me feel hopeless. Now I'm actually on track.",n:'Anitha R.',r:'Teacher, Madurai',s:'★★★★★'},
+];
+var tg=document.getElementById('testGrid');
+if(tg){
+  var col1=document.createElement('div');col1.className='test-col';
+  var col2=document.createElement('div');col2.className='test-col';
+  tests.forEach(function(t,i){
+    var card=document.createElement('div');
+    card.className='t-card reveal d'+(i%2+1);
+    card.innerHTML='<div class="t-stars">'+t.s+'</div><p class="t-quote">&#8220;'+t.q+'&#8221;</p><div class="t-person"><div class="t-av">'+t.n[0]+'</div><div><div class="t-name">'+t.n+'</div><div class="t-role">'+t.r+'</div></div></div>';
+    (i%2===0?col1:col2).appendChild(card);
+    ro.observe(card);
+  });
+  tg.appendChild(col1);
+  tg.appendChild(col2);
+}
+
+/* ════ PRICING ════ */
+var plans=[
+  {tier:'Basic',price:'4,000',cycle:'per hour',feat:false,badge:'',feats:['60-minute advisory session','Financial health assessment','Portfolio review & feedback','Written recommendations','24hr response window']},
+  {tier:'Pro',price:'4,999',cycle:'per hour',feat:true,badge:'Most popular',feats:['Everything in Basic','Custom scenario modelling','Tax-aware structuring','Sector & macro calibration','Priority response window','Follow-up framework']},
+  {tier:'Elite',price:'7,999',cycle:'per hour',feat:false,badge:'',feats:['Everything in Pro','Complete wealth architecture','Legacy & estate planning','Advanced drawdown defence','4hr response incl. weekends','Annual financial audit']},
+];
+var pgEl=document.getElementById('pGrid');
+if(pgEl){
+  plans.forEach(function(p,i){
+    var div=document.createElement('div');
+    div.className='pc'+(p.feat?' feat':'')+' reveal d'+i;
+    var featHtml=p.feats.map(function(f){return '<li><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>'+f+'</li>';}).join('');
+    div.innerHTML=(p.badge?'<div class="p-badge">'+p.badge+'</div>':'')+
+      '<div class="p-tier">'+p.tier+'</div>'+
+      '<div class="p-price"><sup>₹</sup>'+p.price+'</div>'+
+      '<div class="p-cycle">'+p.cycle+'</div>'+
+      '<div class="p-div"></div>'+
+      '<ul class="p-feats">'+featHtml+'</ul>'+
+      '<a href="contact.html" class="p-btn'+(p.feat?' fill':'')+'">Get started →</a>';
+    pgEl.appendChild(div);
+    ro.observe(div);
+  });
+}
+
+/* ════ PARALLAX PHONES ════ */
+if(!isTouch){
+  window.addEventListener('scroll',function(){
+    var sy=window.scrollY;
+    var phones=document.querySelectorAll('.hphone');
+    phones[0]&&(phones[0].style.transform='translateY('+(-sy*.04)+'px)');
+    phones[1]&&(phones[1].style.transform='rotate(5deg) translateY('+(-sy*.025)+'px)');
+    phones[2]&&(phones[2].style.transform='rotate(-4deg) translateY('+(-sy*.035)+'px)');
+  },{passive:true});
+}
+
+/* ════ MAGNETIC BUTTONS ════ */
+document.querySelectorAll('.btn-p,.btn-g,.nav-cta').forEach(function(btn){
+  btn.addEventListener('mousemove',function(e){
+    var r=btn.getBoundingClientRect();
+    var dx=(e.clientX-r.left-r.width/2)*.18;
+    var dy=(e.clientY-r.top-r.height/2)*.18;
+    btn.style.transform='translate('+dx+'px,'+dy+'px) translateY(-2px)';
+  });
+  btn.addEventListener('mouseleave',function(){btn.style.transform=''});
+});
+</script>
+</body>
+</html>
